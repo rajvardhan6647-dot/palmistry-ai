@@ -1,0 +1,17 @@
+# Local secrets
+.env
+.env.production
+*.db
+*.log
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+venv/
+.venv/
+env/
+
+# IDEs
+.vscode/
+.idea/

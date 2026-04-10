@@ -1,0 +1,1081 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>हस्तरेखा शास्त्र — Vrihud Hastrekha Shastra | Indian Palmistry</title>
+    <meta name="description" content="Explore the complete science of Indian palmistry — Vrihud Hastrekha Shastra by Dr. Narayan Dutt Shrimali. All 6 lines, 7 mounts, 10 special marks, 22+ yogas explained in English and Hindi.">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Noto+Sans+Devanagari:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-deep: #0b0814;
+            --bg-mid: #120e22;
+            --bg-card: rgba(22, 17, 42, 0.9);
+            --bg-card-hover: rgba(30, 24, 55, 0.95);
+            --gold: #c4993d;
+            --gold-light: #e2c77a;
+            --gold-pale: #f0dfa8;
+            --gold-dark: #7a5c1f;
+            --gold-glow: rgba(196, 153, 61, 0.1);
+            --gold-glow-md: rgba(196, 153, 61, 0.2);
+            --gold-glow-strong: rgba(196, 153, 61, 0.35);
+            --saffron: #d17a2e;
+            --vermillion: #b5342a;
+            --lotus: #9e5a82;
+            --text: #e4ddd0;
+            --text-dim: #a69c8a;
+            --text-muted: #6a6052;
+            --border: rgba(196, 153, 61, 0.1);
+            --border-glow: rgba(196, 153, 61, 0.35);
+            --r-sm: 8px; --r-md: 14px; --r-lg: 22px;
+            --font-serif: 'Cormorant Garamond', Georgia, serif;
+            --font-sans: 'Inter', 'Segoe UI', sans-serif;
+            --font-hi: 'Noto Sans Devanagari', sans-serif;
+            --shadow: 0 8px 40px rgba(0,0,0,0.5), inset 0 1px 0 rgba(196,153,61,0.06);
+            --ease: 0.4s cubic-bezier(.25,.46,.45,.94);
+        }
+        *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+        html { scroll-behavior:smooth; -webkit-font-smoothing:antialiased; }
+        body { font-family:var(--font-sans); background:var(--bg-deep); color:var(--text); min-height:100vh; overflow-x:hidden; line-height:1.75; }
+
+        /* Stars */
+        #stars { position:fixed; inset:0; z-index:0; pointer-events:none; opacity:0.35; }
+
+        /* Pages */
+        .pg { display:none; position:relative; z-index:1; min-height:100vh; animation:fadeIn .55s ease-out; }
+        .pg.active { display:block; }
+        @keyframes fadeIn { from{opacity:0;transform:translateY(16px)} to{opacity:1;transform:translateY(0)} }
+
+        /* Nav */
+        nav { position:fixed; top:0; left:0; right:0; z-index:100; background:rgba(11,8,20,0.9); backdrop-filter:blur(22px); border-bottom:1px solid var(--border); padding:0 20px; transition:var(--ease); }
+        nav.scrolled { background:rgba(11,8,20,0.97); box-shadow:0 4px 30px rgba(0,0,0,0.5); }
+        .nav-in { max-width:1200px; margin:0 auto; display:flex; align-items:center; justify-content:space-between; height:62px; }
+        .brand { display:flex; align-items:center; gap:10px; cursor:pointer; }
+        .brand-icon { font-size:1.4rem; }
+        .brand-t { font-family:var(--font-serif); font-size:1.35rem; font-weight:600; color:var(--gold); }
+        .brand-s { font-family:var(--font-hi); font-size:0.65rem; color:var(--text-muted); letter-spacing:1px; }
+        .navl { display:flex; gap:4px; list-style:none; }
+        .navl button { background:none; border:none; color:var(--text-dim); font-family:var(--font-sans); font-size:.82rem; font-weight:500; padding:7px 14px; border-radius:var(--r-sm); cursor:pointer; transition:var(--ease); letter-spacing:.3px; }
+        .navl button:hover, .navl button.on { color:var(--gold); background:var(--gold-glow); }
+        .nav-tog { display:none; background:none; border:none; color:var(--gold); font-size:1.4rem; cursor:pointer; }
+        @media(max-width:768px) {
+            .nav-tog { display:block; }
+            .navl { position:fixed; top:62px; left:0; right:0; background:rgba(11,8,20,0.97); backdrop-filter:blur(20px); flex-direction:column; padding:12px; border-bottom:1px solid var(--border); transform:translateY(-120%); transition:var(--ease); z-index:99; }
+            .navl.open { transform:translateY(0); }
+            .navl button { padding:13px 18px; font-size:.95rem; }
+        }
+
+        /* Hero */
+        .hero { min-height:100vh; display:flex; align-items:center; justify-content:center; text-align:center; padding:100px 20px 60px; position:relative; }
+        .hero::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 50% 25%, rgba(196,153,61,0.05) 0%, transparent 55%), radial-gradient(ellipse at 80% 80%, rgba(158,90,130,0.03) 0%, transparent 45%); pointer-events:none; }
+        .hero-c { max-width:760px; position:relative; }
+        .h-hi { font-family:var(--font-hi); font-size:1.05rem; color:var(--gold-dark); letter-spacing:4px; margin-bottom:14px; opacity:0; animation:fu .8s .2s ease forwards; }
+        .h-title { font-family:var(--font-serif); font-size:clamp(2.2rem,5.5vw,4rem); font-weight:300; color:var(--text); line-height:1.18; margin-bottom:6px; opacity:0; animation:fu .8s .35s ease forwards; }
+        .h-title em { font-style:italic; color:var(--gold); font-weight:500; }
+        .h-sub { font-family:var(--font-serif); font-size:clamp(.92rem,2.2vw,1.2rem); color:var(--text-dim); font-weight:300; margin-bottom:12px; max-width:560px; margin-left:auto; margin-right:auto; opacity:0; animation:fu .8s .5s ease forwards; }
+        .h-sub-hi { font-family:var(--font-hi); font-size:clamp(.82rem,1.8vw,.95rem); color:var(--text-muted); margin-bottom:36px; opacity:0; animation:fu .8s .6s ease forwards; }
+        .h-div { width:80px; height:1px; background:linear-gradient(90deg,transparent,var(--gold),transparent); margin:0 auto 36px; opacity:0; animation:fu .8s .45s ease forwards; }
+        .h-cta { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; opacity:0; animation:fu .8s .75s ease forwards; }
+        @keyframes fu { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
+
+        /* Buttons */
+        .btn { display:inline-flex; align-items:center; gap:8px; padding:13px 30px; border-radius:var(--r-sm); font-family:var(--font-sans); font-size:.88rem; font-weight:500; letter-spacing:.4px; cursor:pointer; border:none; transition:var(--ease); text-decoration:none; }
+        .btn-p { background:linear-gradient(135deg,var(--gold-dark),var(--gold)); color:var(--bg-deep); box-shadow:0 4px 20px rgba(196,153,61,0.22); }
+        .btn-p:hover { box-shadow:0 6px 28px rgba(196,153,61,0.38); transform:translateY(-2px); }
+        .btn-g { background:transparent; color:var(--gold); border:1px solid var(--border-glow); }
+        .btn-g:hover { background:var(--gold-glow); transform:translateY(-2px); }
+        .btn-sm { padding:9px 20px; font-size:.8rem; }
+
+        /* Sections */
+        .sec { padding:80px 20px; max-width:1140px; margin:0 auto; }
+        .sec-h { text-align:center; margin-bottom:52px; }
+        .sec-l { font-family:var(--font-hi); font-size:.8rem; color:var(--gold-dark); letter-spacing:3px; margin-bottom:10px; }
+        .sec-t { font-family:var(--font-serif); font-size:clamp(1.5rem,3.5vw,2.2rem); font-weight:400; color:var(--text); margin-bottom:10px; }
+        .sec-d { font-size:.9rem; color:var(--text-dim); max-width:580px; margin:0 auto; }
+        .sec-d-hi { font-family:var(--font-hi); font-size:.82rem; color:var(--text-muted); max-width:580px; margin:8px auto 0; }
+
+        /* Cards */
+        .cg { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:22px; }
+        .card { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--r-md); padding:30px 26px; transition:var(--ease); box-shadow:var(--shadow); }
+        .card:hover { border-color:var(--border-glow); transform:translateY(-3px); box-shadow:var(--shadow), 0 0 35px var(--gold-glow); }
+        .card-i { font-size:1.4rem; margin-bottom:14px; }
+        .card-t { font-family:var(--font-serif); font-size:1.15rem; font-weight:600; color:var(--gold); margin-bottom:3px; }
+        .card-hi { font-family:var(--font-hi); font-size:.76rem; color:var(--gold-dark); margin-bottom:10px; }
+        .card-p { font-size:.86rem; color:var(--text-dim); line-height:1.75; }
+        .card-p-hi { font-family:var(--font-hi); font-size:.78rem; color:var(--text-muted); margin-top:8px; line-height:1.7; }
+
+        /* Palm Explorer */
+        .palm-ex { display:grid; grid-template-columns:1fr 1fr; gap:44px; align-items:start; }
+        @media(max-width:900px) { .palm-ex { grid-template-columns:1fr; gap:28px; } }
+        .palm-svg { position:relative; max-width:400px; margin:0 auto; aspect-ratio:3/4; }
+        .palm-svg svg { width:100%; height:100%; }
+        .pz { cursor:pointer; transition:all .3s ease; fill:transparent; stroke:var(--border); stroke-width:1.5; }
+        .pz:hover, .pz.on { fill:var(--gold-glow); stroke:var(--gold); stroke-width:2; filter:drop-shadow(0 0 10px var(--gold-glow-strong)); }
+        .pl { stroke:var(--text-muted); stroke-width:2; fill:none; cursor:pointer; transition:all .3s ease; }
+        .pl:hover, .pl.on { stroke:var(--gold); stroke-width:3; filter:drop-shadow(0 0 9px var(--gold-glow-strong)); }
+        .dp { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--r-md); padding:34px 30px; box-shadow:var(--shadow); min-height:420px; overflow-y:auto; max-height:80vh; transition:var(--ease); }
+        .dp h3 { font-family:var(--font-serif); font-size:1.4rem; color:var(--gold); margin-bottom:2px; }
+        .dp .hi-n { font-family:var(--font-hi); font-size:.88rem; color:var(--gold-dark); margin-bottom:14px; }
+        .dp .dt { font-size:.88rem; color:var(--text-dim); line-height:1.85; margin-bottom:14px; }
+        .dp .dt-hi { font-family:var(--font-hi); font-size:.82rem; color:var(--text-muted); line-height:1.75; margin-bottom:16px; font-style:italic; }
+        .dp .dl { list-style:none; padding:0; }
+        .dp .dl li { position:relative; padding-left:16px; margin-bottom:7px; font-size:.84rem; color:var(--text-dim); }
+        .dp .dl li::before { content:'◆'; position:absolute; left:0; color:var(--gold-dark); font-size:.5rem; top:5px; }
+        .dp .dl li .hi { font-family:var(--font-hi); color:var(--text-muted); font-size:.78rem; display:block; margin-top:2px; }
+        .prompt-s { display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; min-height:380px; }
+        .prompt-s .pi { font-size:2.6rem; margin-bottom:18px; opacity:.45; }
+        .prompt-s p { font-family:var(--font-serif); font-size:1.05rem; color:var(--text-muted); font-style:italic; }
+        .prompt-s .p-hi { font-family:var(--font-hi); font-size:.82rem; color:var(--text-muted); margin-top:8px; opacity:.7; }
+
+        /* Marks */
+        .mg { display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:18px; }
+        .mark { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--r-md); padding:24px 20px; transition:var(--ease); cursor:pointer; }
+        .mark:hover { border-color:var(--border-glow); }
+        .mark-h { display:flex; align-items:center; gap:12px; margin-bottom:12px; }
+        .mark-sym { font-size:1.5rem; width:40px; text-align:center; }
+        .mark-n { font-family:var(--font-serif); font-size:1.05rem; color:var(--gold); }
+        .mark-nhi { font-family:var(--font-hi); font-size:.72rem; color:var(--gold-dark); }
+        .mark-body { font-size:.82rem; color:var(--text-dim); line-height:1.75; }
+        .mark-body .loc { display:block; padding-left:14px; position:relative; margin-top:4px; }
+        .mark-body .loc::before { content:'·'; position:absolute; left:4px; color:var(--gold-dark); font-weight:bold; }
+        .mark-body .loc-hi { font-family:var(--font-hi); color:var(--text-muted); font-size:.75rem; }
+
+        /* Yogas */
+        .yg { display:grid; grid-template-columns:repeat(auto-fill,minmax(340px,1fr)); gap:18px; }
+        .yc { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--r-md); padding:26px 22px; transition:var(--ease); }
+        .yc:hover { border-color:var(--border-glow); box-shadow:0 0 28px var(--gold-glow); }
+        .yc-h { display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:10px; }
+        .yc-n { font-family:var(--font-serif); font-size:1.1rem; font-weight:600; color:var(--gold); }
+        .yc-hi { font-family:var(--font-hi); font-size:.76rem; color:var(--gold-dark); }
+        .yc-sub { font-family:var(--font-serif); font-size:.82rem; color:var(--text-muted); font-style:italic; margin-bottom:10px; }
+        .badge { font-size:.65rem; font-weight:600; padding:3px 9px; border-radius:18px; text-transform:uppercase; letter-spacing:1px; white-space:nowrap; }
+        .badge.rare { background:rgba(158,90,130,.2); color:#c88db8; }
+        .badge.uncommon { background:rgba(196,153,61,.12); color:var(--gold-light); }
+        .badge.common { background:rgba(90,130,90,.14); color:#8dbe8d; }
+        .yc-m { font-size:.84rem; color:var(--text-dim); line-height:1.75; margin-bottom:8px; }
+        .yc-m-hi { font-family:var(--font-hi); font-size:.78rem; color:var(--text-muted); line-height:1.7; margin-bottom:10px; }
+        .yc-ind { font-size:.76rem; color:var(--text-muted); }
+        .yc-ind strong { color:var(--gold-dark); }
+        .yc-meta { display:flex; gap:16px; margin-top:10px; font-size:.72rem; color:var(--text-muted); }
+        .yc-meta span { display:flex; align-items:center; gap:4px; }
+
+        /* Tabs */
+        .tabs { display:flex; gap:3px; margin-bottom:28px; border-bottom:1px solid var(--border); overflow-x:auto; -webkit-overflow-scrolling:touch; }
+        .tabs::-webkit-scrollbar { height:0; }
+        .tab { background:none; border:none; padding:11px 18px; font-family:var(--font-sans); font-size:.82rem; color:var(--text-muted); cursor:pointer; border-bottom:2px solid transparent; transition:var(--ease); white-space:nowrap; }
+        .tab:hover { color:var(--text-dim); }
+        .tab.on { color:var(--gold); border-bottom-color:var(--gold); }
+
+        /* Reading */
+        .rc { max-width:720px; margin:0 auto; padding:100px 20px 60px; }
+        .upload { text-align:center; padding:44px 24px; border:1px dashed var(--border-glow); border-radius:var(--r-md); background:var(--gold-glow); cursor:pointer; transition:var(--ease); margin-bottom:22px; }
+        .upload:hover { background:var(--gold-glow-md); }
+        .upload input { display:none; }
+        .cam-area { position:relative; width:100%; aspect-ratio:4/3; background:var(--bg-mid); border:2px dashed var(--border-glow); border-radius:var(--r-lg); overflow:hidden; margin-bottom:22px; display:flex; align-items:center; justify-content:center; }
+        .cam-area video { width:100%; height:100%; object-fit:cover; }
+        .cam-ctrl { display:flex; gap:10px; justify-content:center; margin-bottom:28px; }
+        .prev-img { width:100%; border-radius:var(--r-md); border:2px solid var(--border-glow); margin-bottom:22px; }
+        .rr { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--r-lg); padding:38px 34px; box-shadow:var(--shadow); }
+        .rr h2 { font-family:var(--font-serif); font-size:1.7rem; font-weight:500; color:var(--gold); margin-bottom:6px; }
+        .rr .rov { font-family:var(--font-serif); font-size:1rem; color:var(--text-dim); line-height:1.9; margin-bottom:28px; font-style:italic; }
+        .rs { margin-bottom:26px; }
+        .rs h4 { font-family:var(--font-serif); font-size:1.05rem; color:var(--gold); margin-bottom:6px; }
+        .rs p { font-size:.87rem; color:var(--text-dim); line-height:1.8; }
+        .rs .rh { font-family:var(--font-hi); font-size:.8rem; color:var(--text-muted); margin-top:4px; }
+        .tags { display:flex; flex-wrap:wrap; gap:7px; margin-top:10px; }
+        .tag { font-size:.73rem; padding:4px 13px; border-radius:18px; border:1px solid var(--border-glow); color:var(--gold-light); background:var(--gold-glow); }
+        .ld { text-align:center; padding:56px 20px; }
+        .lr { width:52px; height:52px; border:3px solid var(--border); border-top-color:var(--gold); border-radius:50%; animation:spin 1s linear infinite; margin:0 auto 22px; }
+        @keyframes spin { to{transform:rotate(360deg)} }
+        .lt { font-family:var(--font-serif); font-size:1rem; color:var(--text-muted); font-style:italic; }
+
+        /* About */
+        .ab-g { display:grid; grid-template-columns:280px 1fr; gap:44px; align-items:start; }
+        @media(max-width:768px) { .ab-g { grid-template-columns:1fr; gap:28px; } }
+        .pc { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--r-lg); padding:30px 22px; text-align:center; box-shadow:var(--shadow); }
+        .pa { width:96px; height:96px; border-radius:50%; border:3px solid var(--gold-dark); margin:0 auto 14px; display:flex; align-items:center; justify-content:center; background:linear-gradient(135deg,var(--bg-mid),rgba(196,153,61,0.08)); font-size:2.3rem; }
+        .pn { font-family:var(--font-serif); font-size:1.25rem; color:var(--gold); font-weight:600; margin-bottom:2px; }
+        .pr { font-size:.78rem; color:var(--text-muted); margin-bottom:14px; }
+        .pb { font-size:.82rem; color:var(--text-dim); line-height:1.7; font-style:italic; }
+        .pb-hi { font-family:var(--font-hi); font-size:.76rem; color:var(--text-muted); line-height:1.65; margin-top:10px; }
+        .ac h3 { font-family:var(--font-serif); font-size:1.4rem; color:var(--text); margin-bottom:14px; }
+        .ac p { font-size:.9rem; color:var(--text-dim); line-height:1.8; margin-bottom:16px; }
+        .ac .p-hi { font-family:var(--font-hi); font-size:.82rem; color:var(--text-muted); line-height:1.7; margin-bottom:16px; }
+        .bq { background:var(--gold-glow); border-left:3px solid var(--gold-dark); padding:18px 22px; border-radius:0 var(--r-sm) var(--r-sm) 0; font-family:var(--font-serif); font-style:italic; color:var(--text-dim); font-size:.92rem; line-height:1.75; margin-bottom:20px; }
+        .bq .bq-hi { font-family:var(--font-hi); font-size:.8rem; color:var(--text-muted); display:block; margin-top:8px; font-style:normal; }
+        .phil-list { list-style:none; padding:0; }
+        .phil-list li { position:relative; padding:10px 0 10px 22px; border-bottom:1px solid var(--border); font-size:.87rem; color:var(--text-dim); }
+        .phil-list li::before { content:'☸'; position:absolute; left:0; color:var(--gold-dark); font-size:.7rem; top:12px; }
+        .phil-list li .phi-hi { font-family:var(--font-hi); font-size:.78rem; color:var(--text-muted); display:block; margin-top:2px; }
+
+        /* Approach Steps */
+        .steps { display:grid; grid-template-columns:repeat(auto-fill, minmax(180px,1fr)); gap:14px; margin-top:20px; }
+        .step { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--r-sm); padding:18px 14px; text-align:center; }
+        .step-n { font-family:var(--font-serif); font-size:1.6rem; color:var(--gold-dark); margin-bottom:6px; }
+        .step-t { font-size:.82rem; color:var(--gold); margin-bottom:2px; }
+        .step-d { font-size:.72rem; color:var(--text-muted); }
+        .step-h { font-family:var(--font-hi); font-size:.7rem; color:var(--text-muted); margin-top:4px; }
+
+        /* Footer */
+        footer { border-top:1px solid var(--border); padding:44px 20px; text-align:center; position:relative; z-index:1; }
+        .fb { font-family:var(--font-serif); font-size:1.05rem; color:var(--gold-dark); margin-bottom:6px; }
+        .ft { font-size:.76rem; color:var(--text-muted); max-width:500px; margin:0 auto; line-height:1.7; }
+        .fd { margin-top:14px; font-size:.68rem; color:var(--text-muted); opacity:.55; }
+
+        /* Reveal */
+        .rv { opacity:0; transform:translateY(28px); transition:opacity .7s ease, transform .7s ease; }
+        .rv.vis { opacity:1; transform:translateY(0); }
+
+        canvas#hc { display:none; }
+    </style>
+</head>
+<body>
+<canvas id="stars"></canvas>
+<canvas id="hc"></canvas>
+
+<!-- NAV -->
+<nav id="nav">
+<div class="nav-in">
+    <div class="brand" onclick="go('home')">
+        <span class="brand-icon">𑁍</span>
+        <div><div class="brand-t">Hastrekha</div><div class="brand-s">वृहद् हस्तरेखा शास्त्र</div></div>
+    </div>
+    <button class="nav-tog" onclick="document.getElementById('nl').classList.toggle('open')" aria-label="Menu">☰</button>
+    <ul class="navl" id="nl">
+        <li><button onclick="go('home')" id="n-home" class="on">Home</button></li>
+        <li><button onclick="go('explore')" id="n-explore">Explore Palm</button></li>
+        <li><button onclick="go('marks')" id="n-marks">Special Marks</button></li>
+        <li><button onclick="go('yogas')" id="n-yogas">Yogas</button></li>
+        <li><button onclick="go('reading')" id="n-reading">Get Reading</button></li>
+        <li><button onclick="go('about')" id="n-about">About</button></li>
+    </ul>
+</div>
+</nav>
+
+<!-- HOME -->
+<div class="pg active" id="pg-home">
+<div class="hero"><div class="hero-c">
+    <div class="h-hi">वृहद् हस्तरेखा शास्त्र</div>
+    <h1 class="h-title">The Ancient Science of<br><em>Reading the Hand</em></h1>
+    <div class="h-div"></div>
+    <p class="h-sub">Based on the teachings of Dr. Narayan Dutt Shrimali — discover the map of your soul's journey, written in the lines and mounts of your palm.</p>
+    <p class="h-sub-hi">डॉ. नारायण दत्त श्रीमाली की शिक्षाओं पर आधारित — अपनी आत्मा की यात्रा का नक्शा खोजें, जो आपकी हथेली की रेखाओं और पर्वतों में लिखा है।</p>
+    <div class="h-cta">
+        <button class="btn btn-p" onclick="go('explore')"><span>✦</span> Explore Your Palm / हस्तरेखा देखें</button>
+        <button class="btn btn-g" onclick="go('reading')">Begin a Reading / पठन शुरू करें</button>
+    </div>
+</div></div>
+
+<div class="sec">
+    <div class="sec-h rv">
+        <div class="sec-l">क्या सीखें · WHAT YOU'LL LEARN</div>
+        <h2 class="sec-t">What Your Hand Reveals</h2>
+        <p class="sec-d">Every line, mount, and mark on your palm carries deep meaning — a reflection of your inner nature and life's potential.</p>
+        <p class="sec-d-hi">आपकी हथेली की हर रेखा, पर्वत और चिह्न गहरा अर्थ रखता है — यह आपके आंतरिक स्वभाव और जीवन की संभावनाओं का प्रतिबिंब है।</p>
+    </div>
+    <div class="cg">
+        <div class="card rv">
+            <div class="card-i">𑁍</div>
+            <h3 class="card-t">Six Major Lines · छह प्रमुख रेखाएँ</h3>
+            <div class="card-hi">जीवन, बुद्धि, हृदय, भाग्य, सूर्य, बुध</div>
+            <p class="card-p">Life, Head, Heart, Fate, Sun, and Mercury — each line narrates a different chapter of your existence, from vitality to wisdom to love.</p>
+            <p class="card-p-hi">जीवन रेखा, बुद्धि रेखा, हृदय रेखा, भाग्य रेखा, सूर्य रेखा और बुध रेखा — प्रत्येक रेखा आपके अस्तित्व का एक अलग अध्याय बताती है।</p>
+        </div>
+        <div class="card rv">
+            <div class="card-i">☾</div>
+            <h3 class="card-t">Seven Sacred Mounts · सात पर्वत</h3>
+            <div class="card-hi">गुरु, शनि, सूर्य, बुध, चंद्र, शुक्र, मंगल</div>
+            <p class="card-p">Jupiter, Saturn, Sun, Mercury, Moon, Venus, and Mars — the mounts reveal your elemental nature, ambitions, and hidden gifts.</p>
+            <p class="card-p-hi">ये सात पर्वत आपके मूल स्वभाव, महत्वाकांक्षाओं और छिपी प्रतिभाओं को प्रकट करते हैं।</p>
+        </div>
+        <div class="card rv">
+            <div class="card-i">◈</div>
+            <h3 class="card-t">240+ Hastrekha Yogas · हस्तरेखा योग</h3>
+            <div class="card-hi">राज्ययोग, लक्ष्मी योग, मोक्ष योग…</div>
+            <p class="card-p">Unique combinations of lines, mounts, and marks that reveal deeper truths — from Rajyoga (kingship) to Lakshmi Yoga (wealth) to Moksha Yoga (liberation).</p>
+            <p class="card-p-hi">रेखाओं, पर्वतों और चिह्नों के अद्वितीय संयोजन जो गहरे सत्य प्रकट करते हैं — राज्ययोग से लेकर मोक्ष योग तक।</p>
+        </div>
+    </div>
+</div>
+
+<!-- Reading Approach -->
+<div class="sec">
+    <div class="sec-h rv">
+        <div class="sec-l">पठन की विधि · HOW TO READ</div>
+        <h2 class="sec-t">The Five-Step Interpretation</h2>
+        <p class="sec-d">Dr. Shrimali's systematic approach to reading the hand, from the general to the specific.</p>
+        <p class="sec-d-hi">हाथ पढ़ने का व्यवस्थित तरीका — सामान्य से विशिष्ट तक।</p>
+    </div>
+    <div class="steps rv">
+        <div class="step"><div class="step-n">①</div><div class="step-t">Hand Shape</div><div class="step-d">Overall shape & texture reveal character</div><div class="step-h">हाथ का आकार · चरित्र</div></div>
+        <div class="step"><div class="step-n">②</div><div class="step-t">Mounts</div><div class="step-d">Elemental nature & planetary influence</div><div class="step-h">पर्वत · तात्विक प्रकृति</div></div>
+        <div class="step"><div class="step-n">③</div><div class="step-t">Major Lines</div><div class="step-d">The narrative of your life story</div><div class="step-h">प्रमुख रेखाएँ · जीवन कथा</div></div>
+        <div class="step"><div class="step-n">④</div><div class="step-t">Special Marks</div><div class="step-d">Events, themes & turning points</div><div class="step-h">विशेष चिह्न · घटनाएँ</div></div>
+        <div class="step"><div class="step-n">⑤</div><div class="step-t">Yogas</div><div class="step-d">Combinations revealing destiny</div><div class="step-h">योग · भाग्य संयोजन</div></div>
+    </div>
+</div>
+
+<!-- Spiritual Philosophy -->
+<div class="sec">
+    <div class="sec-h rv">
+        <div class="sec-l">आध्यात्मिक दर्शन · SPIRITUAL PHILOSOPHY</div>
+        <h2 class="sec-t">The Philosophy Behind the Lines</h2>
+    </div>
+    <div style="max-width:700px; margin:0 auto;" class="rv">
+        <ul class="phil-list">
+            <li>Palmistry shows tendencies, not absolute destiny — your choices always matter most<span class="phi-hi">हस्तरेखा प्रवृत्तियाँ दिखाती है, पूर्ण भाग्य नहीं — आपके चुनाव सबसे महत्वपूर्ण हैं</span></li>
+            <li>Lines can change over time — it is a guide, not a fixed fate<span class="phi-hi">रेखाएँ समय के साथ बदल सकती हैं — यह मार्गदर्शक है, स्थिर भाग्य नहीं</span></li>
+            <li>The "now" moment is most important — what the palm reveals about your current reality<span class="phi-hi">वर्तमान क्षण सबसे महत्वपूर्ण है — हथेली आपकी वर्तमान वास्तविकता के बारे में क्या प्रकट करती है</span></li>
+            <li>Challenges are lessons; strengths are gifts — both deserve equal respect<span class="phi-hi">चुनौतियाँ सबक हैं; शक्तियाँ उपहार हैं — दोनों समान सम्मान के योग्य हैं</span></li>
+            <li>Hands speak the language of the soul — the palm is a map of the soul's journey<span class="phi-hi">हाथ आत्मा की भाषा बोलते हैं — हथेली आत्मा की यात्रा का नक्शा है</span></li>
+            <li>Respect both destiny (भाग्य / bhagya) and free will (स्वतंत्र / swatantra)<span class="phi-hi">भाग्य और स्वतंत्र इच्छा दोनों का सम्मान करें</span></li>
+        </ul>
+    </div>
+</div>
+
+<div class="sec text-center rv" style="text-align:center;">
+    <blockquote style="font-family:var(--font-serif);font-size:1.2rem;color:var(--text-dim);font-style:italic;max-width:620px;margin:0 auto;line-height:1.85;">"The palm is not a prophecy carved in stone — it is a living map, changing as you grow. It reflects your tendencies, your gifts, and the courage you carry within."</blockquote>
+    <p style="font-family:var(--font-hi);margin-top:12px;color:var(--text-muted);font-size:.82rem;">"हथेली पत्थर पर तराशी भविष्यवाणी नहीं है — यह एक जीवित नक्शा है, जो आपके विकास के साथ बदलता है।"</p>
+    <p style="margin-top:10px;color:var(--gold-dark);font-size:.8rem;">— Based on teachings of Dr. Narayan Dutt Shrimali</p>
+</div>
+</div>
+
+<!-- EXPLORE PALM -->
+<div class="pg" id="pg-explore">
+<div class="sec" style="padding-top:100px;">
+    <div class="sec-h rv">
+        <div class="sec-l">हस्तरेखा अन्वेषण · PALM EXPLORATION</div>
+        <h2 class="sec-t">Interactive Palm Map · संवादी हस्तरेखा मानचित्र</h2>
+        <p class="sec-d">Tap any line or mount to learn its complete meaning in English and Hindi, as described in Vrihud Hastrekha Shastra.</p>
+        <p class="sec-d-hi">किसी भी रेखा या पर्वत पर टैप करें — अंग्रेजी और हिंदी दोनों में पूरा अर्थ जानें।</p>
+    </div>
+    <div class="palm-ex rv">
+        <div class="palm-svg">
+            <svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
+                <path d="M150 380 C100 380 60 340 50 300 C40 260 42 220 50 190 C55 170 45 140 40 120 C35 95 45 75 60 70 C75 65 82 80 85 95 C88 75 80 45 80 30 C80 12 95 5 108 10 C118 14 122 30 120 55 C125 30 128 10 140 5 C155 -2 165 10 165 30 C165 55 158 75 155 95 C165 65 170 35 178 20 C188 5 205 10 208 28 C212 48 205 80 195 110 C210 85 220 70 235 72 C250 74 258 92 250 115 C242 138 220 165 200 190 C250 200 258 220 255 250 C252 280 240 320 220 345 C200 370 175 380 150 380Z" fill="rgba(196,153,61,0.03)" stroke="var(--gold-dark)" stroke-width="1.5" opacity=".65"/>
+                <path class="pl" d="M70 195 C100 178 140 172 170 178 C200 185 220 195 245 190" data-f="heart"/>
+                <path class="pl" d="M65 230 C100 225 140 220 170 228 C195 235 210 250 230 255" data-f="head"/>
+                <path class="pl" d="M105 160 C95 190 85 230 80 270 C78 300 82 330 95 355" data-f="life"/>
+                <path class="pl" d="M150 360 C148 320 145 280 142 240 C140 210 138 190 135 170" data-f="fate"/>
+                <path class="pl" d="M175 300 C173 270 170 240 168 210 C167 195 167 185 168 170" data-f="sun"/>
+                <path class="pl" d="M195 340 C200 310 210 270 215 240 C218 220 220 200 218 185" data-f="mercury"/>
+                <circle class="pz" cx="110" cy="140" r="22" data-f="m-jupiter"/>
+                <circle class="pz" cx="145" cy="132" r="20" data-f="m-saturn"/>
+                <circle class="pz" cx="175" cy="138" r="20" data-f="m-sun"/>
+                <circle class="pz" cx="210" cy="155" r="20" data-f="m-mercury"/>
+                <circle class="pz" cx="90" cy="310" r="28" data-f="m-venus"/>
+                <circle class="pz" cx="210" cy="290" r="24" data-f="m-moon"/>
+                <circle class="pz" cx="150" cy="260" r="22" data-f="m-mars"/>
+                <text x="110" y="145" text-anchor="middle" fill="var(--text-muted)" font-size="7" font-family="var(--font-sans)">Jupiter</text>
+                <text x="145" y="137" text-anchor="middle" fill="var(--text-muted)" font-size="7" font-family="var(--font-sans)">Saturn</text>
+                <text x="175" y="143" text-anchor="middle" fill="var(--text-muted)" font-size="7" font-family="var(--font-sans)">Sun</text>
+                <text x="210" y="160" text-anchor="middle" fill="var(--text-muted)" font-size="7" font-family="var(--font-sans)">Mercury</text>
+                <text x="90" y="315" text-anchor="middle" fill="var(--text-muted)" font-size="7" font-family="var(--font-sans)">Venus</text>
+                <text x="210" y="295" text-anchor="middle" fill="var(--text-muted)" font-size="7" font-family="var(--font-sans)">Moon</text>
+                <text x="150" y="265" text-anchor="middle" fill="var(--text-muted)" font-size="7" font-family="var(--font-sans)">Mars</text>
+            </svg>
+        </div>
+        <div class="dp" id="dp">
+            <div class="prompt-s" id="prm"><div class="pi">🤲</div><p>Select a line or mount to learn its meaning</p><p class="p-hi">अर्थ जानने के लिए किसी रेखा या पर्वत का चयन करें</p></div>
+            <div id="dtl" style="display:none"></div>
+        </div>
+    </div>
+</div>
+</div>
+
+<!-- SPECIAL MARKS -->
+<div class="pg" id="pg-marks">
+<div class="sec" style="padding-top:100px;">
+    <div class="sec-h rv">
+        <div class="sec-l">विशेष चिह्न · SPECIAL MARKS</div>
+        <h2 class="sec-t">Marks & Signs on the Palm · हथेली पर चिह्न</h2>
+        <p class="sec-d">Beyond the lines, the palm holds subtle marks — each carrying its own prophecy, depending on where it appears.</p>
+        <p class="sec-d-hi">रेखाओं के अलावा, हथेली पर सूक्ष्म चिह्न होते हैं — प्रत्येक अपनी भविष्यवाणी रखता है, यह इस पर निर्भर करता है कि वह कहाँ दिखाई देता है।</p>
+    </div>
+    <div class="mg rv" id="marksGrid"></div>
+</div>
+</div>
+
+<!-- YOGAS -->
+<div class="pg" id="pg-yogas">
+<div class="sec" style="padding-top:100px;">
+    <div class="sec-h rv">
+        <div class="sec-l">योग एवं संयोजन · YOGAS & COMBINATIONS</div>
+        <h2 class="sec-t">Hastrekha Yogas · हस्तरेखा योग</h2>
+        <p class="sec-d">The combinations of lines, mounts, and marks that reveal deeper patterns of destiny — catalogued from Dr. Shrimali's teachings.</p>
+        <p class="sec-d-hi">रेखाओं, पर्वतों और चिह्नों के संयोजन जो भाग्य के गहरे पैटर्न प्रकट करते हैं — डॉ. श्रीमाली की शिक्षाओं से संकलित।</p>
+    </div>
+    <div class="tabs" id="yt">
+        <button class="tab on" onclick="yf('all',this)">All · सभी</button>
+        <button class="tab" onclick="yf('wealth',this)">Wealth · धन</button>
+        <button class="tab" onclick="yf('challenge',this)">Challenge · चुनौती</button>
+        <button class="tab" onclick="yf('creativity',this)">Creativity · रचनात्मकता</button>
+        <button class="tab" onclick="yf('spiritual',this)">Spiritual · आध्यात्मिक</button>
+        <button class="tab" onclick="yf('health',this)">Health · स्वास्थ्य</button>
+        <button class="tab" onclick="yf('relationship',this)">Relationships · संबंध</button>
+    </div>
+    <div class="yg" id="ygr"></div>
+</div>
+</div>
+
+<!-- GET READING -->
+<div class="pg" id="pg-reading">
+<div class="rc">
+    <div class="sec-h rv" style="margin-bottom:32px;">
+        <div class="sec-l">हस्त पठन · PALM READING</div>
+        <h2 class="sec-t">Your Personal Reading · आपका व्यक्तिगत पठन</h2>
+        <p class="sec-d">Upload a clear photo of your open palm. Rishika will study your hand and share her insights in both English and Hindi.</p>
+        <p class="sec-d-hi">अपनी खुली हथेली की एक स्पष्ट तस्वीर अपलोड करें। ऋषिका आपके हाथ का अध्ययन करेंगी।</p>
+    </div>
+    <div id="stg">
+        <div id="s-up" class="rv">
+            <label class="upload" for="fu" id="ua">
+                <div style="font-size:2rem;margin-bottom:10px;opacity:.45;">🤲</div>
+                <div style="font-family:var(--font-serif);font-size:1.05rem;color:var(--gold);margin-bottom:6px;">Tap to upload a palm photo · तस्वीर अपलोड करें</div>
+                <div style="font-size:.78rem;color:var(--text-muted);">Clear, well-lit photo of your open right hand · अपने दाहिने हाथ की स्पष्ट तस्वीर</div>
+                <input type="file" id="fu" accept="image/*" onchange="onUp(event)">
+            </label>
+            <div style="text-align:center;margin-bottom:18px;"><span style="font-size:.78rem;color:var(--text-muted);">— or · या —</span></div>
+            <div style="text-align:center;"><button class="btn btn-g btn-sm" onclick="camOn()">📷 Use Camera · कैमरा खोलें</button></div>
+        </div>
+        <div id="s-cam" style="display:none">
+            <div class="cam-area"><video id="vid" autoplay playsinline></video><div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;"><div style="font-family:var(--font-serif);font-size:.88rem;color:var(--gold-light);opacity:.55;">Position your open palm · हथेली रखें</div></div></div>
+            <div class="cam-ctrl"><button class="btn btn-g btn-sm" onclick="camOff()">Cancel</button><button class="btn btn-p btn-sm" onclick="snap()">Capture · कैप्चर</button></div>
+        </div>
+        <div id="s-pre" style="display:none"><img id="pimg" class="prev-img" alt="Your palm"><div style="display:flex;gap:10px;justify-content:center;"><button class="btn btn-g btn-sm" onclick="rset()">Retake · फिर से</button><button class="btn btn-p btn-sm" onclick="doRead()">✦ Begin Reading · पठन शुरू करें</button></div></div>
+        <div id="s-ld" style="display:none"><div class="ld"><div class="lr"></div><div class="lt">Rishika is studying your palm… · ऋषिका आपकी हथेली का अध्ययन कर रही हैं…</div></div></div>
+        <div id="s-res" style="display:none"><div class="rr" id="rres"></div><div style="text-align:center;margin-top:28px;"><button class="btn btn-g btn-sm" onclick="rset()">New Reading · नया पठन</button></div></div>
+    </div>
+</div>
+</div>
+
+<!-- ABOUT -->
+<div class="pg" id="pg-about">
+<div class="sec" style="padding-top:100px;">
+    <div class="sec-h rv"><div class="sec-l">परिचय · ABOUT</div><h2 class="sec-t">About This Work · इस कार्य के बारे में</h2></div>
+    <div class="ab-g rv">
+        <div class="pc">
+            <div class="pa">🪷</div>
+            <div class="pn">Rishika · ऋषिका</div>
+            <div class="pr">Palmistry Consultant · हस्तरेखा विशेषज्ञ</div>
+            <p class="pb">"I have studied hands for many years, learning from the tradition of Vrihud Hastrekha Shastra. Each hand tells a unique story — I am here to help you read yours."</p>
+            <p class="pb-hi">"मैंने वर्षों तक वृहद् हस्तरेखा शास्त्र की परंपरा से सीखते हुए हाथों का अध्ययन किया है। हर हाथ एक अनूठी कहानी कहता है — मैं यहाँ हूँ आपकी कहानी पढ़ने में मदद करने के लिए।"</p>
+        </div>
+        <div class="ac">
+            <h3>The Tradition · परंपरा</h3>
+            <p>Palmistry — or <em>Hastrekha Shastra</em> (हस्तरेखा शास्त्र) — is one of the oldest forms of divination practiced in India. It views the palm as a living document, constantly evolving as you grow and make choices.</p>
+            <p class="p-hi">हस्तरेखा शास्त्र भारत में प्रचलित सबसे प्राचीन भविष्यवाणी पद्धतियों में से एक है। यह हथेली को एक जीवित दस्तावेज़ के रूप में देखता है, जो आपके विकास और चुनावों के साथ लगातार बदलता रहता है।</p>
+            <p>This application is grounded in the work of <strong>Dr. Narayan Dutt Shrimali</strong>, whose comprehensive text <em>"Vrihud Hastrekha Shastra"</em> (वृहद् हस्तरेखा शास्त्र) catalogues over 240 unique combinations of lines, mounts, and marks.</p>
+            <div class="bq">"The hand is a map of the soul's journey. Every line speaks, every mount whispers, and every mark holds a story waiting to be read. The ancient seer saw the entire cosmos reflected in the palm."<span class="bq-hi">"हाथ आत्मा की यात्रा का नक्शा है। हर रेखा बोलती है, हर पर्वत फुसफुसाता है, और हर चिह्न एक कहानी रखता है जो पढ़ने की प्रतीक्षा कर रही है।"</span></div>
+
+            <h3 style="margin-top:28px;">How Readings Work · पठन कैसे कार्य करता है</h3>
+            <p>When you submit a palm image, Rishika examines the visible features: the six major lines (Life, Head, Heart, Fate, Sun, Mercury), the seven mounts (Jupiter, Saturn, Sun, Mercury, Venus, Moon, Mars), and any special marks. She then identifies which <em>Yogas</em> — traditional combinations — are present.</p>
+            <p class="p-hi">जब आप हथेली की तस्वीर भेजते हैं, ऋषिका दृश्य विशेषताओं की जाँच करती हैं: छह प्रमुख रेखाएँ, सात पर्वत, और विशेष चिह्न। फिर वह पहचानती हैं कि कौन से योग मौजूद हैं।</p>
+
+            <h3 style="margin-top:28px;">Cultural Respect · सांस्कृतिक सम्मान</h3>
+            <p>This work respects the sacred tradition of Indian palmistry. The interpretations follow the framework set by Dr. Shrimali, honoring both the precision of the science and the poetry of the art. We connect lines and mounts to life principles — <em>dharma</em> (धर्म), <em>karma</em> (कर्म), <em>bhagya</em> (भाग्य), and <em>swatantra</em> (स्वतंत्र).</p>
+            <p class="p-hi">यह कार्य भारतीय हस्तरेखा विज्ञान की पवित्र परंपरा का सम्मान करता है। हम रेखाओं और पर्वतों को जीवन के सिद्धांतों — धर्म, कर्म, भाग्य और स्वतंत्र — से जोड़ते हैं।</p>
+            <p>Readings are meant for self-reflection and personal insight. Palmistry shows tendencies and potentials — not fixed destinies. <strong>Your choices always matter most.</strong></p>
+            <p class="p-hi">पठन आत्म-चिंतन और व्यक्तिगत अंतर्दृष्टि के लिए है। हस्तरेखा प्रवृत्तियाँ और संभावनाएँ दिखाती है — स्थिर भाग्य नहीं। <strong>आपके चुनाव हमेशा सबसे महत्वपूर्ण होते हैं।</strong></p>
+        </div>
+    </div>
+</div>
+</div>
+
+<footer>
+    <div class="fb">हस्तरेखा — Hastrekha</div>
+    <p class="ft">An exploration of Indian palmistry based on Vrihud Hastrekha Shastra (वृहद् हस्तरेखा शास्त्र) by Dr. Narayan Dutt Shrimali. For educational and self-reflection purposes.</p>
+    <p class="ft" style="margin-top:6px;font-family:var(--font-hi);">डॉ. नारायण दत्त श्रीमाली द्वारा वृहद् हस्तरेखा शास्त्र पर आधारित। शैक्षिक और आत्म-चिंतन उद्देश्यों के लिए।</p>
+    <p class="fd">Palmistry is a traditional art, not an exact science. Readings are for personal insight and entertainment only.</p>
+</footer>
+
+<script>
+// ============================================================
+// COMPLETE PALM DATA — ALL details from the book, bilingual
+// ============================================================
+const D={
+heart:{t:'Heart Line',h:'हृदय रेखा',
+d:'The Heart Line reveals your emotional nature — your capacity for love, how you form bonds, and the depth of your feelings. It runs from below the little finger across the upper palm.',
+dh:'हृदय रेखा आपके भावनात्मक स्वभाव को प्रकट करती है — प्रेम की क्षमता, बंधन कैसे बनाते हैं, और भावनाओं की गहराई। यह छोटी उंगली के नीचे से हथेली के ऊपरी भाग में चलती है।',
+items:[
+['Long line: Deep emotional capacity, loves fully and openly','लंबी रेखा: गहरी भावनात्मक क्षमता, पूरी तरह और खुले तौर पर प्यार करता है'],
+['Short line: Selective with emotions, tends to guard the heart','छोटी रेखा: भावनाओं में चयनात्मक, हृदय की रक्षा करता है'],
+['Straight: Head rules heart — practical approach to love','सीधी: बुद्धि हृदय पर राज करती है — प्रेम में व्यावहारिक दृष्टिकोण'],
+['Curved or wavy: Deeply romantic and emotional nature','घुमावदार या लहरदार: गहरा रोमांटिक और भावनात्मक स्वभाव'],
+['Starts under Jupiter (index): Idealistic love','गुरु (तर्जनी) के नीचे शुरू: आदर्शवादी प्रेम'],
+['Starts under Saturn (middle): Practical love','शनि (मध्यमा) के नीचे शुरू: व्यावहारिक प्रेम'],
+['Clear and deep: Passionate, intense feelings','स्पष्ट और गहरी: भावुक, तीव्र भावनाएँ'],
+['Broken: Past heartbreak or emotional wounds (healed or current)','टूटी: पिछला दिल टूटना या भावनात्मक घाव'],
+['Islands: Periods of emotional confusion or mixed feelings','द्वीप: भावनात्मक भ्रम या मिश्रित भावनाओं का काल'],
+['Forks at end: Multiple loves or diverse emotional nature','अंत में कांटे: कई प्रेम या विविध भावनात्मक स्वभाव'],
+['Connected to Head Line: Integration of emotion and logic','बुद्धि रेखा से जुड़ी: भावना और तर्क का एकीकरण'],
+['Faint: Emotionally detached or reserved','हल्की: भावनात्मक रूप से अलग या संयमित'],
+['Rising at end (toward Mercury): Good communication in relationships','अंत में उठती (बुध की ओर): संबंधों में अच्छा संवाद']
+]},
+head:{t:'Head Line',h:'बुद्धि रेखा',
+d:'The Head Line speaks of your intellect, thinking style, communication ability, and mental clarity. It runs across the middle of the palm.',
+dh:'बुद्धि रेखा आपकी बुद्धि, सोचने की शैली, संवाद क्षमता और मानसिक स्पष्टता के बारे में बताती है। यह हथेली के मध्य में चलती है।',
+items:[
+['Long line: Deep thinker with excellent memory','लंबी: गहरा विचारक, उत्कृष्ट स्मृति'],
+['Short line: Direct, practical thinker','छोटी: सीधा, व्यावहारिक विचारक'],
+['Straight: Logical and realistic mind','सीधी: तार्किक और यथार्थवादी मन'],
+['Curved: Creative and imaginative thinking','घुमावदार: रचनात्मक और कल्पनाशील सोच'],
+['Sloping toward Moon mount: Intuitive, artistic, dreamer','चंद्र पर्वत की ओर झुकी: सहज ज्ञानी, कलात्मक, स्वप्नदर्शी'],
+['Clear and deep: Sharp mind, excellent concentration','स्पष्ट और गहरी: तेज़ मन, उत्कृष्ट एकाग्रता'],
+['Broken: Scattered thinking, need for mental discipline','टूटी: बिखरी सोच, मानसिक अनुशासन की आवश्यकता'],
+['Branches: Multiple interests, diverse thinking','शाखाएँ: कई रुचियाँ, विविध सोच'],
+['Islands: Mental confusion, anxiety periods','द्वीप: मानसिक भ्रम, चिंता के काल'],
+['Connected to Life Line: Cautious, family-oriented','जीवन रेखा से जुड़ी: सतर्क, परिवार-केंद्रित'],
+['Separated from Life Line: Bold, independent spirit','जीवन रेखा से अलग: साहसी, स्वतंत्र आत्मा'],
+['Toward Jupiter: Leadership thinking','गुरु की ओर: नेतृत्ववादी सोच'],
+['Toward Saturn: Philosophical, deep thinker','शनि की ओर: दार्शनिक, गहन विचारक'],
+['Multiple head lines: Complex, multi-layered thinking','कई बुद्धि रेखाएँ: जटिल, बहु-स्तरीय सोच']
+]},
+life:{t:'Life Line',h:'जीवन रेखा',
+d:'The Life Line reflects vitality, energy, resilience, and life force — NOT the length of your life. It curves around the base of the thumb.',
+dh:'जीवन रेखा जीवन शक्ति, ऊर्जा, सहनशीलता और प्राण शक्ति को दर्शाती है — जीवन की लंबाई नहीं। यह अंगूठे के आधार के चारों ओर घूमती है।',
+items:[
+['Long and clear: Robust health and strong vitality','लंबी और स्पष्ट: मजबूत स्वास्थ्य और शक्तिशाली जीवन शक्ति'],
+['Short: Does NOT mean short life — just a different approach to life','छोटी: छोटे जीवन का मतलब नहीं — बस जीवन का अलग दृष्टिकोण'],
+['Deep: Strong constitution and endurance','गहरी: मजबूत शारीरिक गठन और सहन शक्ति'],
+['Faint: Need to consciously build stamina and energy','हल्की: सचेत रूप से ऊर्जा और सहनशक्ति बढ़ाने की आवश्यकता'],
+['Curves outward (toward Mount Venus): Warm, extroverted nature','बाहर की ओर मुड़ी (शुक्र पर्वत की ओर): गर्म, बहिर्मुखी स्वभाव'],
+['Close to thumb: Reserved, cautious, conservative energy','अंगूठे के करीब: संयमित, सतर्क, रूढ़िवादी ऊर्जा'],
+['Broken: Major life changes or shifts in direction','टूटी: जीवन में बड़े बदलाव या दिशा परिवर्तन'],
+['Multiple lines: Extra vitality or divided attention','कई रेखाएँ: अतिरिक्त जीवन शक्ति या विभाजित ध्यान'],
+['Islands: Health challenges or troubled periods','द्वीप: स्वास्थ्य चुनौतियाँ या कठिन काल'],
+['Forks at end: Multiple life directions in later years','अंत में कांटे: बाद के वर्षों में कई दिशाएँ'],
+['Chains: Dispersed energy, health ups and downs','श्रृंखला: बिखरी ऊर्जा, स्वास्थ्य में उतार-चढ़ाव'],
+['Close to wrist: Creative energy source','कलाई के करीब: रचनात्मक ऊर्जा स्रोत']
+]},
+fate:{t:'Fate Line',h:'भाग्य रेखा',
+d:'The Fate Line reveals your destiny path, career direction, and how external circumstances shape your journey. It runs vertically from palm base toward the middle finger.',
+dh:'भाग्य रेखा आपके भाग्य का मार्ग, करियर की दिशा, और बाहरी परिस्थितियाँ आपकी यात्रा को कैसे आकार देती हैं, यह प्रकट करती है।',
+items:[
+['Present and clear: Strong sense of destiny, clear life path','स्पष्ट और मौजूद: भाग्य की मजबूत भावना, स्पष्ट जीवन मार्ग'],
+['Absent: Free agent, self-directed life — no single path','अनुपस्थित: स्वतंत्र, स्व-निर्देशित जीवन — कोई एक मार्ग नहीं'],
+['Starts from wrist: Predetermined path, early clarity','कलाई से शुरू: पूर्व निर्धारित मार्ग, प्रारंभिक स्पष्टता'],
+['Starts from Life Line: Family strongly influences career','जीवन रेखा से शुरू: परिवार करियर को प्रभावित करता है'],
+['Starts from Moon mount: Imagination/public opinion drives path','चंद्र पर्वत से शुरू: कल्पना या जनमत मार्ग को निर्देशित करता है'],
+['Deep: Strong willpower and determined nature','गहरी: मजबूत इच्छाशक्ति और दृढ़ स्वभाव'],
+['Broken: Career changes — sometimes forced, sometimes chosen','टूटी: करियर में बदलाव — कभी मजबूर, कभी चुने हुए'],
+['Forks: Multiple career paths or vocations','कांटे: कई करियर मार्ग या व्यवसाय'],
+['Branches upward: Growth, expansion ahead','ऊपर की शाखाएँ: विकास, विस्तार आगे'],
+['Branches downward: Temporary setbacks or challenges','नीचे की शाखाएँ: अस्थायी असफलताएँ या चुनौतियाँ'],
+['Connected to Head Line: Mental work / career','बुद्धि रेखा से जुड़ी: बौद्धिक कार्य / करियर'],
+['Connected to Heart Line: People-oriented work','हृदय रेखा से जुड़ी: लोग-केंद्रित कार्य'],
+['Multiple fate lines: Diverse vocations and abilities','कई भाग्य रेखाएँ: विविध व्यवसाय और क्षमताएँ']
+]},
+sun:{t:'Sun Line (Apollo Line)',h:'सूर्य रेखा',
+d:'The Sun Line speaks of creativity, success, public recognition, and the joy you bring to the world. It runs toward the ring finger.',
+dh:'सूर्य रेखा रचनात्मकता, सफलता, सार्वजनिक मान्यता और आपके द्वारा दुनिया में लाई गई खुशी के बारे में बताती है।',
+items:[
+['Present: Natural talent and public appeal','मौजूद: प्राकृतिक प्रतिभा और सार्वजनिक अपील'],
+['Absent: Does NOT mean failure — just a different path to fulfillment','अनुपस्थित: विफलता नहीं — पूर्ति का अलग मार्ग'],
+['Deep: Strong creative power and artistic gifts','गहरी: मजबूत रचनात्मक शक्ति और कलात्मक उपहार'],
+['Starts from Life Line: Self-made success through effort','जीवन रेखा से शुरू: प्रयास से स्व-निर्मित सफलता'],
+['Starts from Moon mount: Fame through public appeal','चंद्र पर्वत से शुरू: सार्वजनिक अपील से प्रसिद्धि'],
+['Starts from Fate Line: Success through career achievement','भाग्य रेखा से शुरू: करियर उपलब्धि से सफलता'],
+['Branches upward: Growing recognition over time','ऊपर की शाखाएँ: समय के साथ बढ़ती मान्यता'],
+['Islands: Creative blocks or delays in recognition','द्वीप: रचनात्मक अवरोध या मान्यता में देरी'],
+['Forks: Multiple talents waiting to be expressed','कांटे: कई प्रतिभाएँ अभिव्यक्ति की प्रतीक्षा में'],
+['Rising toward Apollo mount: Public recognition coming','अपोलो पर्वत की ओर बढ़ती: सार्वजनिक मान्यता आ रही है']
+]},
+mercury:{t:'Mercury Line',h:'बुध रेखा',
+d:'The Mercury Line relates to business acumen, communication ability, health awareness, and healing power. It runs toward the little finger.',
+dh:'बुध रेखा व्यापार कुशलता, संवाद क्षमता, स्वास्थ्य जागरूकता और उपचार शक्ति से संबंधित है।',
+items:[
+['Present: Good business acumen and communication skills','मौजूद: अच्छी व्यापार कुशलता और संवाद कौशल'],
+['Absent: Not a problem — skills can be developed','अनुपस्थित: समस्या नहीं — कौशल विकसित किए जा सकते हैं'],
+['Straight: Clear, logical business thinking','सीधी: स्पष्ट, तार्किक व्यापार सोच'],
+['Curved: Persuasive, natural ability with people','घुमावदार: प्रभावशाली, लोगों के साथ प्राकृतिक क्षमता'],
+['Deep: Sharp commercial mind','गहरी: तेज़ वाणिज्यिक मन'],
+['Connected to Head Line: Intellectual approach to business','बुद्धि रेखा से जुड़ी: व्यापार में बौद्धिक दृष्टिकोण'],
+['Connected to Heart Line: People-oriented business style','हृदय रेखा से जुड़ी: लोग-केंद्रित व्यापार शैली'],
+['Islands: May indicate digestive or nervous system concerns','द्वीप: पाचन या तंत्रिका तंत्र की चिंता का संकेत'],
+['Branches: Multiple business interests or ventures','शाखाएँ: कई व्यापार रुचियाँ या उद्यम'],
+['Rising toward Mercury mount: Commercial success ahead','बुध पर्वत की ओर बढ़ती: वाणिज्यिक सफलता आगे']
+]},
+'m-jupiter':{t:'Mount of Jupiter',h:'गुरु पर्वत',
+d:'Located at the base of the index finger, the Mount of Jupiter represents leadership, ambition, spirituality, generosity, and the desire for honor.',
+dh:'तर्जनी के आधार पर स्थित, गुरु पर्वत नेतृत्व, महत्वाकांक्षा, आध्यात्मिकता, उदारता और सम्मान की इच्छा का प्रतिनिधित्व करता है।',
+items:[
+['Well-developed: Natural leader, ambitious, spiritually inclined','विकसित: प्राकृतिक नेता, महत्वाकांक्षी, आध्यात्मिक प्रवृत्ति'],
+['Flat: May need to develop confidence and assertiveness','सपाट: आत्मविश्वास और दृढ़ता विकसित करने की आवश्यकता'],
+['Overdeveloped: Tendency toward arrogance or overambition','अति विकसित: अहंकार या अत्यधिक महत्वाकांक्षा की प्रवृत्ति'],
+['Cross here (✚): Idealistic marriage or obstacle to partnership','क्रॉस (✚): आदर्शवादी विवाह या साझेदारी में बाधा'],
+['Star here (★): Great honor and public recognition','तारा (★): महान सम्मान और सार्वजनिक मान्यता'],
+['Triangle here (△): Deep spiritual wisdom','त्रिकोण (△): गहरी आध्यात्मिक बुद्धि'],
+['Grille here (▦): Too much ambition, overreach','जाली (▦): अत्यधिक महत्वाकांक्षा, सीमाओं से परे']
+]},
+'m-saturn':{t:'Mount of Saturn',h:'शनि पर्वत',
+d:'Below the middle finger, the Mount of Saturn governs discipline, responsibility, karma, hardship, and life\'s deeper lessons.',
+dh:'मध्यमा उंगली के नीचे, शनि पर्वत अनुशासन, जिम्मेदारी, कर्म, कठिनाई और जीवन के गहरे सबक को नियंत्रित करता है।',
+items:[
+['Well-developed: Disciplined, serious, takes responsibility fully','विकसित: अनुशासित, गंभीर, पूरी जिम्मेदारी लेता है'],
+['Flat: May lack structure or discipline in life','सपाट: जीवन में संरचना या अनुशासन की कमी हो सकती है'],
+['Overdeveloped: Tendency toward pessimism or melancholy','अति विकसित: निराशावाद या उदासी की प्रवृत्ति'],
+['Cross here (✚): Major life hurdle — a karmic lesson','क्रॉस (✚): जीवन की बड़ी बाधा — एक कार्मिक सबक'],
+['Star here (★): Great challenge or catastrophe that transforms','तारा (★): बड़ी चुनौती जो बदल दे'],
+['Crossed by lines: Karmic debts being settled','रेखाओं से काटा: कार्मिक ऋणों का निपटान'],
+['Grille here (▦): Heavy karma, life obstacles','जाली (▦): भारी कर्म, जीवन की बाधाएँ']
+]},
+'m-sun':{t:'Mount of Sun (Apollo)',h:'सूर्य पर्वत (अपोलो)',
+d:'Under the ring finger, the Sun Mount relates to creativity, success, beauty, artistic expression, charm, and public image.',
+dh:'अनामिका उंगली के नीचे, सूर्य पर्वत रचनात्मकता, सफलता, सौंदर्य, कलात्मक अभिव्यक्ति, आकर्षण और सार्वजनिक छवि से संबंधित है।',
+items:[
+['Well-developed: Artistic soul, natural charm, attracts success','विकसित: कलात्मक आत्मा, प्राकृतिक आकर्षण, सफलता को आकर्षित करता है'],
+['Flat: Struggles with self-expression or creative confidence','सपाट: आत्म-अभिव्यक्ति या रचनात्मक आत्मविश्वास में कठिनाई'],
+['Overdeveloped: Risk of vanity or superficiality','अति विकसित: अहंकार या सतहीपन का जोखिम'],
+['Star here (★): Fame and exceptional talent','तारा (★): प्रसिद्धि और असाधारण प्रतिभा'],
+['Triangle here (△): Hidden talent waiting to bloom','त्रिकोण (△): छिपी प्रतिभा खिलने की प्रतीक्षा में'],
+['Circle here (◯): Talent recognized, though not always smoothly','वृत्त (◯): प्रतिभा मान्य, हालांकि हमेशा सुचारू नहीं'],
+['Cross here (✚): Obstacle to success','क्रॉस (✚): सफलता में बाधा'],
+['Grille here (▦): Blocked creativity','जाली (▦): अवरुद्ध रचनात्मकता']
+]},
+'m-mercury':{t:'Mount of Mercury',h:'बुध पर्वत',
+d:'At the base of the little finger, the Mercury Mount governs business acumen, communication intelligence, wit, and quick thinking.',
+dh:'छोटी उंगली के आधार पर, बुध पर्वत व्यापार कुशलता, संवाद बुद्धि, चतुराई और त्वरित सोच को नियंत्रित करता है।',
+items:[
+['Well-developed: Excellent communicator, sharp business sense, witty','विकसित: उत्कृष्ट संवादक, तेज़ व्यापार बुद्धि, चतुर'],
+['Flat: May face challenges in communication or commerce','सपाट: संवाद या वाणिज्य में चुनौतियों का सामना'],
+['Overdeveloped: Cunning nature, potential for deception','अति विकसित: चालाक स्वभाव, धोखे की संभावना'],
+['Star here (★): Brilliant mind — possibly genius-level intellect','तारा (★): प्रतिभाशाली मन — संभवतः प्रतिभा-स्तर की बुद्धि'],
+['Triangle here (△): Exceptional business success predicted','त्रिकोण (△): असाधारण व्यापार सफलता की भविष्यवाणी'],
+['Cross here (✚): Warning about health or ethics','क्रॉस (✚): स्वास्थ्य या नैतिकता के बारे में चेतावनी'],
+['Grille here (▦): Scattered communication, nervous issues','जाली (▦): बिखरा संवाद, तंत्रिका संबंधी समस्याएँ']
+]},
+'m-venus':{t:'Mount of Venus',h:'शुक्र पर्वत',
+d:'The fleshy area at the base of the thumb. Represents love, passion, sexuality, family bonds, warmth, and the zest for life.',
+dh:'अंगूठे के आधार पर मांसल क्षेत्र। प्रेम, जुनून, कामुकता, पारिवारिक बंधन, गर्मजोशी और जीवन के प्रति उत्साह का प्रतिनिधित्व करता है।',
+items:[
+['Well-developed: Loving, warm, passionate, deeply family-oriented','विकसित: प्यारा, गर्म, भावुक, गहराई से परिवार-केंद्रित'],
+['Flat: Cool demeanour, emotionally detached','सपाट: ठंडा व्यवहार, भावनात्मक रूप से अलग'],
+['Overdeveloped: Tends toward overindulgence and excess passions','अति विकसित: अत्यधिक भोग और अधिक जुनून की प्रवृत्ति'],
+['Grille here (▦): Intense desires, need for balance','जाली (▦): तीव्र इच्छाएँ, संतुलन की आवश्यकता'],
+['Ring marking: Blessed with children (Santan Yoga)','वलय चिह्न: संतान से आशीर्वादित (संतान योग)']
+]},
+'m-moon':{t:'Mount of Moon',h:'चंद्र पर्वत',
+d:'On the outer lower palm (opposite Venus). Reflects imagination, intuition, travel, subconscious mind, and creativity.',
+dh:'हथेली के बाहरी निचले भाग पर (शुक्र के विपरीत)। कल्पना, अंतर्ज्ञान, यात्रा, अवचेतन मन और रचनात्मकता को दर्शाता है।',
+items:[
+['Well-developed: Deeply creative, intuitive, loves travel','विकसित: गहराई से रचनात्मक, सहज ज्ञानी, यात्रा प्रेमी'],
+['Flat: Grounded but less imaginative','सपाट: ज़मीनी लेकिन कम कल्पनाशील'],
+['Overdeveloped: Too much imagination, may lose touch with reality','अति विकसित: अत्यधिक कल्पना, वास्तविकता से संपर्क खो सकता है'],
+['Head Line sloping here: Artistic, dreamy thinking style','बुद्धि रेखा यहाँ झुकी: कलात्मक, स्वप्निल सोच शैली'],
+['Lines from here: Connection to travel and distant places','यहाँ से रेखाएँ: यात्रा और दूर स्थानों से संबंध']
+]},
+'m-mars':{t:'Mount of Mars',h:'मंगल पर्वत',
+d:'Mars has two aspects — Inner Mars (below Jupiter: aggression, action, physical courage) and Outer Mars (between Moon and Mercury: passive courage, endurance, inner strength). The Plain of Mars is the center of the palm.',
+dh:'मंगल के दो पहलू हैं — भीतरी मंगल (गुरु के नीचे: आक्रामकता, कार्य, शारीरिक साहस) और बाहरी मंगल (चंद्र और बुध के बीच: निष्क्रिय साहस, सहन, आंतरिक शक्ति)। मंगल का मैदान हथेली का केंद्र है।',
+items:[
+['Well-developed: Courageous, strong-willed, determined fighter','विकसित: साहसी, दृढ़ इच्छाशक्ति, दृढ़ लड़ाका'],
+['Flat: May lack assertiveness or physical courage','सपाट: दृढ़ता या शारीरिक साहस की कमी हो सकती है'],
+['Overdeveloped: Aggressive tendencies, short temper, violent','अति विकसित: आक्रामक प्रवृत्तियाँ, कम स्वभाव, हिंसक'],
+['Inner Mars (below Jupiter): Aggressive courage, physical action','भीतरी मंगल (गुरु के नीचे): आक्रामक साहस, शारीरिक कार्य'],
+['Outer Mars (Moon side): Passive courage, endurance, patience','बाहरी मंगल (चंद्र पक्ष): निष्क्रिय साहस, सहन, धैर्य'],
+['Well-padded Plain of Mars: High energy, resistance to adversity','अच्छा मंगल मैदान: उच्च ऊर्जा, प्रतिकूलता के प्रति प्रतिरोध']
+]}
+};
+
+// SPECIAL MARKS — ALL per-mount details from book
+const MARKS=[
+{sym:'★',n:'Star · तारा',nh:'तारा चिह्न',locs:[
+['On Mount Jupiter: Great honor, recognition · गुरु पर्वत: महान सम्मान, मान्यता'],
+['On Mount Saturn: Great challenge, catastrophe · शनि पर्वत: बड़ी चुनौती, आपदा'],
+['On Mount Sun: Fame, exceptional talent · सूर्य पर्वत: प्रसिद्धि, असाधारण प्रतिभा'],
+['On Mount Mercury: Brilliant mind, genius · बुध पर्वत: प्रतिभाशाली मन, प्रतिभा'],
+['On Heart Line: Significant love impact · हृदय रेखा पर: महत्वपूर्ण प्रेम प्रभाव'],
+['On Head Line: Mental shock or trauma · बुद्धि रेखा पर: मानसिक आघात']
+]},
+{sym:'✚',n:'Cross · क्रॉस',nh:'क्रॉस चिह्न',locs:[
+['On Mount Jupiter: Idealistic marriage or obstacle to partnership · गुरु: आदर्शवादी विवाह या साझेदारी में बाधा'],
+['On Mount Saturn: Major life hurdle, karmic lesson · शनि: जीवन की बड़ी बाधा, कार्मिक सबक'],
+['On Mount Sun: Obstacle to success · सूर्य: सफलता में बाधा'],
+['On Mount Mercury: Warning about health or ethics · बुध: स्वास्थ्य या नैतिकता की चेतावनी'],
+['In plain of palm: Significant turning point · हथेली के मैदान में: महत्वपूर्ण मोड़']
+]},
+{sym:'△',n:'Triangle · त्रिकोण',nh:'त्रिकोण चिह्न',locs:[
+['General: Very fortunate mark · सामान्य: बहुत शुभ चिह्न'],
+['On Mount Jupiter: Spiritual wisdom · गुरु: आध्यात्मिक बुद्धि'],
+['On Mount Saturn: Occult knowledge · शनि: गूढ़ ज्ञान'],
+['On Mount Sun: Hidden talent realization · सूर्य: छिपी प्रतिभा का साक्षात्कार'],
+['On Mount Mercury: Great business success · बुध: महान व्यापार सफलता'],
+['In plain of palm: Harmony, balance · हथेली के मैदान में: सामंजस्य, संतुलन']
+]},
+{sym:'◯',n:'Circle · वृत्त',nh:'वृत्त चिह्न',locs:[
+['On Sun mount: Famous, but not always for good reasons · सूर्य: प्रसिद्ध, लेकिन हमेशा अच्छे कारणों से नहीं'],
+['On Sun mount: Talent but challenges expressing it · सूर्य: प्रतिभा लेकिन अभिव्यक्ति में चुनौती'],
+['On other areas: Generally not favorable · अन्य क्षेत्रों पर: आमतौर पर अनुकूल नहीं']
+]},
+{sym:'◇',n:'Island · द्वीप',nh:'द्वीप चिह्न',locs:[
+['On Life Line: Health problems, dispersed energy · जीवन रेखा: स्वास्थ्य समस्याएँ, बिखरी ऊर्जा'],
+['On Head Line: Mental confusion, worry, emotional turmoil · बुद्धि रेखा: मानसिक भ्रम, चिंता'],
+['On Heart Line: Emotional pain, relationship struggles · हृदय रेखा: भावनात्मक दर्द, संबंध संघर्ष'],
+['On Fate Line: Obstacles, interruptions to destiny · भाग्य रेखा: बाधाएँ, भाग्य में रुकावट'],
+['On Sun Line: Blocked creativity, delayed success · सूर्य रेखा: अवरुद्ध रचनात्मकता, विलंबित सफलता'],
+['On Mercury Line: Health issues (digestive, respiratory) · बुध रेखा: स्वास्थ्य समस्याएँ (पाचन, श्वसन)']
+]},
+{sym:'▦',n:'Grille · जाली',nh:'जाली चिह्न',locs:[
+['On Mount Jupiter: Too much Jupiter energy (arrogance) · गुरु: अत्यधिक ऊर्जा (अहंकार)'],
+['On Mount Saturn: Heavy karma, life obstacles · शनि: भारी कर्म, जीवन की बाधाएँ'],
+['On Mount Sun: Blocked creativity · सूर्य: अवरुद्ध रचनात्मकता'],
+['On Mount Mercury: Scattered communication, nervous issues · बुध: बिखरा संवाद, तंत्रिका समस्याएँ']
+]},
+{sym:'⑂',n:'Fork · कांटा',nh:'कांटा चिह्न',locs:[
+['Life Line end: Multiple life directions, uncertainty · जीवन रेखा अंत: कई दिशाएँ, अनिश्चितता'],
+['Head Line end: Multiple interests, indecision · बुद्धि रेखा अंत: कई रुचियाँ, अनिर्णय'],
+['Heart Line end: Multiple romantic interests · हृदय रेखा अंत: कई रोमांटिक रुचियाँ'],
+['At line beginning: New start, change of direction · रेखा की शुरुआत में: नई शुरुआत, दिशा परिवर्तन']
+]},
+{sym:'⋯',n:'Chain · श्रृंखला',nh:'श्रृंखला चिह्न',locs:[
+['On Life Line: Weak periods, health ups and downs · जीवन रेखा: कमज़ोर काल, स्वास्थ्य उतार-चढ़ाव'],
+['On Head Line: Indecision, scattered thinking · बुद्धि रेखा: अनिर्णय, बिखरी सोच'],
+['On Heart Line: Emotional ups and downs · हृदय रेखा: भावनात्मक उतार-चढ़ाव'],
+['On Fate Line: Many obstacles, life interruptions · भाग्य रेखा: कई बाधाएँ, जीवन में बाधा']
+]},
+{sym:'•',n:'Dot · बिंदु',nh:'बिंदु चिह्न',locs:[
+['Usually unfavorable · आमतौर पर अशुभ'],
+['On lines: Disruption, illness, stress · रेखाओं पर: व्यवधान, बीमारी, तनाव'],
+['On mounts: Obstacles at that mount\'s domain · पर्वतों पर: उस पर्वत के क्षेत्र में बाधाएँ']
+]},
+{sym:'□',n:'Square · वर्ग',nh:'वर्ग चिह्न',locs:[
+['Generally protective mark · आमतौर पर सुरक्षात्मक चिह्न'],
+['Around lines: Protection from damage · रेखाओं के चारों ओर: क्षति से सुरक्षा'],
+['On mounts: Moderation of mount qualities · पर्वतों पर: पर्वत गुणों का संयम']
+]}
+];
+
+// YOGAS — ALL 22 from book with bilingual + confidence + subtitle
+const Y=[
+{n:'Rajyoga',h:'राज्ययोग',sub:'Mark of Kingship · राजा का चिह्न',cat:'wealth',rar:'uncommon',conf:'Very High',
+m:'The mark of natural authority and leadership. When Life, Head, and Fate lines are all deep, clear, and strong — you carry the energy of a natural ruler.',
+mh:'प्राकृतिक अधिकार और नेतृत्व का चिह्न। जब जीवन, बुद्धि और भाग्य रेखाएँ सभी गहरी, स्पष्ट और मजबूत हों — आप एक स्वाभाविक शासक की ऊर्जा रखते हैं।',
+ind:'Deep Life + Head + Fate lines, all clear and strong'},
+{n:'Lakshmi Yoga',h:'लक्ष्मी योग',sub:'Wealth Yoga · धन योग',cat:'wealth',rar:'uncommon',conf:'High',
+m:'The yoga of prosperity. A triangle on Mount Jupiter combined with a clear Fate Line suggests steady accumulation of wealth and material comfort.',
+mh:'समृद्धि का योग। गुरु पर्वत पर त्रिकोण और स्पष्ट भाग्य रेखा का संयोजन धन और भौतिक सुख के स्थिर संचय का संकेत देता है।',
+ind:'Triangle on Mount Jupiter + clear Fate Line'},
+{n:'Vasya Yoga',h:'वश्य योग',sub:'Power of Influence · प्रभाव की शक्ति',cat:'wealth',rar:'uncommon',conf:'High',
+m:'Natural magnetism and influence. A curved Life Line with developed Mercury mount and straight Head Line speaks of charisma and the ability to lead.',
+mh:'प्राकृतिक आकर्षण और प्रभाव। घुमावदार जीवन रेखा, विकसित बुध पर्वत और सीधी बुद्धि रेखा करिश्मे और नेतृत्व क्षमता की बात करती है।',
+ind:'Curved Life Line + developed Mercury mount + straight Head Line'},
+{n:'Padartha Yoga',h:'पदार्थ योग',sub:'Wealth Accumulation · धन संचय',cat:'wealth',rar:'common',conf:'High',
+m:'Steady, patient wealth-building through career. When the Sun Line is prominent early and connects with the Fate Line, fortune grows with work.',
+mh:'करियर के माध्यम से स्थिर, धैर्यपूर्ण धन-निर्माण। जब सूर्य रेखा शुरू से प्रमुख हो और भाग्य रेखा से जुड़ी हो।',
+ind:'Sun Line prominent early + connected to Fate Line'},
+{n:'Vyapara Yoga',h:'व्यापार योग',sub:'Business Success · व्यापार सफलता',cat:'wealth',rar:'common',conf:'High',
+m:'The mark of commercial success. Well-developed Mercury mount with clear Mercury Line speaks of instinct for opportunity.',
+mh:'वाणिज्यिक सफलता का चिह्न। विकसित बुध पर्वत और स्पष्ट बुध रेखा अवसर की सहज बुद्धि की बात करती है।',
+ind:'Developed Mercury mount + clear Mercury Line'},
+{n:'Shankara Yoga',h:'शंकर योग',sub:'Blessing of Balance · संतुलन का आशीर्वाद',cat:'wealth',rar:'uncommon',conf:'Moderate',
+m:'Balance between ambition and discipline — the blessing of Lord Shiva. Jupiter and Saturn mounts equally developed = rare equilibrium.',
+mh:'महत्वाकांक्षा और अनुशासन के बीच संतुलन — भगवान शिव का आशीर्वाद। गुरु और शनि पर्वत समान रूप से विकसित।',
+ind:'Jupiter and Saturn mounts equally developed'},
+{n:'Satya Yoga',h:'सत्य योग',sub:'Truth Seeker · सत्य अन्वेषी',cat:'challenge',rar:'uncommon',conf:'High',
+m:'The yoga of the truth-seeker. A very developed Saturn mount with clear Life Line reveals a soul that journeys through hardship toward wisdom.',
+mh:'सत्य-अन्वेषी का योग। बहुत विकसित शनि पर्वत और स्पष्ट जीवन रेखा एक ऐसी आत्मा को प्रकट करती है जो कठिनाई से ज्ञान की ओर यात्रा करती है।',
+ind:'Very developed Saturn mount + clear Life Line'},
+{n:'Krura Yoga',h:'क्रूर योग',sub:'Difficult Life · कठिन जीवन',cat:'challenge',rar:'common',conf:'High',
+m:'Life will test your courage. Very developed Mars mounts with broken Life Line means real challenges — but also the inner strength to overcome them.',
+mh:'जीवन आपके साहस की परीक्षा लेगा। बहुत विकसित मंगल पर्वत और टूटी जीवन रेखा का अर्थ है वास्तविक चुनौतियाँ — लेकिन उन्हें पार करने की आंतरिक शक्ति भी।',
+ind:'Very developed Mars mounts + broken Life Line'},
+{n:'Danda Yoga',h:'दंड योग',sub:'Delayed Rewards · विलंबित पुरस्कार',cat:'challenge',rar:'common',conf:'Moderate',
+m:'The yoga of delayed beginnings. A Fate Line starting late with strong Saturn influence means rewards come after patience and perseverance.',
+mh:'विलंबित शुरुआत का योग। देर से शुरू होने वाली भाग्य रेखा और मजबूत शनि प्रभाव — धैर्य और दृढ़ता के बाद पुरस्कार मिलते हैं।',
+ind:'Fate Line starting late + strong Saturn influence'},
+{n:'Saraswati Yoga',h:'सरस्वती योग',sub:'Goddess of Knowledge · ज्ञान की देवी',cat:'creativity',rar:'common',conf:'High',
+m:'Named for the goddess of knowledge and arts. Strong Mercury mount with curved Head Line and education lines marks a gifted mind.',
+mh:'ज्ञान और कला की देवी के नाम पर। मजबूत बुध पर्वत, घुमावदार बुद्धि रेखा और शिक्षा रेखाएँ एक प्रतिभाशाली मन का चिह्न है।',
+ind:'Strong Mercury mount + curved Head Line + education lines'},
+{n:'Kala Yoga',h:'कला योग',sub:'Art Yoga · कला योग',cat:'creativity',rar:'common',conf:'High',
+m:'The mark of the artist. Sun mount developed, Heart Line curves beautifully, Mercury mount active — creative expression flows naturally.',
+mh:'कलाकार का चिह्न। सूर्य पर्वत विकसित, हृदय रेखा सुंदर ढंग से मुड़ी, बुध पर्वत सक्रिय — रचनात्मक अभिव्यक्ति स्वाभाविक रूप से बहती है।',
+ind:'Sun mount developed + curved Heart Line + active Mercury mount'},
+{n:'Nritya Yoga',h:'नृत्य योग',sub:'Dance Yoga · नृत्य योग',cat:'creativity',rar:'uncommon',conf:'Moderate',
+m:'The dancer within. Very flexible hands, long fingers, and a prominent Moon mount speak of someone who naturally feels rhythm and movement.',
+mh:'भीतर का नर्तक। बहुत लचीले हाथ, लंबी उंगलियाँ, और प्रमुख चंद्र पर्वत — लय और गति को स्वाभाविक रूप से महसूस करने वाला।',
+ind:'Flexible hand + long fingers + prominent Moon mount'},
+{n:'Moksha Yoga',h:'मोक्ष योग',sub:'Liberation Yoga · मुक्ति योग',cat:'spiritual',rar:'rare',conf:'Moderate',
+m:'The rarest yoga in Hastrekha Shastra. Very developed Jupiter and Saturn mounts with mystical markings suggest a soul on the path toward enlightenment.',
+mh:'हस्तरेखा शास्त्र का सबसे दुर्लभ योग। बहुत विकसित गुरु और शनि पर्वत रहस्यमय चिह्नों के साथ — मोक्ष की ओर यात्रा करती आत्मा।',
+ind:'Very developed Jupiter + Saturn + mystical markings'},
+{n:'Brahmi Yoga',h:'ब्राह्मी योग',sub:'Divine Connection · दिव्य संबंध',cat:'spiritual',rar:'rare',conf:'Moderate',
+m:'A divine connection. A strongly marked Jupiter mount with a cross or star indicates spiritual gifts and a channel to something greater.',
+mh:'एक दिव्य संबंध। मजबूत चिह्नित गुरु पर्वत पर क्रॉस या तारा आध्यात्मिक उपहारों और किसी बड़ी शक्ति से संबंध का संकेत देता है।',
+ind:'Strongly marked Jupiter mount + cross or star on Jupiter'},
+{n:'Bhagya Yoga',h:'भाग्य योग',sub:'Destiny Yoga · भाग्य योग',cat:'spiritual',rar:'uncommon',conf:'High',
+m:'The yoga of destiny. When the Fate Line begins at the wrist and runs strong and clear, your life path was set before you took your first breath.',
+mh:'भाग्य का योग। जब भाग्य रेखा कलाई से शुरू होकर मजबूत और स्पष्ट चलती है, आपका जीवन मार्ग पहले से निर्धारित था।',
+ind:'Fate Line from wrist, strong and clear'},
+{n:'Roga Yoga',h:'रोग योग',sub:'Disease Awareness · रोग जागरूकता',cat:'health',rar:'common',conf:'High',
+m:'A flag for health awareness. Islands on Life Line combined with a cross on Mercury mount suggest areas that need attention and care.',
+mh:'स्वास्थ्य जागरूकता का संकेत। जीवन रेखा पर द्वीप और बुध पर्वत पर क्रॉस का संयोजन — ध्यान और देखभाल की आवश्यकता।',
+ind:'Islands on Life Line + cross on Mercury mount'},
+{n:'Ayu Yoga',h:'आयु योग',sub:'Longevity · दीर्घायु',cat:'health',rar:'common',conf:'High',
+m:'The mark of vitality and longevity. A long, clear Life Line without breaks or islands is the strongest sign of a healthy, resilient constitution.',
+mh:'जीवन शक्ति और दीर्घायु का चिह्न। बिना टूट या द्वीप के लंबी, स्पष्ट जीवन रेखा — स्वस्थ, सहनशील शरीर का सबसे मजबूत संकेत।',
+ind:'Long clear Life Line, no breaks or islands'},
+{n:'Aram Yoga',h:'आराम योग',sub:'Rest Yoga · विश्राम योग',cat:'health',rar:'common',conf:'Moderate',
+m:'Your body is asking for rest. Broken or weak lines with many islands — the hand says: slow down, recover, manage your energy wisely.',
+mh:'आपका शरीर विश्राम माँग रहा है। कई द्वीपों के साथ टूटी या कमज़ोर रेखाएँ — हाथ कहता है: धीमा करो, ठीक हो जाओ।',
+ind:'Many broken/weak lines with islands'},
+{n:'Vivah Yoga',h:'विवाह योग',sub:'Marriage Yoga · विवाह योग',cat:'relationship',rar:'common',conf:'Moderate-High',
+m:'The marriage yoga. Clear relationship lines on Mount Mercury indicate meaningful committed partnerships — depth, not just presence.',
+mh:'विवाह योग। बुध पर्वत पर स्पष्ट संबंध रेखाएँ अर्थपूर्ण प्रतिबद्ध साझेदारी का संकेत देती हैं — गहराई, न कि केवल उपस्थिति।',
+ind:'Clear relationship lines on Mercury mount'},
+{n:'Santan Yoga',h:'संतान योग',sub:'Children Yoga · संतान योग',cat:'relationship',rar:'common',conf:'Moderate',
+m:'Blessed with family joy. A ring on Mount Venus combined with a prominent Sun Line speaks of children who bring light and purpose.',
+mh:'पारिवारिक आनंद से धन्य। शुक्र पर्वत पर वलय और प्रमुख सूर्य रेखा — ऐसी संतान जो प्रकाश और उद्देश्य लाती है।',
+ind:'Ring on Venus mount + prominent Sun Line'},
+{n:'Prema Yoga',h:'प्रेम योग',sub:'Love Yoga · प्रेम योग',cat:'relationship',rar:'common',conf:'High',
+m:'The capacity for deep, true love. When the Heart Line is strong, deep, and curves under Apollo — you love with your whole being.',
+mh:'गहरे, सच्चे प्रेम की क्षमता। जब हृदय रेखा मजबूत, गहरी हो और अपोलो के नीचे मुड़ती हो — आप अपने पूरे अस्तित्व से प्रेम करते हैं।',
+ind:'Strong deep Heart Line curving under Apollo'},
+{n:'Bhakti Yoga',h:'भक्ति योग',sub:'Devotion Yoga · भक्ति योग',cat:'relationship',rar:'common',conf:'High',
+m:'The yoga of devotion — whether to love, family, or the divine. A powerful Heart Line with a large Venus mount marks a deeply devoted soul.',
+mh:'भक्ति का योग — चाहे प्रेम, परिवार या ईश्वर के प्रति। शक्तिशाली हृदय रेखा और बड़ा शुक्र पर्वत गहरी भक्ति की आत्मा का चिह्न है।',
+ind:'Powerful Heart Line + large Venus mount'}
+];
+
+// ============================================================
+// NAVIGATION
+// ============================================================
+function go(p){
+    document.querySelectorAll('.pg').forEach(e=>e.classList.remove('active'));
+    document.getElementById('pg-'+p).classList.add('active');
+    document.querySelectorAll('.navl button').forEach(b=>b.classList.remove('on'));
+    const nb=document.getElementById('n-'+p); if(nb) nb.classList.add('on');
+    document.getElementById('nl').classList.remove('open');
+    window.scrollTo(0,0);
+    setTimeout(()=>document.querySelectorAll('.pg.active .rv').forEach(e=>{if(iv(e))e.classList.add('vis')}),80);
+}
+function iv(e){return e.getBoundingClientRect().top<window.innerHeight-50}
+window.addEventListener('scroll',()=>{
+    document.querySelectorAll('.rv').forEach(e=>{if(iv(e))e.classList.add('vis')});
+    document.getElementById('nav').classList.toggle('scrolled',window.scrollY>30);
+});
+window.addEventListener('load',()=>document.querySelectorAll('.rv').forEach(e=>{if(iv(e))e.classList.add('vis')}));
+
+// ============================================================
+// PALM EXPLORER
+// ============================================================
+document.querySelectorAll('.pl,.pz').forEach(el=>{
+    el.addEventListener('click',function(){
+        const f=this.dataset.f; if(!D[f])return;
+        document.querySelectorAll('.pl,.pz').forEach(e=>e.classList.remove('on'));
+        this.classList.add('on');
+        const d=D[f];
+        document.getElementById('prm').style.display='none';
+        const dtl=document.getElementById('dtl');
+        dtl.style.display='block';
+        dtl.innerHTML=`<h3>${d.t}</h3><div class="hi-n">${d.h}</div><div class="dt">${d.d}</div><div class="dt-hi">${d.dh}</div><ul class="dl">${d.items.map(i=>`<li>${i[0]}<span class="hi">${i[1]}</span></li>`).join('')}</ul>`;
+    });
+});
+
+// ============================================================
+// MARKS RENDERING
+// ============================================================
+document.getElementById('marksGrid').innerHTML=MARKS.map(mk=>`
+<div class="mark"><div class="mark-h"><span class="mark-sym">${mk.sym}</span><div><div class="mark-n">${mk.n}</div><div class="mark-nhi">${mk.nh}</div></div></div>
+<div class="mark-body">${mk.locs.map(l=>`<span class="loc">${l}</span>`).join('')}</div></div>`).join('');
+
+// ============================================================
+// YOGAS
+// ============================================================
+function ry(cat){
+    const f=cat==='all'?Y:Y.filter(y=>y.cat===cat);
+    document.getElementById('ygr').innerHTML=f.map(y=>`
+    <div class="yc"><div class="yc-h"><div><div class="yc-n">${y.n}</div><div class="yc-hi">${y.h}</div></div><span class="badge ${y.rar}">${y.rar}</span></div>
+    <div class="yc-sub">${y.sub}</div>
+    <div class="yc-m">${y.m}</div><div class="yc-m-hi">${y.mh}</div>
+    <div class="yc-ind"><strong>Indicators · संकेतक:</strong> ${y.ind}</div>
+    <div class="yc-meta"><span>Confidence · विश्वास: ${y.conf}</span></div></div>`).join('');
+}
+function yf(cat,el){document.querySelectorAll('#yt .tab').forEach(b=>b.classList.remove('on'));el.classList.add('on');ry(cat);}
+ry('all');
+
+// ============================================================
+// COMPREHENSIVE CAMERA & READING ENGINE WITH TIMELINE
+// ============================================================
+let cs=null,cimg=null;
+function onUp(e){const f=e.target.files[0];if(!f)return;const r=new FileReader();r.onload=x=>{cimg=x.target.result;document.getElementById('pimg').src=cimg;ss('pre')};r.readAsDataURL(f)}
+async function camOn(){try{cs=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment',width:{ideal:1280}}});document.getElementById('vid').srcObject=cs;ss('cam')}catch(e){alert('Camera not available. Please upload a photo instead.')}}
+function camOff(){if(cs){cs.getTracks().forEach(t=>t.stop());cs=null}ss('up')}
+function snap(){const v=document.getElementById('vid'),c=document.getElementById('hc');c.width=v.videoWidth;c.height=v.videoHeight;c.getContext('2d').drawImage(v,0,0);cimg=c.toDataURL('image/jpeg',.92);document.getElementById('pimg').src=cimg;if(cs){cs.getTracks().forEach(t=>t.stop());cs=null}ss('pre')}
+function ss(s){['up','cam','pre','ld','res'].forEach(x=>document.getElementById('s-'+x).style.display=x===s?'block':'none')}
+function rset(){cimg=null;ss('up');document.getElementById('fu').value=''}
+
+function resizeImage(base64Str, maxWidth = 1024, maxHeight = 1024) {
+    return new Promise((resolve) => {
+        const img = new Image();
+        img.src = base64Str;
+        img.onload = () => {
+            const canvas = document.createElement('canvas');
+            let width = img.width;
+            let height = img.height;
+
+            if (width > height) {
+                if (width > maxWidth) {
+                    height *= maxWidth / width;
+                    width = maxWidth;
+                }
+            } else {
+                if (height > maxHeight) {
+                    width *= maxHeight / height;
+                    height = maxHeight;
+                }
+            }
+
+            canvas.width = width;
+            canvas.height = height;
+            const ctx = canvas.getContext('2d');
+            ctx.drawImage(img, 0, 0, width, height);
+            resolve(canvas.toDataURL('image/jpeg', 0.85));
+        };
+    });
+}
+
+async function doRead(){
+    ss('ld');
+    
+    // Resize image for optimization before sending
+    const optimizedImage = await resizeImage(cimg);
+    
+    fetch('/api/analyze-palm', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+            image: optimizedImage,
+            language: "en"
+        })
+    })
+    .then(r => {
+        if (!r.ok) {
+            return r.json().then(err => { throw new Error(err.detail || 'API Error: ' + r.status); }).catch(e => { throw new Error('Network or API Error: ' + r.status); });
+        }
+        return r.json();
+    })
+    .then(data => {
+        if (!data || !data.reading_data) throw new Error("Invalid response format from AI");
+        showRead(data.reading_data);
+        ss('res');
+    })
+    .catch(e => {
+        let msg = "A spiritual disturbance prevented the reading: " + e.message;
+        if (e.message.toLowerCase().includes("quota") || e.message.includes("429")) {
+            msg = "The spirits are overwhelmed with requests! Our AI mystical quota has been temporarily exceeded. Please wait a moment and try again.";
+        } else if (e.message.toLowerCase().includes("fetch")) {
+            msg = "Could not connect to the divination servers. Please check your internet connection.";
+        }
+        
+        document.getElementById('rres').innerHTML = `
+            <div style="text-align:center; padding: 40px 20px; border: 1px dashed var(--border-glow); border-radius: var(--r-md); background: var(--bg-mid);">
+                <div style="font-size:3rem; margin-bottom:20px; color: var(--gold-dark);">⚠️</div>
+                <h3 style="font-family:var(--font-serif); margin-bottom:15px; color:var(--text);">Reading Interrupted</h3>
+                <p style="color:var(--text-muted); font-size:0.95rem; line-height: 1.6; max-width: 400px; margin: 0 auto; margin-bottom: 25px;">${msg}</p>
+                <div class="row" style="justify-content:center;">
+                    <button class="btn btn-out" onclick="ss('pre')" style="margin-right:15px;">Go Back</button>
+                    <button class="btn" onclick="doRead()">Retry Reading</button>
+                </div>
+            </div>
+        `;
+        ss('res');
+    });
+}
+
+function showRead(r){
+    document.getElementById('rres').innerHTML=`
+    <div style="text-align:center;margin-bottom:34px;">
+        <span style="font-size:2.2rem;display:block;margin-bottom:14px;color:var(--gold-dark);">𑁍</span>
+        <h2>${r.title}</h2>
+        <div style="height:1px;width:120px;background:linear-gradient(90deg,transparent,var(--gold-dark),transparent);margin:18px auto;"></div>
+    </div>
+
+    <div style="margin-bottom:44px;">
+        <div style="display:flex;align-items:flex-start;gap:20px;">
+            <div style="font-size:2.4rem;color:var(--gold);opacity:0.3;line-height:0.8;font-family:var(--font-serif);">"</div>
+            <div>
+                <p style="font-family:var(--font-serif);font-size:1.05rem;color:var(--text);line-height:1.95;margin-bottom:16px;">${r.ov.e}</p>
+                <p style="font-family:var(--font-hi);font-size:.9rem;color:var(--text-muted);line-height:1.8;">${r.ov.hi}</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="rs" style="margin-bottom:38px;">
+        <h4 style="font-size:1.25rem;border-bottom:1px solid var(--border);padding-bottom:10px;margin-bottom:18px;">🫀 Health, Vitality & Life Force · स्वास्थ्य एवं जीवन शक्ति</h4>
+        <p style="margin-bottom:12px;">${r.health.e}</p>
+        <p class="rh" style="margin-bottom:0;">${r.health.hi}</p>
+    </div>
+
+    <div class="rs" style="margin-bottom:38px;">
+        <h4 style="font-size:1.25rem;border-bottom:1px solid var(--border);padding-bottom:10px;margin-bottom:18px;">🏛 Career, Vocation & Destiny · करियर एवं व्यवसाय</h4>
+        <p style="margin-bottom:12px;">${r.career.e}</p>
+        <p class="rh" style="margin-bottom:0;">${r.career.hi}</p>
+    </div>
+
+    <div class="rs" style="margin-bottom:44px;">
+        <h4 style="font-size:1.25rem;border-bottom:1px solid var(--border);padding-bottom:10px;margin-bottom:18px;">💛 Relationships, Love & Devotion · संबंध एवं प्रेम</h4>
+        <p style="margin-bottom:12px;">${r.rel.e}</p>
+        <p class="rh" style="margin-bottom:0;">${r.rel.hi}</p>
+    </div>
+
+    <!-- EXACT TIMELINES FROM THE BOOK -->
+    <div class="rs" style="background:var(--bg-mid);border:1px solid var(--border-glow);border-radius:var(--r-md);padding:28px 24px;margin-bottom:44px;box-shadow:inset 0 0 20px rgba(0,0,0,0.5);">
+        <div style="text-align:center;margin-bottom:20px;">
+            <h4 style="font-size:1.35rem;color:var(--gold);margin-bottom:4px;">⏳ Exact Timelines & Age Milestones</h4>
+            <div style="font-family:var(--font-hi);color:var(--gold-dark);font-size:.85rem;letter-spacing:1px;">सटीक समयरेखा और आयु मील का पत्थर</div>
+            <p style="font-size:.8rem;color:var(--text-muted);margin-top:12px;">Calculated using the intersection points of the Fate Line (Bhagya Rekha), Head Line, and Life Line as described in Vrihud Hastrekha Shastra.</p>
+        </div>
+        
+        <ul style="list-style:none;padding:0;position:relative;">
+            <div style="position:absolute;left:11px;top:10px;bottom:10px;width:1px;background:var(--border-glow);"></div>
+            ${r.tl.map(t => `
+            <li style="position:relative;padding-left:36px;margin-bottom:24px;">
+                <div style="position:absolute;left:7px;top:6px;width:9px;height:9px;border-radius:50%;background:var(--gold);box-shadow:0 0 10px var(--gold);"></div>
+                <p style="color:var(--text);font-size:.92rem;margin-bottom:8px;line-height:1.7;">${t.e}</p>
+                <p style="font-family:var(--font-hi);color:var(--text-dim);font-size:.84rem;line-height:1.65;border-left:2px solid var(--gold-dark);padding-left:14px;margin-left:-8px;">${t.h}</p>
+            </li>
+            `).join('')}
+        </ul>
+    </div>
+
+    <div class="rs">
+        <h4 style="font-size:1.25rem;border-bottom:1px solid var(--border);padding-bottom:10px;margin-bottom:18px;">✦ Prominent Yogas Identified · पहचाने गए योग</h4>
+        <p style="margin-bottom:16px;">Based on the intricate convergence of lines and mounts, you possess the following major traditional combinations (Yogas):</p>
+        <div style="display:grid;gap:16px;">
+        ${r.yogas.map(y=>`
+            <div style="background:var(--bg-deep);border:1px solid var(--border);padding:18px;border-radius:var(--r-sm);">
+                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px;">
+                    <span style="font-family:var(--font-serif);font-size:1.15rem;color:var(--gold);">${y.n} / ${y.h}</span>
+                    <span class="badge ${y.rar}">${y.rar}</span>
+                </div>
+                <p style="font-size:.85rem;color:var(--text-dim);margin-bottom:8px;">${y.m}</p>
+                <p style="font-family:var(--font-hi);font-size:.8rem;color:var(--text-muted);">${y.mh}</p>
+            </div>
+        `).join('')}
+        </div>
+    </div>
+
+    <div class="rs" style="border-top:1px dashed var(--border-glow);padding-top:28px;margin-top:38px;text-align:center;">
+        <div style="font-size:1.8rem;color:var(--gold-dark);margin-bottom:14px;">🪷</div>
+        <p style="font-family:var(--font-serif);font-style:italic;font-size:1.05rem;line-height:1.8;color:var(--text-dim);">"The lines on your hand are deeply written, profound in their meaning. Remember, your destiny is a living river—palmistry maps the riverbed, but your soul is the water. The choices you make shape the flow."</p>
+        <p style="font-family:var(--font-hi);color:var(--text-muted);margin-top:14px;font-size:.85rem;">"आपके हाथ की रेखाएँ गहराई से लिखी गई हैं। याद रखें, आपका भाग्य एक जीवित नदी है — हस्तरेखा नदी के तल को मापती है, लेकिन आपकी आत्मा पानी है। आपके द्वारा किए गए चुनाव प्रवाह को आकार देते हैं।"</p>
+        <div style="margin-top:28px;font-size:.82rem;letter-spacing:1px;color:var(--gold);text-transform:uppercase;">— Rishika · ऋषिका</div>
+    </div>`;
+}
+
+// ============================================================
+// STARS
+// ============================================================
+(function(){
+    const c=document.getElementById('stars'),x=c.getContext('2d');let s=[];
+    function rz(){c.width=innerWidth;c.height=innerHeight}rz();addEventListener('resize',rz);
+    for(let i=0;i<140;i++)s.push({x:Math.random()*c.width,y:Math.random()*c.height,r:Math.random()*1.4+.3,a:Math.random()*.5+.2,sp:Math.random()*.0007+.0003,ph:Math.random()*Math.PI*2});
+    function dr(){x.clearRect(0,0,c.width,c.height);const t=Date.now();s.forEach(st=>{const a=st.a*(.5+.5*Math.sin(t*st.sp+st.ph));x.beginPath();x.arc(st.x,st.y,st.r,0,Math.PI*2);x.fillStyle=`rgba(196,153,61,${a})`;x.fill()});requestAnimationFrame(dr)}dr();
+})();
+</script>
+</body>
+</html>
