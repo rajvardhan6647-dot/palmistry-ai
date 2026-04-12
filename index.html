@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>हस्तरेखा शास्त्र — Vrihud Hastrekha Shastra | Indian Palmistry</title>
-    <meta name="description" content="Explore the complete science of Indian palmistry — Vrihud Hastrekha Shastra by Dr. Narayan Dutt Shrimali. All 6 lines, 7 mounts, 10 special marks, 22+ yogas explained in English and Hindi.">
+    <title>ज्योतिष एवं हस्तरेखा — Jyotish & Hastrekha | Indian Astrology & Palmistry</title>
+    <meta name="description" content="Get your FREE horoscope based on Vedic astrology (Bharatiya Jyotish). Complete palmistry, zodiac predictions, nakshatra analysis, and life forecasts in English and Hindi.">
     <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500&family=Noto+Sans+Devanagari:wght@300;400;500;600;700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -20,6 +20,10 @@
             --gold-glow-md: rgba(196, 153, 61, 0.2);
             --gold-glow-strong: rgba(196, 153, 61, 0.35);
             --saffron: #d17a2e;
+            --saffron-light: #e8944a;
+            --saffron-glow: rgba(209, 122, 46, 0.15);
+            --warm-orange: #e07c3e;
+            --warm-red: #c45a3c;
             --vermillion: #b5342a;
             --lotus: #9e5a82;
             --text: #e4ddd0;
@@ -227,6 +231,88 @@
         .rv.vis { opacity:1; transform:translateY(0); }
 
         canvas#hc { display:none; }
+
+        /* ============================================= */
+        /* HOROSCOPE FORM — Clickastro-inspired design   */
+        /* ============================================= */
+        .horo-section { padding:60px 20px 80px; position:relative; overflow:hidden; }
+        .horo-section::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 30% 20%, rgba(209,122,46,0.06) 0%, transparent 50%), radial-gradient(ellipse at 70% 80%, rgba(196,153,61,0.04) 0%, transparent 50%); pointer-events:none; }
+        .horo-wrap { max-width:720px; margin:0 auto; position:relative; }
+        .horo-badge { display:inline-flex; align-items:center; gap:8px; background:linear-gradient(135deg,rgba(209,122,46,0.12),rgba(196,153,61,0.08)); border:1px solid rgba(209,122,46,0.25); padding:6px 16px; border-radius:30px; font-size:.75rem; color:var(--saffron-light); letter-spacing:1.5px; text-transform:uppercase; margin-bottom:18px; }
+        .horo-title { font-family:var(--font-serif); font-size:clamp(1.6rem,4vw,2.4rem); font-weight:400; color:var(--text); text-align:center; margin-bottom:6px; line-height:1.3; }
+        .horo-title em { color:var(--saffron-light); font-style:italic; font-weight:500; }
+        .horo-subtitle { text-align:center; font-family:var(--font-hi); font-size:.88rem; color:var(--text-muted); margin-bottom:32px; }
+
+        .horo-card { background:rgba(22,17,42,0.85); backdrop-filter:blur(24px); border:1px solid rgba(209,122,46,0.18); border-radius:var(--r-lg); padding:36px 32px; box-shadow:0 12px 50px rgba(0,0,0,0.5), 0 0 80px rgba(209,122,46,0.04), inset 0 1px 0 rgba(255,255,255,0.03); position:relative; }
+        .horo-card::before { content:''; position:absolute; top:-1px; left:20%; right:20%; height:2px; background:linear-gradient(90deg,transparent,var(--saffron),var(--gold),var(--saffron),transparent); border-radius:2px; }
+
+        .horo-form { display:grid; gap:20px; }
+        .horo-row { display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+        @media(max-width:600px) { .horo-row { grid-template-columns:1fr; } }
+
+        .f-group { display:flex; flex-direction:column; gap:6px; }
+        .f-label { font-size:.78rem; color:var(--gold); font-weight:500; letter-spacing:.5px; display:flex; align-items:center; gap:6px; }
+        .f-label .f-icon { font-size:.9rem; opacity:.7; }
+        .f-input { background:rgba(11,8,20,0.7); border:1px solid var(--border); border-radius:var(--r-sm); padding:12px 14px; color:var(--text); font-family:var(--font-sans); font-size:.88rem; transition:var(--ease); outline:none; }
+        .f-input:focus { border-color:var(--saffron); box-shadow:0 0 0 3px rgba(209,122,46,0.12); }
+        .f-input::placeholder { color:var(--text-muted); }
+        .f-input::-webkit-calendar-picker-indicator { filter:invert(0.7) sepia(1) hue-rotate(0deg); cursor:pointer; }
+        select.f-input { cursor:pointer; -webkit-appearance:none; appearance:none; background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%23a69c8a' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E"); background-repeat:no-repeat; background-position:right 12px center; padding-right:32px; }
+
+        .gender-group { display:flex; gap:10px; }
+        .gender-opt { flex:1; position:relative; }
+        .gender-opt input { position:absolute; opacity:0; pointer-events:none; }
+        .gender-opt label { display:flex; align-items:center; justify-content:center; gap:8px; padding:11px 14px; background:rgba(11,8,20,0.7); border:1px solid var(--border); border-radius:var(--r-sm); color:var(--text-dim); font-size:.85rem; cursor:pointer; transition:var(--ease); }
+        .gender-opt input:checked + label { border-color:var(--saffron); background:rgba(209,122,46,0.08); color:var(--saffron-light); box-shadow:0 0 0 3px rgba(209,122,46,0.1); }
+        .gender-opt label:hover { border-color:rgba(209,122,46,0.4); }
+
+        .time-row { display:grid; grid-template-columns:1fr auto; gap:10px; }
+
+        .horo-submit { width:100%; padding:15px 28px; border:none; border-radius:var(--r-sm); background:linear-gradient(135deg,var(--saffron),var(--warm-orange),var(--gold)); color:var(--bg-deep); font-family:var(--font-sans); font-size:.95rem; font-weight:600; letter-spacing:.5px; cursor:pointer; transition:var(--ease); box-shadow:0 4px 24px rgba(209,122,46,0.3); margin-top:8px; display:flex; align-items:center; justify-content:center; gap:10px; }
+        .horo-submit:hover { box-shadow:0 6px 32px rgba(209,122,46,0.45); transform:translateY(-2px); }
+        .horo-submit:active { transform:translateY(0); }
+        .horo-submit:disabled { opacity:0.6; cursor:not-allowed; transform:none; }
+
+        .horo-note { text-align:center; font-size:.72rem; color:var(--text-muted); margin-top:14px; line-height:1.6; }
+
+        /* Zodiac decoration */
+        .zodiac-strip { display:flex; justify-content:center; gap:12px; margin-bottom:24px; font-size:1.1rem; opacity:.3; letter-spacing:4px; }
+
+        /* ============================================= */
+        /* HOROSCOPE RESULTS                             */
+        /* ============================================= */
+        .horo-result { max-width:800px; margin:0 auto; padding:100px 20px 60px; }
+        .horo-profile { background:var(--bg-card); border:1px solid rgba(209,122,46,0.2); border-radius:var(--r-lg); padding:28px 24px; margin-bottom:28px; display:grid; grid-template-columns:auto 1fr; gap:24px; align-items:center; box-shadow:var(--shadow); }
+        @media(max-width:600px) { .horo-profile { grid-template-columns:1fr; text-align:center; } }
+        .horo-symbol { width:80px; height:80px; border-radius:50%; background:linear-gradient(135deg,rgba(209,122,46,0.15),rgba(196,153,61,0.1)); border:2px solid var(--saffron); display:flex; align-items:center; justify-content:center; font-size:2.2rem; }
+        .horo-meta h2 { font-family:var(--font-serif); font-size:1.5rem; color:var(--gold); margin-bottom:4px; }
+        .horo-meta .horo-tags { display:flex; flex-wrap:wrap; gap:6px; margin-top:8px; }
+        .horo-tag { font-size:.7rem; padding:3px 10px; border-radius:14px; background:rgba(209,122,46,0.1); border:1px solid rgba(209,122,46,0.2); color:var(--saffron-light); }
+
+        .horo-sec { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--r-md); padding:28px 24px; margin-bottom:18px; box-shadow:var(--shadow); transition:var(--ease); }
+        .horo-sec:hover { border-color:rgba(209,122,46,0.25); }
+        .horo-sec-h { display:flex; align-items:center; gap:10px; margin-bottom:14px; }
+        .horo-sec-icon { font-size:1.3rem; }
+        .horo-sec-title { font-family:var(--font-serif); font-size:1.15rem; color:var(--gold); }
+        .horo-sec-title-hi { font-family:var(--font-hi); font-size:.75rem; color:var(--gold-dark); }
+        .horo-sec p { font-size:.88rem; color:var(--text-dim); line-height:1.85; margin-bottom:10px; }
+        .horo-sec .hi-text { font-family:var(--font-hi); font-size:.82rem; color:var(--text-muted); line-height:1.75; }
+
+        .fav-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(140px,1fr)); gap:12px; margin-top:12px; }
+        .fav-item { background:rgba(11,8,20,0.6); border:1px solid var(--border); border-radius:var(--r-sm); padding:14px 12px; text-align:center; }
+        .fav-item .fav-label { font-size:.68rem; color:var(--text-muted); text-transform:uppercase; letter-spacing:1px; margin-bottom:4px; }
+        .fav-item .fav-val { font-family:var(--font-serif); font-size:.95rem; color:var(--saffron-light); }
+
+        .phase-timeline { position:relative; padding-left:28px; }
+        .phase-timeline::before { content:''; position:absolute; left:10px; top:8px; bottom:8px; width:2px; background:linear-gradient(180deg,var(--saffron),var(--gold),var(--saffron)); border-radius:2px; }
+        .phase-item { position:relative; margin-bottom:22px; }
+        .phase-item::before { content:''; position:absolute; left:-22px; top:6px; width:10px; height:10px; border-radius:50%; background:var(--saffron); box-shadow:0 0 10px var(--saffron-glow); }
+        .phase-age { font-family:var(--font-serif); font-size:.9rem; color:var(--gold); margin-bottom:4px; }
+
+        .horo-loading { text-align:center; padding:80px 20px; }
+        .horo-loading .lr { border-top-color:var(--saffron); }
+        .horo-loading-text { font-family:var(--font-serif); color:var(--text-muted); font-style:italic; margin-top:6px; }
+        .horo-loading-sub { font-family:var(--font-hi); font-size:.82rem; color:var(--text-muted); margin-top:8px; opacity:.7; }
     </style>
 </head>
 <body>
@@ -243,6 +329,7 @@
     <button class="nav-tog" onclick="document.getElementById('nl').classList.toggle('open')" aria-label="Menu">☰</button>
     <ul class="navl" id="nl">
         <li><button onclick="go('home')" id="n-home" class="on">Home</button></li>
+        <li><button onclick="go('horoscope')" id="n-horoscope" style="color:var(--saffron-light);">✦ Horoscope</button></li>
         <li><button onclick="go('explore')" id="n-explore">Explore Palm</button></li>
         <li><button onclick="go('marks')" id="n-marks">Special Marks</button></li>
         <li><button onclick="go('yogas')" id="n-yogas">Yogas</button></li>
@@ -255,16 +342,79 @@
 <!-- HOME -->
 <div class="pg active" id="pg-home">
 <div class="hero"><div class="hero-c">
-    <div class="h-hi">वृहद् हस्तरेखा शास्त्र</div>
-    <h1 class="h-title">The Ancient Science of<br><em>Reading the Hand</em></h1>
+    <div class="h-hi">भारतीय ज्योतिष एवं हस्तरेखा शास्त्र</div>
+    <h1 class="h-title">The Ancient Science of<br><em>Astrology & Palmistry</em></h1>
     <div class="h-div"></div>
-    <p class="h-sub">Based on the teachings of Dr. Narayan Dutt Shrimali — discover the map of your soul's journey, written in the lines and mounts of your palm.</p>
-    <p class="h-sub-hi">डॉ. नारायण दत्त श्रीमाली की शिक्षाओं पर आधारित — अपनी आत्मा की यात्रा का नक्शा खोजें, जो आपकी हथेली की रेखाओं और पर्वतों में लिखा है।</p>
+    <p class="h-sub">Based on Bharatiya Jyotish (Nemi Chandra Shastri) & Vrihud Hastrekha Shastra — discover your destiny through the stars and the lines of your palm.</p>
+    <p class="h-sub-hi">भारतीय ज्योतिष (नेमि चंद्र शास्त्री) एवं वृहद् हस्तरेखा शास्त्र पर आधारित — सितारों और हथेली की रेखाओं से अपने भाग्य की खोज करें।</p>
     <div class="h-cta">
-        <button class="btn btn-p" onclick="go('explore')"><span>✦</span> Explore Your Palm / हस्तरेखा देखें</button>
+        <button class="btn btn-p" onclick="go('horoscope')" style="background:linear-gradient(135deg,var(--saffron),var(--warm-orange),var(--gold));box-shadow:0 4px 24px rgba(209,122,46,0.3);"><span>☉</span> Get Free Horoscope / निशुल्क कुंडली</button>
+        <button class="btn btn-g" onclick="go('explore')"><span>✦</span> Explore Palm / हस्तरेखा देखें</button>
         <button class="btn btn-g" onclick="go('reading')">Begin a Reading / पठन शुरू करें</button>
     </div>
 </div></div>
+
+<!-- HOROSCOPE FORM SECTION ON HOMEPAGE -->
+<div class="horo-section">
+    <div class="horo-wrap rv">
+        <div style="text-align:center;">
+            <div class="zodiac-strip">♈ ♉ ♊ ♋ ♌ ♍ ♎ ♏ ♐ ♑ ♒ ♓</div>
+            <div class="horo-badge">☉ Free Vedic Horoscope · निशुल्क वैदिक कुंडली</div>
+            <h2 class="horo-title">Discover Your <em>Cosmic Blueprint</em></h2>
+            <p class="horo-subtitle">भारतीय ज्योतिष के अनुसार अपनी जन्म कुंडली जानें</p>
+        </div>
+
+        <div class="horo-card">
+            <form class="horo-form" id="horoForm" onsubmit="submitHoroscope(event)">
+                <div class="f-group">
+                    <label class="f-label"><span class="f-icon">👤</span> Full Name · पूरा नाम</label>
+                    <input type="text" class="f-input" id="horo-name" placeholder="Enter your name" required>
+                </div>
+
+                <div class="f-group">
+                    <label class="f-label"><span class="f-icon">⚤</span> Gender · लिंग</label>
+                    <div class="gender-group">
+                        <div class="gender-opt">
+                            <input type="radio" name="gender" id="g-male" value="Male" required>
+                            <label for="g-male">♂ Male · पुरुष</label>
+                        </div>
+                        <div class="gender-opt">
+                            <input type="radio" name="gender" id="g-female" value="Female">
+                            <label for="g-female">♀ Female · महिला</label>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="horo-row">
+                    <div class="f-group">
+                        <label class="f-label"><span class="f-icon">📅</span> Date of Birth · जन्म तिथि</label>
+                        <input type="date" class="f-input" id="horo-dob" required>
+                    </div>
+                    <div class="f-group">
+                        <label class="f-label"><span class="f-icon">🕐</span> Time of Birth · जन्म समय</label>
+                        <div class="time-row">
+                            <input type="time" class="f-input" id="horo-time" required>
+                            <select class="f-input" id="horo-ampm" style="min-width:70px;">
+                                <option value="AM">AM</option>
+                                <option value="PM">PM</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="f-group">
+                    <label class="f-label"><span class="f-icon">📍</span> Place of Birth · जन्म स्थान</label>
+                    <input type="text" class="f-input" id="horo-place" placeholder="e.g., Delhi, Mumbai, Varanasi..." required>
+                </div>
+
+                <button type="submit" class="horo-submit" id="horoSubmitBtn">
+                    <span>☉</span> Get Free Horoscope · निशुल्क कुंडली प्राप्त करें
+                </button>
+            </form>
+            <p class="horo-note">Based on Bharatiya Jyotish by Nemi Chandra Shastri & Vrihud Hastrekha Shastra · नेमि चंद्र शास्त्री की भारतीय ज्योतिष पर आधारित</p>
+        </div>
+    </div>
+</div>
 
 <div class="sec">
     <div class="sec-h rv">
@@ -449,6 +599,27 @@
 </div>
 </div>
 
+<!-- HOROSCOPE RESULTS PAGE -->
+<div class="pg" id="pg-horoscope">
+<div class="horo-result">
+    <div class="sec-h rv" style="margin-bottom:28px;">
+        <div class="sec-l">ज्योतिष कुंडली · VEDIC HOROSCOPE</div>
+        <h2 class="sec-t">Your Cosmic Blueprint · आपकी ब्रह्मांडीय रूपरेखा</h2>
+        <p class="sec-d">Fill in the form on the homepage or click below to start.</p>
+        <p class="sec-d-hi">होमपेज पर फॉर्म भरें या नीचे क्लिक करें।</p>
+        <div style="text-align:center;margin-top:18px;"><button class="btn btn-p" onclick="go('home');setTimeout(()=>document.getElementById('horoForm').scrollIntoView({behavior:'smooth'}),300)" style="background:linear-gradient(135deg,var(--saffron),var(--warm-orange),var(--gold));box-shadow:0 4px 24px rgba(209,122,46,0.3);">☉ Fill Horoscope Form</button></div>
+    </div>
+    <div id="horo-loading" style="display:none">
+        <div class="horo-loading">
+            <div class="lr"></div>
+            <div class="horo-loading-text">Consulting the celestial bodies and ancient texts…</div>
+            <div class="horo-loading-sub">ग्रहों और प्राचीन ग्रंथों से परामर्श कर रहे हैं…</div>
+        </div>
+    </div>
+    <div id="horo-results" style="display:none"></div>
+</div>
+</div>
+
 <!-- ABOUT -->
 <div class="pg" id="pg-about">
 <div class="sec" style="padding-top:100px;">
@@ -483,10 +654,9 @@
 </div>
 
 <footer>
-    <div class="fb">हस्तरेखा — Hastrekha</div>
-    <p class="ft">An exploration of Indian palmistry based on Vrihud Hastrekha Shastra (वृहद् हस्तरेखा शास्त्र) by Dr. Narayan Dutt Shrimali. For educational and self-reflection purposes.</p>
-    <p class="ft" style="margin-top:6px;font-family:var(--font-hi);">डॉ. नारायण दत्त श्रीमाली द्वारा वृहद् हस्तरेखा शास्त्र पर आधारित। शैक्षिक और आत्म-चिंतन उद्देश्यों के लिए।</p>
-    <p class="fd">Palmistry is a traditional art, not an exact science. Readings are for personal insight and entertainment only.</p>
+    <div class="fb">ज्योतिष एवं हस्तरेखा — Jyotish & Hastrekha</div>
+    <p class="ft">An exploration of Indian astrology & palmistry based on Bharatiya Jyotish (भारतीय ज्योतिष) by Nemi Chandra Shastri and Vrihud Hastrekha Shastra (वृहद् हस्तरेखा शास्त्र). For educational and self-reflection purposes.</p>
+    <p class="ft" style="margin-top:6px;font-family:var(--font-hi);">नेमि चंद्र शास्त्री की भारतीय ज्योतिष एवं वृहद् हस्तरेखा शास्त्र पर आधारित। शैक्षिक और आत्म-चिंतन उद्देश्यों के लिए।</p>
 </footer>
 
 <script>
@@ -1065,6 +1235,225 @@ function showRead(r){
         <p style="font-family:var(--font-hi);color:var(--text-muted);margin-top:14px;font-size:.85rem;">"आपके हाथ की रेखाएँ गहराई से लिखी गई हैं। याद रखें, आपका भाग्य एक जीवित नदी है — हस्तरेखा नदी के तल को मापती है, लेकिन आपकी आत्मा पानी है। आपके द्वारा किए गए चुनाव प्रवाह को आकार देते हैं।"</p>
         <div style="margin-top:28px;font-size:.82rem;letter-spacing:1px;color:var(--gold);text-transform:uppercase;">— Rishika · ऋषिका</div>
     </div>`;
+}
+
+// ============================================================
+// HOROSCOPE ENGINE
+// ============================================================
+async function submitHoroscope(e) {
+    e.preventDefault();
+    
+    const name = document.getElementById('horo-name').value.trim();
+    const gender = document.querySelector('input[name="gender"]:checked')?.value;
+    const dob = document.getElementById('horo-dob').value;
+    const time = document.getElementById('horo-time').value;
+    const ampm = document.getElementById('horo-ampm').value;
+    const place = document.getElementById('horo-place').value.trim();
+    
+    if (!name || !gender || !dob || !time || !place) {
+        alert('Please fill in all fields / कृपया सभी फ़ील्ड भरें');
+        return;
+    }
+    
+    // Navigate to horoscope page and show loading
+    go('horoscope');
+    document.getElementById('horo-loading').style.display = 'block';
+    document.getElementById('horo-results').style.display = 'none';
+    document.querySelector('#pg-horoscope .sec-h').style.display = 'none';
+    
+    const btn = document.getElementById('horoSubmitBtn');
+    btn.disabled = true;
+    
+    try {
+        const response = await fetch('/generate-horoscope', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                name: name,
+                gender: gender,
+                birth_date: dob,
+                birth_time: time,
+                birth_time_period: ampm,
+                birth_place: place
+            })
+        });
+        
+        if (!response.ok) {
+            const err = await response.json().catch(() => ({}));
+            throw new Error(err.detail || 'Server error: ' + response.status);
+        }
+        
+        const data = await response.json();
+        if (!data || !data.horoscope_data) throw new Error('Invalid response format');
+        
+        renderHoroscope(data.horoscope_data);
+        document.getElementById('horo-loading').style.display = 'none';
+        document.getElementById('horo-results').style.display = 'block';
+        
+    } catch (err) {
+        console.error('Horoscope error:', err);
+        document.getElementById('horo-loading').style.display = 'none';
+        document.getElementById('horo-results').style.display = 'block';
+        document.getElementById('horo-results').innerHTML = `
+            <div style="text-align:center;padding:50px 20px;border:1px dashed var(--border-glow);border-radius:var(--r-md);background:var(--bg-mid);">
+                <div style="font-size:3rem;margin-bottom:20px;color:var(--saffron);">⚠️</div>
+                <h3 style="font-family:var(--font-serif);margin-bottom:15px;color:var(--text);">Horoscope Generation Interrupted</h3>
+                <p style="color:var(--text-muted);font-size:.9rem;line-height:1.6;max-width:400px;margin:0 auto 25px;">${err.message}</p>
+                <button class="btn btn-p" onclick="go('home');setTimeout(()=>document.getElementById('horoForm').scrollIntoView({behavior:'smooth'}),300)" style="background:linear-gradient(135deg,var(--saffron),var(--warm-orange),var(--gold));">Try Again</button>
+            </div>
+        `;
+    } finally {
+        btn.disabled = false;
+    }
+}
+
+function renderHoroscope(d) {
+    const ap = d.astro_profile || {};
+    const rashi = ap.rashi || {};
+    const nak = ap.nakshatra || {};
+    const lag = ap.lagna || {};
+    const fav = d.favorable || {};
+    
+    const sections = [
+        { icon: '🌟', title: 'Personality & Character', title_hi: 'व्यक्तित्व एवं स्वभाव', data: d.personality },
+        { icon: '🏛', title: 'Career & Profession', title_hi: 'करियर एवं व्यवसाय', data: d.career },
+        { icon: '💛', title: 'Relationships & Marriage', title_hi: 'संबंध एवं विवाह', data: d.relationships },
+        { icon: '🫀', title: 'Health & Vitality', title_hi: 'स्वास्थ्य एवं जीवन शक्ति', data: d.health },
+        { icon: '💰', title: 'Wealth & Prosperity', title_hi: 'धन एवं समृद्धि', data: d.wealth },
+        { icon: '🪷', title: 'Spiritual Path', title_hi: 'आध्यात्मिक मार्ग', data: d.spiritual },
+    ];
+    
+    let html = `
+    <!-- Profile Card -->
+    <div class="horo-profile">
+        <div class="horo-symbol">${rashi.symbol || '☉'}</div>
+        <div class="horo-meta">
+            <h2>${d.title || ('Horoscope of ' + (ap.name || ''))}</h2>
+            <div style="font-family:var(--font-hi);font-size:.85rem;color:var(--text-muted);margin-bottom:6px;">${d.title_hi || ''}</div>
+            <div class="horo-tags">
+                <span class="horo-tag">${rashi.name || ''} · ${rashi.name_hi || ''} ${rashi.symbol || ''}</span>
+                <span class="horo-tag">⊕ ${nak.name || ''} · ${nak.name_hi || ''}</span>
+                <span class="horo-tag">↑ Lagna: ${lag.name_en || ''}</span>
+                <span class="horo-tag">${rashi.element || ''}</span>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Summary -->
+    <div class="horo-sec" style="border-color:rgba(209,122,46,0.25);background:rgba(22,17,42,0.95);">
+        <div class="horo-sec-h">
+            <span class="horo-sec-icon">☉</span>
+            <div>
+                <div class="horo-sec-title">Overall Life Summary</div>
+                <div class="horo-sec-title-hi">समग्र जीवन सारांश</div>
+            </div>
+        </div>
+        <p>${typeof d.summary === 'object' ? d.summary.en : (d.summary || '')}</p>
+        <p class="hi-text">${typeof d.summary === 'object' ? d.summary.hi : ''}</p>
+    </div>
+    `;
+    
+    // Prediction Sections
+    for (const sec of sections) {
+        if (!sec.data) continue;
+        html += `
+        <div class="horo-sec">
+            <div class="horo-sec-h">
+                <span class="horo-sec-icon">${sec.icon}</span>
+                <div>
+                    <div class="horo-sec-title">${sec.title}</div>
+                    <div class="horo-sec-title-hi">${sec.title_hi}</div>
+                </div>
+            </div>
+            <p>${typeof sec.data === 'object' ? sec.data.en : sec.data}</p>
+            <p class="hi-text">${typeof sec.data === 'object' ? sec.data.hi : ''}</p>
+        </div>
+        `;
+    }
+    
+    // Favorable Items
+    if (fav && Object.keys(fav).length > 0) {
+        html += `
+        <div class="horo-sec">
+            <div class="horo-sec-h">
+                <span class="horo-sec-icon">✨</span>
+                <div>
+                    <div class="horo-sec-title">Favorable Elements</div>
+                    <div class="horo-sec-title-hi">अनुकूल तत्व</div>
+                </div>
+            </div>
+            <div class="fav-grid">
+                ${fav.colors ? `<div class="fav-item"><div class="fav-label">Colors · रंग</div><div class="fav-val">${Array.isArray(fav.colors) ? fav.colors.join(', ') : fav.colors}</div></div>` : ''}
+                ${fav.numbers ? `<div class="fav-item"><div class="fav-label">Numbers · अंक</div><div class="fav-val">${Array.isArray(fav.numbers) ? fav.numbers.join(', ') : fav.numbers}</div></div>` : ''}
+                ${fav.days ? `<div class="fav-item"><div class="fav-label">Days · दिन</div><div class="fav-val">${Array.isArray(fav.days) ? fav.days.join(', ') : fav.days}</div></div>` : ''}
+                ${fav.gemstone ? `<div class="fav-item"><div class="fav-label">Gemstone · रत्न</div><div class="fav-val">${fav.gemstone}</div></div>` : ''}
+                ${fav.deity ? `<div class="fav-item"><div class="fav-label">Deity · देवता</div><div class="fav-val">${fav.deity}</div></div>` : ''}
+                ${fav.mantra ? `<div class="fav-item"><div class="fav-label">Mantra · मंत्र</div><div class="fav-val">${fav.mantra}</div></div>` : ''}
+            </div>
+        </div>
+        `;
+    }
+    
+    // Life Phases
+    if (d.life_phases && d.life_phases.length > 0) {
+        html += `
+        <div class="horo-sec">
+            <div class="horo-sec-h">
+                <span class="horo-sec-icon">⏳</span>
+                <div>
+                    <div class="horo-sec-title">Life Phases & Milestones</div>
+                    <div class="horo-sec-title-hi">जीवन के चरण एवं मील के पत्थर</div>
+                </div>
+            </div>
+            <div class="phase-timeline">
+                ${d.life_phases.map(p => `
+                <div class="phase-item">
+                    <div class="phase-age">${p.age || p.period || ''}</div>
+                    <p>${p.en || ''}</p>
+                    <p class="hi-text">${p.hi || ''}</p>
+                </div>
+                `).join('')}
+            </div>
+        </div>
+        `;
+    }
+    
+    // Yearly Forecast
+    if (d.yearly_forecast && d.yearly_forecast.length > 0) {
+        html += `
+        <div class="horo-sec">
+            <div class="horo-sec-h">
+                <span class="horo-sec-icon">📅</span>
+                <div>
+                    <div class="horo-sec-title">Yearly Forecast</div>
+                    <div class="horo-sec-title-hi">वार्षिक भविष्यवाणी</div>
+                </div>
+            </div>
+            ${d.yearly_forecast.map(y => `
+            <div style="border-bottom:1px solid var(--border);padding:14px 0;">
+                <div style="font-family:var(--font-serif);font-size:.95rem;color:var(--saffron-light);margin-bottom:6px;">${y.period || ''}</div>
+                <p>${y.en || ''}</p>
+                <p class="hi-text">${y.hi || ''}</p>
+            </div>
+            `).join('')}
+        </div>
+        `;
+    }
+    
+    // Closing
+    html += `
+    <div style="border-top:1px dashed var(--border-glow);padding-top:28px;margin-top:28px;text-align:center;">
+        <div style="font-size:1.8rem;color:var(--saffron);margin-bottom:14px;">☉</div>
+        <p style="font-family:var(--font-serif);font-style:italic;font-size:1rem;line-height:1.8;color:var(--text-dim);max-width:600px;margin:0 auto;">"The stars incline, but do not compel. Your destiny is shaped by the cosmos, but fulfilled by your actions."</p>
+        <p style="font-family:var(--font-hi);color:var(--text-muted);margin-top:10px;font-size:.85rem;">"सितारे दिशा देते हैं, बाध्य नहीं करते। आपका भाग्य ब्रह्मांड द्वारा आकार दिया जाता है, लेकिन आपके कर्मों द्वारा पूर्ण होता है।"</p>
+        <div style="margin-top:24px;font-size:.8rem;letter-spacing:1px;color:var(--saffron);text-transform:uppercase;">— Jyotish Guru · ज्योतिष गुरु</div>
+        <div style="margin-top:24px;">
+            <button class="btn btn-g" onclick="go('home');setTimeout(()=>document.getElementById('horoForm').scrollIntoView({behavior:'smooth'}),300)">New Horoscope · नई कुंडली</button>
+        </div>
+    </div>
+    `;
+    
+    document.getElementById('horo-results').innerHTML = html;
 }
 
 // ============================================================

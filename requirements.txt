@@ -4,3 +4,4 @@ google-generativeai
 python-dotenv
 pydantic
 python-multipart
+pdfplumber
