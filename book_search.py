@@ -705,6 +705,213 @@ def get_horoscope_context(astro_profile: Dict, index: Dict = None) -> str:
 
 
 # ============================================================
+# STRUCTURED RULES LOOKUP (from extracted_rules.json)
+# ============================================================
+
+EXTRACTED_RULES_FILE = os.path.join(CACHE_DIR, "extracted_rules.json")
+_rules_db = None
+
+def _load_rules_db() -> Optional[Dict]:
+    """Load the extracted rules database (cached in memory)."""
+    global _rules_db
+    if _rules_db is not None:
+        return _rules_db
+    
+    if not os.path.exists(EXTRACTED_RULES_FILE):
+        return None
+    
+    try:
+        with open(EXTRACTED_RULES_FILE, "r", encoding="utf-8") as f:
+            _rules_db = json.load(f)
+        count = _rules_db.get("total_rules", 0)
+        if count > 0:
+            print(f"  Loaded {count} structured rules from extracted_rules.json")
+        return _rules_db
+    except Exception as e:
+        print(f"  [WARN] Could not load rules DB: {e}")
+        return None
+
+
+def lookup_structured_rules(astro_profile: Dict, max_rules: int = 30) -> List[Dict]:
+    """
+    Find structured astrological rules matching the person's profile.
+    
+    Searches by:
+    - Rashi name (Hindi/English/transliterated)
+    - Nakshatra name
+    - Planetary lords (Graha)
+    - Element
+    - Relevant categories
+    """
+    db = _load_rules_db()
+    if db is None or not db.get("rules"):
+        return []
+    
+    rashi = astro_profile["rashi"]
+    nakshatra = astro_profile["nakshatra"]
+    lagna = astro_profile["lagna"]
+    
+    # Build search terms
+    search_terms = set()
+    
+    # Rashi terms
+    search_terms.add(rashi["name"].lower())
+    search_terms.add(rashi["name_en"].lower())
+    search_terms.add(rashi["name_hi"])
+    for kw in rashi.get("keywords", []):
+        search_terms.add(kw.lower())
+    
+    # Nakshatra terms
+    search_terms.add(nakshatra["name"].lower())
+    search_terms.add(nakshatra["name_hi"])
+    
+    # Lagna terms
+    search_terms.add(lagna["name"].lower())
+    search_terms.add(lagna["name_en"].lower())
+    search_terms.add(lagna["name_hi"])
+    
+    # Planet lords
+    for lord_str in [rashi["lord"], nakshatra["lord"]]:
+        for part in lord_str.split("/"):
+            search_terms.add(part.strip().lower())
+    
+    # Element
+    for part in rashi["element"].split("/"):
+        search_terms.add(part.strip().lower())
+    
+    matched_rules = []
+    
+    for rule in db["rules"]:
+        score = 0
+        
+        # Check applicable_rashi
+        rashi_field = (rule.get("applicable_rashi") or "").lower()
+        if rashi_field:
+            for term in search_terms:
+                if term in rashi_field:
+                    score += 5
+                    break
+        
+        # Check applicable_graha
+        graha_field = (rule.get("applicable_graha") or "").lower()
+        if graha_field:
+            for term in search_terms:
+                if term in graha_field:
+                    score += 3
+                    break
+        
+        # Check topic and topic_hi
+        topic = (rule.get("topic") or "").lower()
+        topic_hi = rule.get("topic_hi") or ""
+        for term in search_terms:
+            if term in topic:
+                score += 4
+                break
+            if term in topic_hi:
+                score += 4
+                break
+        
+        # Check prediction text
+        pred_en = (rule.get("prediction_en") or "").lower()
+        pred_hi = rule.get("prediction_hi") or ""
+        for term in search_terms:
+            if len(term) > 2 and term in pred_en:
+                score += 1
+                break
+            if len(term) > 1 and term in pred_hi:
+                score += 1
+                break
+        
+        # Check category relevance
+        category = (rule.get("category") or "").lower()
+        high_value_cats = ["rashi_effect", "yoga", "planetary_placement", "nakshatra", "dasha", "house_effect"]
+        if category in [c.lower() for c in high_value_cats]:
+            score += 1
+        
+        if score >= 3:
+            rule["_match_score"] = score
+            matched_rules.append(rule)
+    
+    # Sort by match score
+    matched_rules.sort(key=lambda x: -x.get("_match_score", 0))
+    
+    return matched_rules[:max_rules]
+
+
+def format_structured_rules_context(rules: List[Dict]) -> str:
+    """Format matched structured rules as context text for the AI prompt."""
+    if not rules:
+        return ""
+    
+    parts = []
+    parts.append(f"\n📜 STRUCTURED RULES FROM CLASSICAL TEXTS ({len(rules)} matching rules):")
+    parts.append("=" * 60)
+    
+    for i, rule in enumerate(rules, 1):
+        entry = f"\n[Rule {i}] {rule.get('category', 'General')} — {rule.get('topic', 'N/A')}"
+        if rule.get("topic_hi"):
+            entry += f" ({rule['topic_hi']})"
+        entry += f"\n  Source: {rule.get('source_book', '?')}, Page {rule.get('source_page', '?')}"
+        
+        if rule.get("sanskrit_shloka"):
+            entry += f"\n  Shloka: {rule['sanskrit_shloka']}"
+        
+        if rule.get("prediction_en"):
+            entry += f"\n  Effect (EN): {rule['prediction_en']}"
+        
+        if rule.get("prediction_hi"):
+            entry += f"\n  Effect (HI): {rule['prediction_hi']}"
+        
+        if rule.get("remedy"):
+            entry += f"\n  Remedy: {rule['remedy']}"
+        
+        parts.append(entry)
+    
+    return "\n".join(parts)
+
+
+def get_horoscope_context_enhanced(astro_profile: Dict) -> str:
+    """
+    Get comprehensive book context combining:
+    1. RAG semantic search (ChromaDB passages)
+    2. Structured rules lookup (extracted_rules.json)
+    3. Keyword search fallback
+    """
+    context_parts = []
+    
+    # Part 1: RAG semantic search
+    rag_context = ""
+    try:
+        collection = _get_chroma_collection()
+        if collection is not None and collection.count() > 0:
+            print(f"  Using RAG retrieval (ChromaDB: {collection.count()} chunks)")
+            rag_context = get_rag_context(astro_profile, max_chars=12000)
+    except Exception as e:
+        print(f"  [WARN] RAG retrieval failed: {e}")
+    
+    if not rag_context:
+        print("  Using keyword search fallback for RAG")
+        rag_context = _get_keyword_context(astro_profile)
+    
+    if rag_context:
+        context_parts.append(rag_context)
+    
+    # Part 2: Structured rules lookup
+    structured_rules = lookup_structured_rules(astro_profile)
+    if structured_rules:
+        print(f"  Found {len(structured_rules)} matching structured rules")
+        rules_context = format_structured_rules_context(structured_rules)
+        context_parts.append(rules_context)
+    else:
+        print("  No structured rules database available yet")
+    
+    if context_parts:
+        return "\n\n" + "\n\n".join(context_parts)
+    
+    return "No specific book references found. Generate predictions based on traditional Vedic astrology principles."
+
+
+# ============================================================
 # MAIN ENTRY POINT (for standalone testing)
 # ============================================================
 

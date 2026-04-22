@@ -180,7 +180,7 @@ async def analyze_palm(req: AnalyzeRequest):
 # ============================================================
 
 # Import book search module
-from book_search import compute_astro_profile, get_horoscope_context, build_book_index, query_books_semantic
+from book_search import compute_astro_profile, get_horoscope_context, get_horoscope_context_enhanced, build_book_index, query_books_semantic
 
 # Pre-build book index on startup
 print("Pre-building book index...")
@@ -313,9 +313,9 @@ async def generate_horoscope(req: HoroscopeRequest):
             cached["astro_profile"] = profile
             return {"horoscope_data": cached}
         
-        # 3. Get book context (RAG-powered with keyword fallback)
+        # 3. Get book context (RAG + Structured Rules)
         print(f"Retrieving book context for {req.name} ({profile['rashi']['name_en']})...")
-        book_context = get_horoscope_context(profile)
+        book_context = get_horoscope_context_enhanced(profile)
         print(f"  Book context retrieved: {len(book_context)} chars")
         
         # 4. Build comprehensive prompt for Gemini
