@@ -1590,6 +1590,30 @@ function renderHoroscope(d) {
         `;
     }
     
+    // Exact Age Predictions
+    if (d.specific_age_predictions && d.specific_age_predictions.length > 0) {
+        html += `
+        <div class="horo-sec">
+            <div class="horo-sec-h">
+                <span class="horo-sec-icon">🎯</span>
+                <div>
+                    <div class="horo-sec-title">Exact Age Predictions</div>
+                    <div class="horo-sec-title-hi">सटीक आयु भविष्यवाणियां</div>
+                </div>
+            </div>
+            <div class="phase-timeline">
+                ${d.specific_age_predictions.map(p => `
+                <div class="phase-item">
+                    <div class="phase-age">Age ${p.exact_age}</div>
+                    <p>${p.event_en || ''}</p>
+                    <p class="hi-text">${p.event_hi || ''}</p>
+                </div>
+                `).join('')}
+            </div>
+        </div>
+        `;
+    }
+
     // Life Phases
     if (d.life_phases && d.life_phases.length > 0) {
         html += `

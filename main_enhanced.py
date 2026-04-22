@@ -261,10 +261,16 @@ You MUST output EXACTLY valid JSON in this format:
   "yearly_forecast": [
     { "period": "...", "en": "...", "hi": "..." }
   ],
+  "specific_age_predictions": [
+    { "exact_age": 22, "event_en": "...", "event_hi": "..." },
+    { "exact_age": 28, "event_en": "...", "event_hi": "..." },
+    { "exact_age": 35, "event_en": "...", "event_hi": "..." }
+  ],
   "life_phases": [
-    { "age": "0-25", "en": "...", "hi": "..." },
-    { "age": "25-50", "en": "...", "hi": "..." },
-    { "age": "50+", "en": "...", "hi": "..." }
+    { "age": "Childhood & Education", "en": "...", "hi": "..." },
+    { "age": "Career & Marriage (Youth)", "en": "...", "hi": "..." },
+    { "age": "Maturity & Wealth", "en": "...", "hi": "..." },
+    { "age": "Spiritual Growth (Elderly)", "en": "...", "hi": "..." }
   ],
   "book_references": [
     { "book": "Bhrigu Samhita", "insight": "Brief key insight from this source" },
@@ -278,12 +284,12 @@ Rules:
 - Base ALL predictions on the provided book excerpts and established Jyotish principles
 - DO NOT complain about missing information. If specific planetary house placements are absent, derive profound insights using the Lagna, Rashi, Nakshatra, and their ruling planets.
 - Speak confidently as a Jyotish Guru. Never include disclaimers like "Due to the absence of specific planetary placements..." in your reading.
+- YOU MUST PROVIDE EXACT AGES FOR MAJOR LIFE EVENTS (e.g., "At age 28, marriage...", "At age 32, major career breakthrough..."). Do not be vague. Use the specific_age_predictions array to list at least 5-7 major life events with exact ages based on Bhrigu Samhita principles and Dasha timings.
 - The karmic_insights section MUST reference Bhrigu Samhita patterns
 - The dasha_predictions section MUST reference Maansagri Paddhati methods
 - The yoga_analysis section should infer potential yogas based on the Rashi/Lagna lords and their elements
 - Include practical remedies grounded in the classical texts
 - Be respectful, insightful, and encouraging
-- Never make alarming health predictions
 - Emphasize that astrology shows tendencies, not fixed destiny
 """
 
