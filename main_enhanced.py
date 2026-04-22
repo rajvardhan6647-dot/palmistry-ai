@@ -319,8 +319,15 @@ async def generate_horoscope(req: HoroscopeRequest):
         book_context = get_horoscope_context_enhanced(profile)
         print(f"  Book context retrieved: {len(book_context)} chars")
         
+        # Get current date to anchor the AI's predictions
+        from datetime import datetime
+        current_date_str = datetime.now().strftime("%B %d, %Y")
+        current_year = datetime.now().year
+
         # 4. Build comprehensive prompt for Gemini
         prompt = f"""Generate a comprehensive Vedic horoscope for this person. Use EVERY relevant passage from the classical texts provided below.
+        
+**Current Date:** {current_date_str} (Use {current_year} as the current year for the Yearly Forecast section)
 
 **Person Details:**
 - **Name:** {req.name}
