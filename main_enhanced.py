@@ -339,6 +339,15 @@ async def generate_horoscope(req: HoroscopeRequest):
 - Element: {profile['element']}
 - Quality: {profile['quality']}
 
+**Planetary Placements (Sidereal/Vedic):**
+- Sun (Surya): {profile.get('planets', {}).get('Sun', 'Unknown')}
+- Moon (Chandra): {profile.get('planets', {}).get('Moon', 'Unknown')}
+- Mars (Mangal): {profile.get('planets', {}).get('Mars', 'Unknown')}
+- Mercury (Budh): {profile.get('planets', {}).get('Mercury', 'Unknown')}
+- Jupiter (Guru): {profile.get('planets', {}).get('Jupiter', 'Unknown')}
+- Venus (Shukra): {profile.get('planets', {}).get('Venus', 'Unknown')}
+- Saturn (Shani): {profile.get('planets', {}).get('Saturn', 'Unknown')}
+
 **═══════════════════════════════════════════════════════**
 **CLASSICAL TEXT REFERENCES (from Bhrigu Samhita, Maansagri Paddhati, Bharatiya Jyotish, Vrihud Hastrekha Shastra):**
 **═══════════════════════════════════════════════════════**

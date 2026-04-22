@@ -232,12 +232,76 @@ def get_lagna(birth_time: str, time_period: str) -> Dict:
     return RASHIS[0]
 
 
+def compute_planetary_positions(birth_date: str, birth_time: str, time_period: str) -> Dict[str, str]:
+    """Calculate Vedic (sidereal) planetary positions using ephem."""
+    try:
+        import ephem
+        import math
+        from datetime import timedelta
+        
+        # Parse time
+        parts = birth_time.split(":")
+        hour = int(parts[0])
+        minute = int(parts[1]) if len(parts) > 1 else 0
+        if time_period.upper() == "PM" and hour != 12:
+            hour += 12
+        elif time_period.upper() == "AM" and hour == 12:
+            hour = 0
+            
+        dt_str = f"{birth_date} {hour:02d}:{minute:02d}:00"
+        try:
+            dt = datetime.strptime(dt_str, "%Y-%m-%d %H:%M:%S")
+        except ValueError:
+            dt = datetime.strptime(dt_str, "%d-%m-%Y %H:%M:%S")
+            
+        # Assume IST (UTC+5:30) for Indian Vedic astrology if timezone isn't specified
+        dt_utc = dt - timedelta(hours=5, minutes=30)
+        
+        observer = ephem.Observer()
+        observer.date = dt_utc
+        
+        # Lahiri Ayanamsa approximation
+        days_since_2000 = (dt_utc - datetime(2000, 1, 1)).days
+        ayanamsa = 23.85 + (days_since_2000 / 365.25) * (50.29 / 3600.0)
+        
+        rashis = ["Mesh (Aries)", "Vrishabh (Taurus)", "Mithun (Gemini)", "Kark (Cancer)", 
+                  "Simha (Leo)", "Kanya (Virgo)", "Tula (Libra)", "Vrishchik (Scorpio)", 
+                  "Dhanu (Sagittarius)", "Makar (Capricorn)", "Kumbh (Aquarius)", "Meen (Pisces)"]
+                  
+        planets = {
+            "Sun": ephem.Sun(),
+            "Moon": ephem.Moon(),
+            "Mars": ephem.Mars(),
+            "Mercury": ephem.Mercury(),
+            "Jupiter": ephem.Jupiter(),
+            "Venus": ephem.Venus(),
+            "Saturn": ephem.Saturn()
+        }
+        
+        positions = {}
+        for name, p in planets.items():
+            p.compute(observer)
+            ecl = ephem.Ecliptic(p)
+            geo_lon = math.degrees(ecl.lon)
+            sidereal_lon = (geo_lon - ayanamsa) % 360
+            
+            rashi_idx = int(sidereal_lon // 30)
+            degree = sidereal_lon % 30
+            positions[name] = f"{rashis[rashi_idx]} ({degree:.1f}°)"
+            
+        return positions
+    except Exception as e:
+        print(f"[WARN] Could not calculate exact planetary positions: {e}")
+        return {}
+
+
 def compute_astro_profile(birth_date: str, birth_time: str, time_period: str,
                           name: str = "", gender: str = "", birth_place: str = "") -> Dict:
     """Compute complete astrological profile from birth details."""
     rashi = get_rashi(birth_date)
     nakshatra = get_nakshatra(birth_date)
     lagna = get_lagna(birth_time, time_period)
+    planets = compute_planetary_positions(birth_date, birth_time, time_period)
 
     return {
         "name": name,
@@ -248,6 +312,7 @@ def compute_astro_profile(birth_date: str, birth_time: str, time_period: str,
         "rashi": rashi,
         "nakshatra": nakshatra,
         "lagna": lagna,
+        "planets": planets,
         "rashi_lord": rashi["lord"],
         "nakshatra_lord": nakshatra["lord"],
         "element": rashi["element"],
