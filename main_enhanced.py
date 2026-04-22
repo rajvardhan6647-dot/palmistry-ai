@@ -3,6 +3,7 @@ from fastapi.middleware.cors import CORSMiddleware
 from fastapi.responses import FileResponse
 from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
+from typing import Optional
 import google.generativeai as genai
 import os
 import json
@@ -31,7 +32,7 @@ async def serve_index():
 
 @app.get("/health")
 async def health_check():
-    return {"status": "healthy", "version": "2.0.0"}
+    return {"status": "healthy", "version": "3.0.0-rag"}
 
 from dotenv import load_dotenv
 load_dotenv()
@@ -175,11 +176,11 @@ async def analyze_palm(req: AnalyzeRequest):
 
 
 # ============================================================
-# HOROSCOPE ENDPOINT (new)
+# HOROSCOPE ENDPOINT (RAG-Powered)
 # ============================================================
 
 # Import book search module
-from book_search import compute_astro_profile, get_horoscope_context, build_book_index
+from book_search import compute_astro_profile, get_horoscope_context, build_book_index, query_books_semantic
 
 # Pre-build book index on startup
 print("Pre-building book index...")
@@ -197,13 +198,30 @@ class HoroscopeRequest(BaseModel):
     birth_time_period: str  # AM or PM
     birth_place: str
 
-HOROSCOPE_SYSTEM_PROMPT = """You are "Jyotish Guru" (ज्योतिष गुरु), an expert Vedic astrologer deeply versed in Indian astrology (Bharatiya Jyotish).
+HOROSCOPE_SYSTEM_PROMPT = """You are "Jyotish Guru" (ज्योतिष गुरु), a supreme-authority Vedic astrologer with encyclopedic mastery of the following classical Indian astrological texts:
+
+1. **Bharatiya Jyotish** (भारतीय ज्योतिष) by Nemi Chandra Shastri — foundational Vedic astrology covering Rashi, Graha, Nakshatra, Dasha, Gochar
+2. **Vrihud Hastrekha Shastra** (वृहद् हस्तरेखा शास्त्र) — comprehensive palmistry science
+3. **Bhrigu Samhita** (भृगु संहिता) by Maharishi Bhrigu — the oldest treatise on predictive astrology, covering birth charts, planetary effects, karmic destiny, past-life indicators, and precise life predictions
+4. **Maansagri Paddhati** (मानसागरी पद्धति) — detailed Jyotish system covering zodiac characteristics, planetary yogas, marriage timing, career guidance, health analysis, and wealth predictions
+5. **Jyotish Reference Text** (ज्योतिष संदर्भ ग्रंथ) — supplementary astrological references
 
 You will receive:
-1. A person's astrological profile (Rashi, Nakshatra, Lagna, planetary lords)
-2. Relevant passages extracted from classical Jyotish texts (Bharatiya Jyotish by Nemi Chandra Shastri, Vrihud Hastrekha Shastra, and other references)
+1. A person's complete astrological profile (Rashi, Nakshatra, Lagna, planetary lords, element, quality)
+2. Relevant passages extracted directly from the above classical texts via semantic search
 
-Your task is to synthesize a COMPREHENSIVE life prediction horoscope strictly based on the provided book references and traditional Vedic astrology principles.
+CRITICAL INSTRUCTIONS:
+- You MUST synthesize insights from ALL provided book passages
+- When a passage from a specific book is relevant, CITE it (e.g., "भृगु संहिता के अनुसार..." or "According to Maansagri Paddhati...")
+- DO NOT hallucinate or invent information not grounded in the provided passages or established Vedic astrology
+- Provide DEEPLY DETAILED predictions — each section must be 4-6 sentences minimum
+- Include specific planetary effects, yoga analysis, dasha period insights
+- Reference Bhrigu Samhita for karmic/destiny predictions and past-life patterns
+- Reference Maansagri for detailed yoga combinations and timing of events
+- Reference Bharatiya Jyotish for fundamental Rashi/Graha interactions
+- Be respectful, insightful, encouraging, and culturally authentic
+- Never make alarming health predictions — frame challenges as areas for awareness
+- Emphasize that astrology reveals tendencies and potentials, not fixed destiny
 
 You MUST output EXACTLY valid JSON in this format:
 {
@@ -216,6 +234,18 @@ You MUST output EXACTLY valid JSON in this format:
   "health": { "en": "...", "hi": "..." },
   "wealth": { "en": "...", "hi": "..." },
   "spiritual": { "en": "...", "hi": "..." },
+  "karmic_insights": {
+    "en": "Based on Bhrigu Samhita — past-life patterns, karmic lessons, soul purpose...",
+    "hi": "भृगु संहिता के अनुसार — पूर्वजन्म के संस्कार, कार्मिक पाठ, आत्मा का उद्देश्य..."
+  },
+  "dasha_predictions": {
+    "en": "Based on Maansagri Paddhati — planetary period effects, timing of major events...",
+    "hi": "मानसागरी पद्धति के अनुसार — ग्रह दशा का प्रभाव, प्रमुख घटनाओं का समय..."
+  },
+  "yoga_analysis": {
+    "en": "Specific yogas formed in the birth chart and their effects...",
+    "hi": "जन्म कुंडली में बनने वाले विशेष योग और उनके प्रभाव..."
+  },
   "favorable": {
     "colors": ["...", "..."],
     "numbers": ["...", "..."],
@@ -224,6 +254,10 @@ You MUST output EXACTLY valid JSON in this format:
     "deity": "...",
     "mantra": "..."
   },
+  "remedies": {
+    "en": "Specific remedial measures based on classical texts — gemstones, mantras, donations, fasting...",
+    "hi": "शास्त्रों के अनुसार विशेष उपाय — रत्न, मंत्र, दान, व्रत..."
+  },
   "yearly_forecast": [
     { "period": "...", "en": "...", "hi": "..." }
   ],
@@ -231,13 +265,22 @@ You MUST output EXACTLY valid JSON in this format:
     { "age": "0-25", "en": "...", "hi": "..." },
     { "age": "25-50", "en": "...", "hi": "..." },
     { "age": "50+", "en": "...", "hi": "..." }
+  ],
+  "book_references": [
+    { "book": "Bhrigu Samhita", "insight": "Brief key insight from this source" },
+    { "book": "Maansagri Paddhati", "insight": "Brief key insight from this source" },
+    { "book": "Bharatiya Jyotish", "insight": "Brief key insight from this source" }
   ]
 }
 
 Rules:
-- Write at least 3-4 sentences for each section in both English and Hindi
-- Base predictions on the provided book excerpts when available
-- Include specific references to planetary positions and their effects
+- Write at least 4-6 sentences for each section in both English and Hindi
+- Base ALL predictions on the provided book excerpts — cite sources wherever possible
+- Include specific references to planetary positions, yogas, and their effects
+- The karmic_insights section MUST reference Bhrigu Samhita patterns
+- The dasha_predictions section MUST reference Maansagri Paddhati methods
+- The yoga_analysis section should identify specific yogas from the chart
+- Include practical remedies grounded in the classical texts
 - Be respectful, insightful, and encouraging
 - Never make alarming health predictions
 - Emphasize that astrology shows tendencies, not fixed destiny
@@ -270,34 +313,44 @@ async def generate_horoscope(req: HoroscopeRequest):
             cached["astro_profile"] = profile
             return {"horoscope_data": cached}
         
-        # 3. Get book context
-        if _book_index is None:
-            _book_index = build_book_index()
+        # 3. Get book context (RAG-powered with keyword fallback)
+        print(f"Retrieving book context for {req.name} ({profile['rashi']['name_en']})...")
+        book_context = get_horoscope_context(profile)
+        print(f"  Book context retrieved: {len(book_context)} chars")
         
-        book_context = get_horoscope_context(profile, _book_index)
-        
-        # 4. Build prompt for Gemini
-        prompt = f"""Generate a comprehensive Vedic horoscope for this person:
+        # 4. Build comprehensive prompt for Gemini
+        prompt = f"""Generate a comprehensive Vedic horoscope for this person. Use EVERY relevant passage from the classical texts provided below.
 
-**Name:** {req.name}
-**Gender:** {req.gender}
-**Date of Birth:** {req.birth_date}
-**Time of Birth:** {req.birth_time} {req.birth_time_period}
-**Place of Birth:** {req.birth_place}
+**Person Details:**
+- **Name:** {req.name}
+- **Gender:** {req.gender}
+- **Date of Birth:** {req.birth_date}
+- **Time of Birth:** {req.birth_time} {req.birth_time_period}
+- **Place of Birth:** {req.birth_place}
 
 **Astrological Profile:**
 - Rashi (Zodiac Sign): {profile['rashi']['name']} / {profile['rashi']['name_en']} / {profile['rashi']['name_hi']} {profile['rashi']['symbol']}
 - Rashi Lord: {profile['rashi_lord']}
 - Nakshatra (Lunar Mansion): {profile['nakshatra']['name']} / {profile['nakshatra']['name_hi']}
 - Nakshatra Lord: {profile['nakshatra_lord']}
+- Nakshatra Deity: {profile['nakshatra']['deity']}
 - Lagna (Ascendant): {profile['lagna']['name']} / {profile['lagna']['name_en']} / {profile['lagna']['name_hi']}
 - Element: {profile['element']}
 - Quality: {profile['quality']}
 
-**Relevant passages from classical Jyotish texts:**
+**═══════════════════════════════════════════════════════**
+**CLASSICAL TEXT REFERENCES (from Bhrigu Samhita, Maansagri Paddhati, Bharatiya Jyotish, Vrihud Hastrekha Shastra):**
+**═══════════════════════════════════════════════════════**
+
 {book_context}
 
-Based on these authentic sources and traditional Vedic astrology principles, generate a comprehensive life prediction. Output ONLY valid JSON."""
+**═══════════════════════════════════════════════════════**
+
+Based on these authentic classical sources and traditional Vedic astrology principles, generate a deeply comprehensive life prediction. 
+CITE specific passages and book names in your predictions.
+Include karmic insights from Bhrigu Samhita.
+Include dasha/yoga analysis from Maansagri Paddhati.
+Output ONLY valid JSON matching the schema exactly."""
 
         # 5. Call Gemini API
         model = genai.GenerativeModel(
@@ -343,4 +396,27 @@ Based on these authentic sources and traditional Vedic astrology principles, gen
     
     except Exception as e:
         print(f"Error generating horoscope: {e}")
+        raise HTTPException(status_code=500, detail=str(e))
+
+
+# ============================================================
+# BOOK SEARCH API (for debugging/exploration)
+# ============================================================
+
+class BookSearchRequest(BaseModel):
+    query: str
+    n_results: int = 10
+    book_filter: Optional[str] = None
+
+@app.post("/api/book-search")
+async def book_search_api(req: BookSearchRequest):
+    """Semantic search across all classical texts."""
+    try:
+        results = query_books_semantic(req.query, req.n_results, req.book_filter)
+        return {
+            "query": req.query,
+            "results": results,
+            "total": len(results),
+        }
+    except Exception as e:
         raise HTTPException(status_code=500, detail=str(e))

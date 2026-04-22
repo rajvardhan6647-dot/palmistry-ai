@@ -233,6 +233,48 @@
         canvas#hc { display:none; }
 
         /* ============================================= */
+        /* GRAHA DASHA PAGE                              */
+        /* ============================================= */
+        .dasha-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(320px,1fr)); gap:20px; }
+        .dasha-card { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--r-md); padding:28px 24px; transition:var(--ease); box-shadow:var(--shadow); position:relative; overflow:hidden; }
+        .dasha-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:linear-gradient(90deg,var(--lotus),var(--gold),var(--saffron)); opacity:0; transition:var(--ease); }
+        .dasha-card:hover { border-color:var(--border-glow); transform:translateY(-3px); }
+        .dasha-card:hover::before { opacity:1; }
+        .dasha-planet { display:flex; align-items:center; gap:14px; margin-bottom:16px; }
+        .dasha-planet-icon { width:48px; height:48px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:1.5rem; border:2px solid var(--border-glow); background:linear-gradient(135deg,var(--bg-mid),rgba(196,153,61,0.06)); }
+        .dasha-planet-name { font-family:var(--font-serif); font-size:1.2rem; color:var(--gold); font-weight:600; }
+        .dasha-planet-hi { font-family:var(--font-hi); font-size:.78rem; color:var(--gold-dark); }
+        .dasha-planet-years { font-size:.72rem; color:var(--text-muted); margin-top:2px; }
+        .dasha-body p { font-size:.85rem; color:var(--text-dim); line-height:1.8; margin-bottom:10px; }
+        .dasha-body .dasha-hi { font-family:var(--font-hi); font-size:.8rem; color:var(--text-muted); line-height:1.7; margin-bottom:12px; font-style:italic; }
+        .dasha-antar { list-style:none; padding:0; margin-top:14px; }
+        .dasha-antar li { padding:8px 0 8px 18px; border-left:2px solid var(--border); font-size:.82rem; color:var(--text-dim); line-height:1.7; margin-bottom:4px; position:relative; }
+        .dasha-antar li::before { content:''; position:absolute; left:-5px; top:14px; width:8px; height:8px; border-radius:50%; background:var(--gold-dark); }
+        .dasha-antar li .ant-hi { font-family:var(--font-hi); font-size:.76rem; color:var(--text-muted); display:block; margin-top:3px; }
+        .dasha-shloka { background:var(--gold-glow); border-left:3px solid var(--gold-dark); padding:14px 18px; border-radius:0 var(--r-sm) var(--r-sm) 0; font-family:var(--font-hi); font-size:.82rem; color:var(--text-dim); line-height:1.7; margin:14px 0; }
+        .dasha-shloka cite { display:block; margin-top:6px; font-size:.72rem; color:var(--gold-dark); font-style:normal; }
+
+        /* ============================================= */
+        /* RASHI LAGNA PAGE                              */
+        /* ============================================= */
+        .rashi-grid { display:grid; grid-template-columns:repeat(auto-fill,minmax(300px,1fr)); gap:20px; }
+        .rashi-card { background:var(--bg-card); border:1px solid var(--border); border-radius:var(--r-md); padding:28px 24px; transition:var(--ease); box-shadow:var(--shadow); position:relative; overflow:hidden; cursor:default; }
+        .rashi-card:hover { border-color:var(--border-glow); transform:translateY(-3px); box-shadow:var(--shadow), 0 0 35px var(--gold-glow); }
+        .rashi-icon { font-size:2.2rem; margin-bottom:12px; display:inline-block; }
+        .rashi-name { font-family:var(--font-serif); font-size:1.3rem; font-weight:600; color:var(--gold); margin-bottom:2px; }
+        .rashi-name-hi { font-family:var(--font-hi); font-size:.82rem; color:var(--gold-dark); margin-bottom:5px; }
+        .rashi-meta { display:flex; gap:8px; flex-wrap:wrap; margin-bottom:14px; }
+        .rashi-tag { font-size:.68rem; padding:3px 10px; border-radius:14px; background:rgba(196,153,61,0.08); border:1px solid rgba(196,153,61,0.15); color:var(--gold-light); }
+        .rashi-body { font-size:.85rem; color:var(--text-dim); line-height:1.8; margin-bottom:10px; }
+        .rashi-body-hi { font-family:var(--font-hi); font-size:.8rem; color:var(--text-muted); line-height:1.75; font-style:italic; }
+        .rashi-houses { margin-top:16px; }
+        .rashi-house { padding:10px 14px; border-bottom:1px solid var(--border); }
+        .rashi-house:last-child { border-bottom:none; }
+        .rashi-house-num { font-family:var(--font-serif); font-size:.88rem; color:var(--saffron-light); margin-bottom:4px; }
+        .rashi-house-desc { font-size:.82rem; color:var(--text-dim); line-height:1.7; }
+        .rashi-house-hi { font-family:var(--font-hi); font-size:.76rem; color:var(--text-muted); margin-top:3px; }
+
+        /* ============================================= */
         /* HOROSCOPE FORM — Clickastro-inspired design   */
         /* ============================================= */
         .horo-section { padding:60px 20px 80px; position:relative; overflow:hidden; }
@@ -333,6 +375,8 @@
         <li><button onclick="go('explore')" id="n-explore">Explore Palm</button></li>
         <li><button onclick="go('marks')" id="n-marks">Special Marks</button></li>
         <li><button onclick="go('yogas')" id="n-yogas">Yogas</button></li>
+        <li><button onclick="go('dasha')" id="n-dasha" style="color:var(--lotus);">☿ Graha Dasha</button></li>
+        <li><button onclick="go('rashi')" id="n-rashi" style="color:var(--saffron-light);">♈ Rashi Lagna</button></li>
         <li><button onclick="go('reading')" id="n-reading">Get Reading</button></li>
         <li><button onclick="go('about')" id="n-about">About</button></li>
     </ul>
@@ -345,10 +389,10 @@
     <div class="h-hi">भारतीय ज्योतिष एवं हस्तरेखा शास्त्र</div>
     <h1 class="h-title">The Ancient Science of<br><em>Astrology & Palmistry</em></h1>
     <div class="h-div"></div>
-    <p class="h-sub">Based on Bharatiya Jyotish (Nemi Chandra Shastri) & Vrihud Hastrekha Shastra — discover your destiny through the stars and the lines of your palm.</p>
-    <p class="h-sub-hi">भारतीय ज्योतिष (नेमि चंद्र शास्त्री) एवं वृहद् हस्तरेखा शास्त्र पर आधारित — सितारों और हथेली की रेखाओं से अपने भाग्य की खोज करें।</p>
+    <p class="h-sub">Based on 5 classical texts: Bharatiya Jyotish, Vrihud Hastrekha Shastra, Bhrigu Samhita, Maansagri Paddhati & Jyotish Reference — discover your destiny through the stars and the lines of your palm.</p>
+    <p class="h-sub-hi">पाँच शास्त्रीय ग्रंथों पर आधारित: भारतीय ज्योतिष, वृहद् हस्तरेखा शास्त्र, भृगु संहिता, मानसागरी पद्धति — सितारों और हथेली की रेखाओं से अपने भाग्य की खोज करें।</p>
     <div class="h-cta">
-        <button class="btn btn-p" onclick="go('horoscope')" style="background:linear-gradient(135deg,var(--saffron),var(--warm-orange),var(--gold));box-shadow:0 4px 24px rgba(209,122,46,0.3);"><span>☉</span> Get Free Horoscope / निशुल्क कुंडली</button>
+        <button class="btn btn-p" onclick="document.getElementById('horoForm').scrollIntoView({behavior:'smooth'})" style="background:linear-gradient(135deg,var(--saffron),var(--warm-orange),var(--gold));box-shadow:0 4px 24px rgba(209,122,46,0.3);"><span>☉</span> Get Free Horoscope / निशुल्क कुंडली</button>
         <button class="btn btn-g" onclick="go('explore')"><span>✦</span> Explore Palm / हस्तरेखा देखें</button>
         <button class="btn btn-g" onclick="go('reading')">Begin a Reading / पठन शुरू करें</button>
     </div>
@@ -365,7 +409,7 @@
         </div>
 
         <div class="horo-card">
-            <form class="horo-form" id="horoForm" onsubmit="submitHoroscope(event)">
+            <form class="horo-form" id="horoForm" onsubmit="event.preventDefault(); submitHoroscope(event);">
                 <div class="f-group">
                     <label class="f-label"><span class="f-icon">👤</span> Full Name · पूरा नाम</label>
                     <input type="text" class="f-input" id="horo-name" placeholder="Enter your name" required>
@@ -411,7 +455,7 @@
                     <span>☉</span> Get Free Horoscope · निशुल्क कुंडली प्राप्त करें
                 </button>
             </form>
-            <p class="horo-note">Based on Bharatiya Jyotish by Nemi Chandra Shastri & Vrihud Hastrekha Shastra · नेमि चंद्र शास्त्री की भारतीय ज्योतिष पर आधारित</p>
+            <p class="horo-note">Based on Bharatiya Jyotish, Bhrigu Samhita, Maansagri Paddhati & Vrihud Hastrekha Shastra · भारतीय ज्योतिष, भृगु संहिता, मानसागरी पद्धति एवं वृहद् हस्तरेखा शास्त्र पर आधारित</p>
         </div>
     </div>
 </div>
@@ -493,13 +537,13 @@
 <!-- EXPLORE PALM -->
 <div class="pg" id="pg-explore">
 <div class="sec" style="padding-top:100px;">
-    <div class="sec-h rv">
+    <div class="sec-h">
         <div class="sec-l">हस्तरेखा अन्वेषण · PALM EXPLORATION</div>
         <h2 class="sec-t">Interactive Palm Map · संवादी हस्तरेखा मानचित्र</h2>
         <p class="sec-d">Tap any line or mount to learn its complete meaning in English and Hindi, as described in Vrihud Hastrekha Shastra.</p>
         <p class="sec-d-hi">किसी भी रेखा या पर्वत पर टैप करें — अंग्रेजी और हिंदी दोनों में पूरा अर्थ जानें।</p>
     </div>
-    <div class="palm-ex rv">
+    <div class="palm-ex">
         <div class="palm-svg">
             <svg viewBox="0 0 300 400" xmlns="http://www.w3.org/2000/svg">
                 <path d="M150 380 C100 380 60 340 50 300 C40 260 42 220 50 190 C55 170 45 140 40 120 C35 95 45 75 60 70 C75 65 82 80 85 95 C88 75 80 45 80 30 C80 12 95 5 108 10 C118 14 122 30 120 55 C125 30 128 10 140 5 C155 -2 165 10 165 30 C165 55 158 75 155 95 C165 65 170 35 178 20 C188 5 205 10 208 28 C212 48 205 80 195 110 C210 85 220 70 235 72 C250 74 258 92 250 115 C242 138 220 165 200 190 C250 200 258 220 255 250 C252 280 240 320 220 345 C200 370 175 380 150 380Z" fill="rgba(196,153,61,0.03)" stroke="var(--gold-dark)" stroke-width="1.5" opacity=".65"/>
@@ -536,7 +580,7 @@
 <!-- SPECIAL MARKS -->
 <div class="pg" id="pg-marks">
 <div class="sec" style="padding-top:100px;">
-    <div class="sec-h rv">
+    <div class="sec-h">
         <div class="sec-l">विशेष चिह्न · SPECIAL MARKS</div>
         <h2 class="sec-t">Marks & Signs on the Palm · हथेली पर चिह्न</h2>
         <p class="sec-d">Beyond the lines, the palm holds subtle marks — each carrying its own prophecy, depending on where it appears.</p>
@@ -549,7 +593,7 @@
 <!-- YOGAS -->
 <div class="pg" id="pg-yogas">
 <div class="sec" style="padding-top:100px;">
-    <div class="sec-h rv">
+    <div class="sec-h">
         <div class="sec-l">योग एवं संयोजन · YOGAS & COMBINATIONS</div>
         <h2 class="sec-t">Hastrekha Yogas · हस्तरेखा योग</h2>
         <p class="sec-d">The combinations of lines, mounts, and marks that reveal deeper patterns of destiny — catalogued from Dr. Shrimali's teachings.</p>
@@ -571,14 +615,14 @@
 <!-- GET READING -->
 <div class="pg" id="pg-reading">
 <div class="rc">
-    <div class="sec-h rv" style="margin-bottom:32px;">
+    <div class="sec-h" style="margin-bottom:32px;">
         <div class="sec-l">हस्त पठन · PALM READING</div>
         <h2 class="sec-t">Your Personal Reading · आपका व्यक्तिगत पठन</h2>
         <p class="sec-d">Upload a clear photo of your open palm. Rishika will study your hand and share her insights in both English and Hindi.</p>
         <p class="sec-d-hi">अपनी खुली हथेली की एक स्पष्ट तस्वीर अपलोड करें। ऋषिका आपके हाथ का अध्ययन करेंगी।</p>
     </div>
     <div id="stg">
-        <div id="s-up" class="rv">
+        <div id="s-up">
             <label class="upload" for="fu" id="ua">
                 <div style="font-size:2rem;margin-bottom:10px;opacity:.45;">🤲</div>
                 <div style="font-family:var(--font-serif);font-size:1.05rem;color:var(--gold);margin-bottom:6px;">Tap to upload a palm photo · तस्वीर अपलोड करें</div>
@@ -602,12 +646,12 @@
 <!-- HOROSCOPE RESULTS PAGE -->
 <div class="pg" id="pg-horoscope">
 <div class="horo-result">
-    <div class="sec-h rv" style="margin-bottom:28px;">
+    <div class="sec-h" style="margin-bottom:28px;">
         <div class="sec-l">ज्योतिष कुंडली · VEDIC HOROSCOPE</div>
         <h2 class="sec-t">Your Cosmic Blueprint · आपकी ब्रह्मांडीय रूपरेखा</h2>
         <p class="sec-d">Fill in the form on the homepage or click below to start.</p>
         <p class="sec-d-hi">होमपेज पर फॉर्म भरें या नीचे क्लिक करें।</p>
-        <div style="text-align:center;margin-top:18px;"><button class="btn btn-p" onclick="go('home');setTimeout(()=>document.getElementById('horoForm').scrollIntoView({behavior:'smooth'}),300)" style="background:linear-gradient(135deg,var(--saffron),var(--warm-orange),var(--gold));box-shadow:0 4px 24px rgba(209,122,46,0.3);">☉ Fill Horoscope Form</button></div>
+        <div style="text-align:center;margin-top:18px;"><button class="btn btn-p" onclick="go('home');setTimeout(()=> { const el = document.getElementById('horoForm'); if(el) el.scrollIntoView({behavior:'smooth'}); }, 400)" style="background:linear-gradient(135deg,var(--saffron),var(--warm-orange),var(--gold));box-shadow:0 4px 24px rgba(209,122,46,0.3);">☉ Fill Horoscope Form</button></div>
     </div>
     <div id="horo-loading" style="display:none">
         <div class="horo-loading">
@@ -617,6 +661,90 @@
         </div>
     </div>
     <div id="horo-results" style="display:none"></div>
+</div>
+</div>
+
+<!-- GRAHA DASHA — Planetary Period System from Maansagri Paddhati -->
+<div class="pg" id="pg-dasha">
+<div class="sec" style="padding-top:100px;">
+    <div class="sec-h">
+        <div class="sec-l">ग्रह दशा · PLANETARY PERIODS</div>
+        <h2 class="sec-t">Graha Mahadasha System · ग्रह महादशा पद्धति</h2>
+        <p class="sec-d">The Vimshottari Dasha system from Maansagri Paddhati — each planetary period brings specific karmic lessons, opportunities, and challenges throughout your life.</p>
+        <p class="sec-d-hi">मानसागरी पद्धति से विंशोत्तरी दशा पद्धति — प्रत्येक ग्रह दशा जीवन भर विशिष्ट कार्मिक सबक, अवसर और चुनौतियाँ लाती है।</p>
+    </div>
+
+    <div class="dasha-shloka" style="max-width:700px;margin:0 auto 36px;">
+        क्रूरग्रहदशायां च क्रूरस्यांतर्दशांयदि ।<br>
+        शत्रुयोगे भवेन्मृत्युर्निर्णयो न संशयः ॥
+        <cite>— मानसागरी पद्धति, सर्वग्रह दशाफलविचार</cite>
+    </div>
+
+    <div class="dasha-grid" id="dashaGrid"></div>
+
+    <div style="margin-top:48px;max-width:720px;margin-left:auto;margin-right:auto;">
+        <div class="sec-h">
+            <div class="sec-l">अंतर्दशा विचार · ANTARDASHA ANALYSIS</div>
+            <h2 class="sec-t" style="font-size:1.5rem;">Sub-Period Effects · अंतर्दशा प्रभाव</h2>
+            <p class="sec-d">Within each Mahadasha, smaller sub-periods (Antardasha) modulate the planetary influence. These create the nuanced texture of life events.</p>
+            <p class="sec-d-hi">प्रत्येक महादशा के भीतर, छोटी उप-अवधि (अंतर्दशा) ग्रह प्रभाव को niyantrit करती हैं। ये जीवन की घटनाओं की सूक्ष्म बनावट निर्मित करती हैं।</p>
+        </div>
+
+        <div class="dasha-shloka">
+            मंगलस्य दशायां च शनेरंतर्दशा यदि ।<br>
+            श्रियते च चिरंजीवी का कथा स्वरूपजीविनः ॥
+            <cite>— मानसागरी पद्धति, मंगल-शनि अंतर्दशा फल</cite>
+        </div>
+
+        <div id="antardashaDetail" style="margin-top:24px;"></div>
+    </div>
+</div>
+</div>
+
+<!-- RASHI LAGNA — Zodiac House Effects from Maansagri Paddhati -->
+<div class="pg" id="pg-rashi">
+<div class="sec" style="padding-top:100px;">
+    <div class="sec-h">
+        <div class="sec-l">राशि लग्न फल · ZODIAC HOUSE EFFECTS</div>
+        <h2 class="sec-t">Rashi Lagna — Zodiac Signs · राशि लग्न फल</h2>
+        <p class="sec-d">The effects of each zodiac sign (Rashi) in the Lagna (Ascendant) and across all 12 houses — sourced directly from Maansagri Paddhati with original Sanskrit shlokas.</p>
+        <p class="sec-d-hi">प्रत्येक राशि का लग्न (उदय) और सभी 12 भावों में प्रभाव — मानसागरी पद्धति से मूल संस्कृत श्लोकों सहित।</p>
+    </div>
+    <div class="tabs" id="rashiTabs">
+        <button class="tab on" onclick="rashiFilter('all',this)">All · सभी</button>
+        <button class="tab" onclick="rashiFilter('fire',this)">🔥 Fire · अग्नि</button>
+        <button class="tab" onclick="rashiFilter('earth',this)">🌍 Earth · पृथ्वी</button>
+        <button class="tab" onclick="rashiFilter('air',this)">💨 Air · वायु</button>
+        <button class="tab" onclick="rashiFilter('water',this)">💧 Water · जल</button>
+    </div>
+    <div class="rashi-grid" id="rashiGrid"></div>
+
+    <div style="margin-top:48px;">
+        <div class="sec-h">
+            <div class="sec-l">जन्म मास फल · BIRTH MONTH EFFECTS</div>
+            <h2 class="sec-t" style="font-size:1.5rem;">Effects of Birth Month · जन्म मास का प्रभाव</h2>
+            <p class="sec-d">The month in which you were born carries its own quality of destiny — as described in Maansagri Paddhati's Masaphala section.</p>
+            <p class="sec-d-hi">जिस मास में आपका जन्म हुआ है, वह अपने भाग्य का विशेष गुण रखता है — मानसागरी पद्धति के मासफल खंड में वर्णित।</p>
+        </div>
+        <div class="cg" id="masaGrid"></div>
+    </div>
+
+    <div style="margin-top:48px;">
+        <div class="sec-h">
+            <div class="sec-l">तिथि फल · TITHI EFFECTS</div>
+            <h2 class="sec-t" style="font-size:1.5rem;">Effects of Birth Tithi · जन्म तिथि का प्रभाव</h2>
+            <p class="sec-d">The lunar day (Tithi) of your birth determines specific personality traits and destinies — five groups of Tithis shape different life patterns.</p>
+            <p class="sec-d-hi">आपके जन्म का चंद्र दिवस (तिथि) विशिष्ट व्यक्तित्व लक्षण और भाग्य निर्धारित करता है — पाँच प्रकार की तिथियाँ जीवन को आकार देती हैं।</p>
+        </div>
+
+        <div class="dasha-shloka" style="max-width:700px;margin:0 auto 28px;">
+            नन्दा भद्रा जया रिक्ता पूर्णा च तिथयः क्रमात् ।<br>
+            वारत्रयं समावृत्य तिथयः प्रतिपन्सुखाः ॥
+            <cite>— मानसागरी पद्धति, तिथि ज्ञान प्रकरण</cite>
+        </div>
+
+        <div class="mg" id="tithiGrid"></div>
+    </div>
 </div>
 </div>
 
@@ -655,8 +783,8 @@
 
 <footer>
     <div class="fb">ज्योतिष एवं हस्तरेखा — Jyotish & Hastrekha</div>
-    <p class="ft">An exploration of Indian astrology & palmistry based on Bharatiya Jyotish (भारतीय ज्योतिष) by Nemi Chandra Shastri and Vrihud Hastrekha Shastra (वृहद् हस्तरेखा शास्त्र). For educational and self-reflection purposes.</p>
-    <p class="ft" style="margin-top:6px;font-family:var(--font-hi);">नेमि चंद्र शास्त्री की भारतीय ज्योतिष एवं वृहद् हस्तरेखा शास्त्र पर आधारित। शैक्षिक और आत्म-चिंतन उद्देश्यों के लिए।</p>
+    <p class="ft">An exploration of Indian astrology & palmistry based on 5 classical texts: Bharatiya Jyotish (भारतीय ज्योतिष), Vrihud Hastrekha Shastra (वृहद् हस्तरेखा शास्त्र), Bhrigu Samhita (भृगु संहिता), Maansagri Paddhati (मानसागरी पद्धति). For educational and self-reflection purposes.</p>
+    <p class="ft" style="margin-top:6px;font-family:var(--font-hi);">पाँच शास्त्रीय ग्रंथों पर आधारित: भारतीय ज्योतिष, वृहद् हस्तरेखा शास्त्र, भृगु संहिता, मानसागरी पद्धति। शैक्षिक और आत्म-चिंतन उद्देश्यों के लिए।</p>
 </footer>
 
 <script>
@@ -1371,6 +1499,74 @@ function renderHoroscope(d) {
         `;
     }
     
+    // Karmic Insights (from Bhrigu Samhita)
+    if (d.karmic_insights) {
+        html += `
+        <div class="horo-sec" style="border-color:rgba(158,90,130,0.3);background:rgba(22,17,42,0.95);">
+            <div class="horo-sec-h">
+                <span class="horo-sec-icon">🔮</span>
+                <div>
+                    <div class="horo-sec-title">Karmic Insights · कार्मिक अंतर्दृष्टि</div>
+                    <div class="horo-sec-title-hi">भृगु संहिता के अनुसार</div>
+                </div>
+            </div>
+            <p>${typeof d.karmic_insights === 'object' ? d.karmic_insights.en : d.karmic_insights}</p>
+            <p class="hi-text">${typeof d.karmic_insights === 'object' ? d.karmic_insights.hi : ''}</p>
+        </div>
+        `;
+    }
+    
+    // Dasha Predictions (from Maansagri Paddhati)
+    if (d.dasha_predictions) {
+        html += `
+        <div class="horo-sec" style="border-color:rgba(209,122,46,0.3);background:rgba(22,17,42,0.95);">
+            <div class="horo-sec-h">
+                <span class="horo-sec-icon">🪐</span>
+                <div>
+                    <div class="horo-sec-title">Planetary Period Analysis · ग्रह दशा विश्लेषण</div>
+                    <div class="horo-sec-title-hi">मानसागरी पद्धति के अनुसार</div>
+                </div>
+            </div>
+            <p>${typeof d.dasha_predictions === 'object' ? d.dasha_predictions.en : d.dasha_predictions}</p>
+            <p class="hi-text">${typeof d.dasha_predictions === 'object' ? d.dasha_predictions.hi : ''}</p>
+        </div>
+        `;
+    }
+    
+    // Yoga Analysis
+    if (d.yoga_analysis) {
+        html += `
+        <div class="horo-sec" style="border-color:rgba(196,153,61,0.3);background:rgba(22,17,42,0.95);">
+            <div class="horo-sec-h">
+                <span class="horo-sec-icon">⚛</span>
+                <div>
+                    <div class="horo-sec-title">Planetary Yoga Combinations · ग्रह योग संयोजन</div>
+                    <div class="horo-sec-title-hi">जन्म कुंडली में विशेष योग</div>
+                </div>
+            </div>
+            <p>${typeof d.yoga_analysis === 'object' ? d.yoga_analysis.en : d.yoga_analysis}</p>
+            <p class="hi-text">${typeof d.yoga_analysis === 'object' ? d.yoga_analysis.hi : ''}</p>
+        </div>
+        `;
+    }
+    
+    // Remedies
+    if (d.remedies) {
+        html += `
+        <div class="horo-sec" style="border-color:rgba(90,160,90,0.25);background:rgba(22,17,42,0.95);">
+            <div class="horo-sec-h">
+                <span class="horo-sec-icon">🙏</span>
+                <div>
+                    <div class="horo-sec-title">Remedial Measures · उपाय एवं समाधान</div>
+                    <div class="horo-sec-title-hi">शास्त्रों के अनुसार विशेष उपाय</div>
+                </div>
+            </div>
+            <p>${typeof d.remedies === 'object' ? d.remedies.en : d.remedies}</p>
+            <p class="hi-text">${typeof d.remedies === 'object' ? d.remedies.hi : ''}</p>
+        </div>
+        `;
+    }
+    
     // Favorable Items
     if (fav && Object.keys(fav).length > 0) {
         html += `
@@ -1440,6 +1636,32 @@ function renderHoroscope(d) {
         `;
     }
     
+    // Book References
+    if (d.book_references && d.book_references.length > 0) {
+        html += `
+        <div class="horo-sec" style="border-color:rgba(196,153,61,0.15);">
+            <div class="horo-sec-h">
+                <span class="horo-sec-icon">📚</span>
+                <div>
+                    <div class="horo-sec-title">Classical Text References · शास्त्रीय ग्रंथ संदर्भ</div>
+                    <div class="horo-sec-title-hi">इस कुंडली में प्रयुक्त ग्रंथ</div>
+                </div>
+            </div>
+            <div style="display:grid;gap:10px;">
+                ${d.book_references.map(ref => `
+                <div style="display:flex;align-items:flex-start;gap:10px;padding:10px 14px;background:rgba(11,8,20,0.5);border-radius:var(--r-sm);border:1px solid var(--border);">
+                    <span style="color:var(--gold);font-size:1.1rem;">📖</span>
+                    <div>
+                        <div style="font-family:var(--font-serif);font-size:.9rem;color:var(--gold);margin-bottom:3px;">${ref.book || ''}</div>
+                        <div style="font-size:.82rem;color:var(--text-dim);line-height:1.6;">${ref.insight || ''}</div>
+                    </div>
+                </div>
+                `).join('')}
+            </div>
+        </div>
+        `;
+    }
+    
     // Closing
     html += `
     <div style="border-top:1px dashed var(--border-glow);padding-top:28px;margin-top:28px;text-align:center;">
@@ -1455,6 +1677,339 @@ function renderHoroscope(d) {
     
     document.getElementById('horo-results').innerHTML = html;
 }
+
+// ============================================================
+// GRAHA DASHA DATA — From Maansagri Paddhati OCR
+// ============================================================
+const DASHA=[
+{planet:'☉',name:'Surya (Sun)',h:'सूर्य',years:6,
+ desc:'The Sun Mahadasha brings focus on authority, government, father, self-confidence, and public recognition. Leadership emerges, but ego challenges may arise.',
+ dh:'सूर्य महादशा में सत्ता, सरकार, पिता, आत्मविश्वास और सार्वजनिक मान्यता पर ध्यान केंद्रित होता है।',
+ shloka:'सुहृत्पुत्रमहीपीड़ा ज्वररोगोऽन्नहानिक्रत',
+ antars:[
+  {p:'Moon',e:'Emotional clarity, maternal blessings. Gain from travels & water-related ventures.',h:'भावनात्मक स्पष्टता, मातृ आशीर्वाद। यात्रा और जल-संबंधित कार्यों से लाभ।'},
+  {p:'Mars',e:'Courage rises, conflicts with authorities. Surgery or fire-related events possible.',h:'साहस बढ़ता है, अधिकारियों से संघर्ष। शल्य चिकित्सा या अग्नि-संबंधित घटनाएँ संभव।'},
+  {p:'Mercury',e:'Intellectual growth, good for education & communication. Business acumen sharpens.',h:'बौद्धिक विकास, शिक्षा और संवाद के लिए अच्छा। व्यापार कुशलता तेज होती है।'},
+  {p:'Jupiter',e:'Spiritual growth, teacher appears. Government favor & recognition likely.',h:'आध्यात्मिक विकास, गुरु मिलते हैं। सरकारी अनुग्रह और मान्यता संभव।'},
+  {p:'Venus',e:'Creative pursuits flourish. Marriage or relationship matters come to fore.',h:'रचनात्मक कार्य फलते-फूलते हैं। विवाह या संबंधों के मामले सामने आते हैं।'},
+  {p:'Saturn',e:'Delays & discipline required. Health of father may need attention.',h:'विलंब और अनुशासन आवश्यक। पिता के स्वास्थ्य पर ध्यान देने की जरूरत।'},
+  {p:'Rahu',e:'Sudden fame or controversy. Unconventional paths attract. Foreign connections.',h:'अचानक प्रसिद्धि या विवाद। अपारंपरिक मार्ग आकर्षित करते हैं।'},
+  {p:'Ketu',e:'Spiritual awakening but worldly losses. Detachment from material pursuits.',h:'आध्यात्मिक जागृति लेकिन सांसारिक हानि। भौतिक कार्यों से विरक्ति।'}
+ ]},
+{planet:'☽',name:'Chandra (Moon)',h:'चंद्रमा',years:10,
+ desc:'The Moon Mahadasha governs emotions, mind, mother, public life, and travel. Mental peace and family bonds are spotlighted.',
+ dh:'चंद्र महादशा भावनाओं, मन, माता, सार्वजनिक जीवन और यात्रा को नियंत्रित करती है।',
+ shloka:'शीलांम विजयं सौख्यं महिपीगोऽधनादिकम्',
+ antars:[
+  {p:'Mars',e:'Emotional passion, conflicts at home. Property matters may arise.',h:'भावनात्मक जुनून, घर पर संघर्ष। संपत्ति के मामले उठ सकते हैं।'},
+  {p:'Jupiter',e:'Auspicious period for marriage & children. Maternal blessings flow.',h:'विवाह और संतान के लिए शुभ काल। मातृ आशीर्वाद बहता है।'},
+  {p:'Saturn',e:'Mental anxiety, delays in plans. Patience brings eventual rewards.',h:'मानसिक चिंता, योजनाओं में देरी। धैर्य अंततः पुरस्कार लाता है।'},
+  {p:'Mercury',e:'Intellectual stimulation, travel for education. Writing & learning thrive.',h:'बौद्धिक उत्तेजना, शिक्षा के लिए यात्रा। लेखन और सीखना फलता-फूलता है।'},
+  {p:'Venus',e:'Love, comfort, artistic pleasures. Wife brings joy and wealth gains.',h:'प्रेम, आराम, कलात्मक सुख। पत्नी खुशी और धन लाभ लाती है।'}
+ ]},
+{planet:'♂',name:'Mangal (Mars)',h:'मंगल',years:7,
+ desc:'Mars Mahadasha ignites courage, property matters, siblings, and physical vitality. Disputes & surgery may occur, but warrior energy prevails.',
+ dh:'मंगल महादशा साहस, संपत्ति, भाई-बहन और शारीरिक जीवन शक्ति को प्रज्वलित करती है।',
+ shloka:'बंधुस्त्रीसुतनाशो वा विद्युतपातभं भयं',
+ antars:[
+  {p:'Saturn',e:'As stated in Maansagri: "Even a long-lived person faces mortal danger when Saturn enters Mars period." Extreme caution advised.',h:'मानसागरी अनुसार: "चिरंजीवी जातक भी मृत्यु को प्राप्त होता है।" अत्यधिक सावधानी आवश्यक।'},
+  {p:'Jupiter',e:'Balances Mars aggression. Legal victories, property gains, spiritual warrior.',h:'मंगल की आक्रामकता को संतुलित करता है। कानूनी जीत, संपत्ति लाभ।'},
+  {p:'Venus',e:'Passionate love affairs, luxury purchases. Vehicle or property acquisition.',h:'भावुक प्रेम संबंध, विलासिता की खरीदारी। वाहन या संपत्ति अधिग्रहण।'},
+  {p:'Rahu',e:'Accidents, sudden events. Foreign travel possible. Engineering success.',h:'दुर्घटनाएँ, अचानक घटनाएँ। विदेश यात्रा संभव। इंजीनियरिंग में सफलता।'}
+ ]},
+{planet:'☿',name:'Budha (Mercury)',h:'बुध',years:17,
+ desc:'Mercury\'s long 17-year Mahadasha transforms intellect, communication, trade, and education. Business ventures, writing, and diplomatic skills flourish.',
+ dh:'बुध की 17 वर्ष की लंबी महादशा बुद्धि, संवाद, व्यापार और शिक्षा को बदल देती है।',
+ shloka:'सौख्यं सौभाग्यमारोग्यं यशःसंतोषवृद्धयः',
+ antars:[
+  {p:'Venus',e:'Artistic and commercial success combined. Design, music, or creative business thrives.',h:'कलात्मक और वाणिज्यिक सफलता का संयोजन। डिज़ाइन, संगीत, या रचनात्मक व्यवसाय फलता है।'},
+  {p:'Jupiter',e:'Wisdom through knowledge. Teaching, publishing, legal success. Guru appears.',h:'ज्ञान के माध्यम से बुद्धि। शिक्षण, प्रकाशन, कानूनी सफलता। गुरु प्रकट होते हैं।'},
+  {p:'Saturn',e:'Disciplined study, slow but steady career growth. Writing endurance.',h:'अनुशासित अध्ययन, धीमी लेकिन स्थिर करियर वृद्धि। लेखन में दृढ़ता।'},
+  {p:'Rahu',e:'Technology, innovation, foreign communication. Unconventional intelligence.',h:'प्रौद्योगिकी, नवाचार, विदेशी संवाद। अपारंपरिक बुद्धि।'}
+ ]},
+{planet:'♃',name:'Guru (Jupiter)',h:'गुरु / बृहस्पति',years:16,
+ desc:'Jupiter Mahadasha brings expansion, wisdom, children, dharma, and prosperity. The Guru period is considered the most auspicious of all dashas.',
+ dh:'गुरु महादशा विस्तार, ज्ञान, संतान, धर्म और समृद्धि लाती है। गुरु दशा सभी दशाओं में सबसे शुभ मानी जाती है।',
+ shloka:'गुरोदेशायं लभतेतिसोस्यं गुणोदयचं बुद्धयव. धनारोग्यम्',
+ antars:[
+  {p:'Sun',e:'Government recognition, authority rises. Excellent for public service and honor.',h:'सरकारी मान्यता, अधिकार बढ़ता है। सार्वजनिक सेवा और सम्मान के लिए उत्कृष्ट।'},
+  {p:'Moon',e:'Emotional wisdom, family harmony. Pilgrimage and spiritual journeys likely.',h:'भावनात्मक बुद्धि, पारिवारिक सामंजस्य। तीर्थयात्रा और आध्यात्मिक यात्राएँ संभव।'},
+  {p:'Mars',e:'Righteous action, legal victories. Land & property acquisition through dharma.',h:'धर्मपूर्ण कार्रवाई, कानूनी जीत। धर्म के माध्यम से भूमि और संपत्ति अधिग्रहण।'},
+  {p:'Mercury',e:'Knowledge, writing, education. Excellent for students, scholars, & teachers.',h:'ज्ञान, लेखन, शिक्षा। छात्रों, विद्वानों और शिक्षकों के लिए उत्कृष्ट।'},
+  {p:'Venus',e:'Marriage, luxury, artistic appreciation. Wealth through beauty or creativity.',h:'विवाह, विलासिता, कलात्मक प्रशंसा। सौंदर्य या रचनात्मकता से धन।'},
+  {p:'Saturn',e:'Discipline meets wisdom. Slow spiritual growth. Elder respect increases.',h:'अनुशासन बुद्धि से मिलता है। धीमी आध्यात्मिक वृद्धि। बड़ों का सम्मान बढ़ता है।'}
+ ]},
+{planet:'♀',name:'Shukra (Venus)',h:'शुक्र',years:20,
+ desc:'Venus\'s 20-year Mahadasha is the longest. It governs love, marriage, beauty, wealth, luxury, arts, and all material pleasures of life.',
+ dh:'शुक्र की 20 वर्ष की महादशा सबसे लंबी है। यह प्रेम, विवाह, सौंदर्य, धन, विलासिता, कला और जीवन के सभी भौतिक सुखों को नियंत्रित करती है।',
+ shloka:'सौहार्द नृपतेलक्ष्मीः शनैर्गतते सिते',
+ antars:[
+  {p:'Sun',e:'Royal comforts, government favor in luxury or arts. Creative recognition.',h:'राजसी आराम, विलासिता या कला में सरकारी अनुग्रह। रचनात्मक मान्यता।'},
+  {p:'Moon',e:'Emotional fulfillment, love blossoms. Gain from women & public dealings.',h:'भावनात्मक पूर्ति, प्रेम खिलता है। महिलाओं और सार्वजनिक व्यवहार से लाभ।'},
+  {p:'Mars',e:'Passionate period. Vehicle purchase, property. Marriage or intense romance.',h:'भावुक काल। वाहन खरीद, संपत्ति। विवाह या तीव्र रोमांस।'},
+  {p:'Jupiter',e:'Most auspicious combination. Marriage, children, wealth, spiritual love.',h:'सबसे शुभ संयोजन। विवाह, संतान, धन, आध्यात्मिक प्रेम।'},
+  {p:'Saturn',e:'Steady wealth but romantic disappointments. Real estate gains long-term.',h:'स्थिर धन लेकिन रोमांटिक निराशा। दीर्घकालिक अचल संपत्ति लाभ।'}
+ ]},
+{planet:'♄',name:'Shani (Saturn)',h:'शनि',years:19,
+ desc:'Saturn\'s 19-year Mahadasha teaches patience, discipline, karma, and service. Hardships lead to lasting achievement. The most transformative but challenging period.',
+ dh:'शनि की 19 वर्ष की महादशा धैर्य, अनुशासन, कर्म और सेवा सिखाती है। कठिनाइयाँ स्थायी उपलब्धि की ओर ले जाती हैं।',
+ shloka:'द्वारासुतधनाम्नां भीतिजीविते संशयः',
+ antars:[
+  {p:'Sun',e:'Per Maansagri: "Destruction of wife, son, and wealth. Fear for life itself." Extreme caution period.',h:'मानसागरी अनुसार: "स्त्री, पुत्र, तथा धन के नाश का भय, प्राण जीवन का सन्देह।"'},
+  {p:'Moon',e:'Wife gain, victory, happiness, cattle wealth, and birth of daughter.',h:'स्त्री का लाभ, विजय सौख्य, भैंस आदि धन का लाभ, कन्या का जन्म।'},
+  {p:'Mars',e:'Per Maansagri: "Destruction of brothers, wife, son. Fear from lightning. Great disease."',h:'भाई स्त्री पुत्र का नाश, बिजली गिरने से भय, बड़ी भारी व्याधि।'},
+  {p:'Mercury',e:'Happiness, fortune, health, fame, contentment, and gain from good people.',h:'सुख, सौभाग्य, आरोग्य, यश, संतोष, वृद्धि, सुहृज्जन और स्थान का लाभ।'},
+  {p:'Venus',e:'Friends, wife, wealth, comfort arrive. Love of the king (authority figures) brings Lakshmi.',h:'बंधु मित्र, स्त्री, धन, सुख का समागम, राजा से प्रेम होने से लक्ष्मी की प्राप्ति।'}
+ ]},
+{planet:'☊',name:'Rahu',h:'राहु',years:18,
+ desc:'Rahu\'s 18-year Mahadasha brings sudden changes, foreign connections, unconventional paths, and karmic upheavals. Illusion & obsession are key themes.',
+ dh:'राहु की 18 वर्ष की महादशा अचानक परिवर्तन, विदेशी संबंध, अपारंपरिक मार्ग और कार्मिक उथल-पुथल लाती है।',
+ shloka:'स्त्रीनाशःकूलनाशाश्च योगिनीभूतमातुमिः',
+ antars:[
+  {p:'Rahu',e:'Per Maansagri: "Bondage, disease, severe pain, displacement, and contemptible food."',h:'बंधन, व्याधि, रोग, दारुण पीडा, स्थान से भ्रष्ट और कुत्सित भोजन।'},
+  {p:'Jupiter',e:'Loss of knowledge, dharma, and wealth. Quarrels and addictions arise.',h:'ज्ञान, धर्म एवं धन का नाश; कलह, व्यसन प्राप्ति।'},
+  {p:'Saturn',e:'Fasting, loss of home, pain in limbs and eyes. Bondage & sorrowful longevity.',h:'लंघन, गृह नाश, हाथ पाँव और आँखों में पीडा, बंधन।'},
+  {p:'Mercury',e:'Loss of wealth & clothing. Loss of position & intellect. Simple diet only.',h:'धन वस्त्र आदि का नाश, स्थान तथा बुद्धि का भी नाश।'},
+  {p:'Ketu',e:'Wealth destruction, foreign exile. Fear from death, thieves & kings.',h:'धन का नाश, विदेश गमन, मृत्यु, चौर तथा राजा से भय।'},
+  {p:'Venus',e:'Destruction of wife & family. Torment from spirits. Contemptible food.',h:'स्त्री का नाश, कुल का नाश, योगिनी भूत से पीडा।'}
+ ]},
+{planet:'☋',name:'Ketu',h:'केतु',years:7,
+ desc:'Ketu\'s 7-year Mahadasha drives spiritual liberation, detachment, and moksha. Material losses lead to spiritual gains. Past-life karma surfaces intensely.',
+ dh:'केतु की 7 वर्ष की महादशा आध्यात्मिक मुक्ति, विरक्ति और मोक्ष की ओर ले जाती है।',
+ shloka:'ज्ञानधर्मनाशाश्च कलहं व्यसनं भवेत',
+ antars:[
+  {p:'Jupiter',e:'Spiritual master appears. Pilgrimages & sacred knowledge. Best Ketu sub-period.',h:'आध्यात्मिक गुरु प्रकट होते हैं। तीर्थयात्राएँ और पवित्र ज्ञान।'},
+  {p:'Venus',e:'Detachment from pleasures. Art as spiritual practice. Inner beauty revealed.',h:'सुखों से विरक्ति। कला आध्यात्मिक अभ्यास के रूप में। आंतरिक सौंदर्य प्रकट।'},
+  {p:'Saturn',e:'Deep karmic clearing. Isolation beneficial. Meditation & austerity rewarded.',h:'गहरी कार्मिक शुद्धि। एकांत लाभकारी। ध्यान और तपस्या को पुरस्कृत।'},
+  {p:'Mars',e:'Aggressive spiritual pursuit. Tantra, yoga, martial arts. Surgical healing.',h:'आक्रामक आध्यात्मिक अनुसरण। तंत्र, योग, मार्शल आर्ट। शल्य चिकित्सा।'}
+ ]}
+];
+
+function renderDasha(){
+    document.getElementById('dashaGrid').innerHTML=DASHA.map(d=>`
+    <div class="dasha-card">
+        <div class="dasha-planet">
+            <div class="dasha-planet-icon">${d.planet}</div>
+            <div>
+                <div class="dasha-planet-name">${d.name}</div>
+                <div class="dasha-planet-hi">${d.h}</div>
+                <div class="dasha-planet-years">Duration: ${d.years} years · अवधि: ${d.years} वर्ष</div>
+            </div>
+        </div>
+        <div class="dasha-body">
+            <p>${d.desc}</p>
+            <div class="dasha-hi">${d.dh}</div>
+            <div class="dasha-shloka">${d.shloka}<cite>— मानसागरी पद्धति</cite></div>
+            <ul class="dasha-antar">
+                ${d.antars.map(a=>`<li><strong>${a.p}:</strong> ${a.e}<span class="ant-hi">${a.h}</span></li>`).join('')}
+            </ul>
+        </div>
+    </div>`).join('');
+}
+renderDasha();
+
+// ============================================================
+// RASHI LAGNA DATA — From Maansagri Paddhati OCR
+// ============================================================
+const RASHIS=[
+{sym:'♈',name:'Aries · Mesha',h:'मेष',el:'fire',ruler:'Mars · मंगल',
+ desc:'The natural-born leader. Aries Lagna natives are courageous, pioneering, and action-oriented. They initiate projects and inspire others through sheer willpower.',
+ dh:'प्राकृतिक नेता। मेष लग्न के जातक साहसी, अग्रणी और कर्म-उन्मुख होते हैं।',
+ houses:[
+  {n:'1st House (Lagna)',e:'Bold, independent, athletic build. Natural warriors with strong willpower.',h:'साहसी, स्वतंत्र, एथलेटिक शरीर। मजबूत इच्छाशक्ति वाले प्राकृतिक योद्धा।'},
+  {n:'7th House (Libra)',e:'Diplomatic spouse. Partnership through balance. Marriage brings harmony.',h:'कूटनीतिक जीवनसाथी। संतुलन द्वारा साझेदारी।'},
+  {n:'10th House (Capricorn)',e:'Per Maansagri: "Fierce energy, action-oriented karma, daya-less, with brothers."',h:'मानसागरी: "तीव्र प्रतापी, कर्म प्रधान, दया रहित, भाई-बंधुओं से युक्त।"'},
+  {n:'11th House',e:'Per Maansagri: "Gain from cattle trade, royal service, or foreign service."',h:'मानसागरी: "चतुष्पदों के व्यापार या राज सेवा से या देशांतर से लाभ।"'}
+ ]},
+{sym:'♉',name:'Taurus · Vrishabha',h:'वृषभ',el:'earth',ruler:'Venus · शुक्र',
+ desc:'The steadfast builder. Taurus ascendants value comfort, beauty, and material security. They build wealth patiently and enjoy life\'s sensory pleasures.',
+ dh:'स्थिर निर्माता। वृषभ लग्न के जातक आराम, सौंदर्य और भौतिक सुरक्षा को महत्व देते हैं।',
+ houses:[
+  {n:'1st House (Lagna)',e:'Beautiful, patient, loves luxury. Strong determination with artistic taste.',h:'सुंदर, धैर्यवान, विलासिता प्रेमी। कलात्मक रुचि के साथ मजबूत दृढ़ संकल्प।'},
+  {n:'11th House',e:'Per Maansagri: "Gain from noble men, women, farming, or cattle service dharma."',h:'मानसागरी: "सज्जनों से या स्त्रियों से खेती करने से या गाय सेवा से लाभ।"'}
+ ]},
+{sym:'♊',name:'Gemini · Mithuna',h:'मिथुन',el:'air',ruler:'Mercury · बुध',
+ desc:'The cosmic communicator. Gemini ascendants are quick-witted, versatile, and intellectually curious. They excel in writing, trade, and diplomacy.',
+ dh:'ब्रह्मांडीय संवादक। मिथुन लग्न के जातक चतुर, बहुमुखी और बौद्धिक रूप से जिज्ञासु होते हैं।',
+ houses:[
+  {n:'1st House (Lagna)',e:'Witty, curious, dual-natured. Excellent communicator and fast learner.',h:'चतुर, जिज्ञासु, दोहरे स्वभाव वाला। उत्कृष्ट संवादक और तेज सीखने वाला।'},
+  {n:'10th House',e:'Career in communication, writing, or trade. Multiple vocations likely.',h:'संवाद, लेखन, या व्यापार में करियर। कई व्यवसाय संभव।'}
+ ]},
+{sym:'♋',name:'Cancer · Karka',h:'कर्क',el:'water',ruler:'Moon · चंद्रमा',
+ desc:'The nurturing soul. Cancer ascendants are deeply emotional, intuitive, and family-oriented. They create safe havens and care for others instinctively.',
+ dh:'पोषणकर्ता आत्मा। कर्क लग्न के जातक गहरे भावनात्मक, सहज ज्ञानी और परिवार-केंद्रित होते हैं।',
+ houses:[
+  {n:'1st House (Lagna)',e:'Per Maansagri: "Skilled in shastra, music, arts, and physical strength. Pure-natured, plays near flower-scented waterbodies."',h:'मानसागरी: "शास्त्र, गान विद्या, कला एवं शारीरिक बल से निर्मल वृत्तिवाला।"'},
+  {n:'10th House',e:'Career in nourishing fields — food, education, healthcare, home-building.',h:'पोषण क्षेत्रों में करियर — भोजन, शिक्षा, स्वास्थ्य, गृह-निर्माण।'}
+ ]},
+{sym:'♌',name:'Leo · Simha',h:'सिंह',el:'fire',ruler:'Sun · सूर्य',
+ desc:'The royal soul. Leo ascendants radiate authority, creativity, and generosity. They seek admiration and express leadership through heart-centered action.',
+ dh:'शाही आत्मा। सिंह लग्न के जातक अधिकार, रचनात्मकता और उदारता विकीर्ण करते हैं।',
+ houses:[
+  {n:'1st House (Lagna)',e:'Per Maansagri: "Fulfills desires through mountain & forest journeys. Conflict at home, stomach ailments, reduced fame."',h:'मानसागरी: "पर्वत वन से मनोरथ सिद्ध करने वाला, घर में कलह, पेट में पीडा।"'},
+  {n:'12th House',e:'Per Maansagri: "Spends on self-adornment, due to wicked deeds; always very angry."',h:'मानसागरी: "अपने रूप की सजावट में, दुष्ट कर्म से, सदा अत्यन्त क्रोधी।"'}
+ ]},
+{sym:'♍',name:'Virgo · Kanya',h:'कन्या',el:'earth',ruler:'Mercury · बुध',
+ desc:'The sacred analyst. Virgo ascendants are meticulous, service-oriented, and health-conscious. They find purpose through daily rituals and helpful acts.',
+ dh:'पवित्र विश्लेषक। कन्या लग्न के जातक सूक्ष्म, सेवा-उन्मुख और स्वास्थ्य-सजग होते हैं।',
+ houses:[
+  {n:'1st House (Lagna)',e:'Per Maansagri: "Enjoys amorous play with beautiful women. Pure character. Celebrates birth of children."',h:'मानसागरी: "सुन्दर स्त्रियों के संग क्रीडा, निर्मल शील स्वभाव, पुत्र जन्मोत्सव।"'},
+  {n:'12th House',e:'Per Maansagri: "Spends happily on women, on marriage and auspicious family ceremonies."',h:'मानसागरी: "स्त्रियों के निमित्त प्रसन्नतापूर्वक खर्च, विवाह मांगलिक कर्मों में।"'}
+ ]},
+{sym:'♎',name:'Libra · Tula',h:'तुला',el:'air',ruler:'Venus · शुक्र',
+ desc:'The divine balancer. Libra ascendants seek harmony, justice, and beauty in all things. They excel in partnerships, arts, and diplomatic negotiations.',
+ dh:'दिव्य संतुलनकर्ता। तुला लग्न के जातक सभी चीजों में सामंजस्य, न्याय और सौंदर्य चाहते हैं।',
+ houses:[
+  {n:'1st House (Lagna)',e:'Per Maansagri: "Trades in bulls and horses. Worships deities, gives donations. Many wives. Great valor."',h:'मानसागरी: "बैल तथा घोड़ों का व्यापार, देवता पूजन, श्राद्ध दान, अनेक स्त्रियों से संगम।"'},
+  {n:'12th House',e:'Per Maansagri: "Spends on gods, brahmins, per shruti-smriti dharma, vows & fasts, for son\'s sake."',h:'मानसागरी: "देवता ब्राह्मणों का बंधु, श्रुतिस्मृति अनुकूल धर्म में खरच, यम नियम व्रत।"'}
+ ]},
+{sym:'♏',name:'Scorpio · Vrishchika',h:'वृश्चिक',el:'water',ruler:'Mars · मंगल',
+ desc:'The transformer. Scorpio ascendants possess intense emotional depth, transformative power, and an innate understanding of life\'s hidden mysteries.',
+ dh:'परिवर्तनकर्ता। वृश्चिक लग्न के जातक तीव्र भावनात्मक गहराई और रहस्यों की सहज समझ रखते हैं।',
+ houses:[
+  {n:'1st House (Lagna)',e:'Per Maansagri: "Loses wealth from king or gambling. Quarrelsome, faint-hearted."',h:'मानसागरी: "राज्य से या जुए से धन का नाश, कलहकारी, हिम्मत रहित।"'},
+  {n:'12th House',e:'Per Maansagri: "Spends on low women, through many humiliations, wicked friends, & evil intellect."',h:'मानसागरी: "दुष्ट स्त्रियों को, विडंबनाओं से, दुष्ट मित्र की सेवा में, कुबुद्धि से खर्च।"'}
+ ]},
+{sym:'♐',name:'Sagittarius · Dhanu',h:'धनु',el:'fire',ruler:'Jupiter · गुरु',
+ desc:'The truth-seeker. Sagittarius ascendants are philosophical, generous, and adventurous. They pursue wisdom through travel, teaching, and higher learning.',
+ dh:'सत्य-अन्वेषी। धनु लग्न के जातक दार्शनिक, उदार और साहसी होते हैं।',
+ houses:[
+  {n:'1st House (Lagna)',e:'Philosophical, optimistic, loves travel and higher education. Natural teacher.',h:'दार्शनिक, आशावादी, यात्रा और उच्च शिक्षा प्रेमी। प्राकृतिक शिक्षक।'},
+  {n:'12th House',e:'Per Maansagri: "Spends through sinful company, being cheated by others, farming, or service."',h:'मानसागरी: "पापी जनों के संग, अन्यों के ठगने से, खेती या सेवा में खर्च।"'}
+ ]},
+{sym:'♑',name:'Capricorn · Makara',h:'मकर',el:'earth',ruler:'Saturn · शनि',
+ desc:'The mountain climber. Capricorn ascendants are disciplined, ambitious, and build lasting structures. They achieve greatness through persistent, patient effort.',
+ dh:'पर्वत आरोही। मकर लग्न के जातक अनुशासित, महत्वाकांक्षी और स्थायी संरचनाएँ बनाते हैं।',
+ houses:[
+  {n:'10th House',e:'Per Maansagri: "Fierce energy, action-oriented, merciless, with brothers, irreligious, wicked-minded."',h:'मानसागरी: "तीव्र प्रतापी, कर्म प्रधान, दया रहित, भाई-बंधुओं से युक्त, धर्म रहित।"'}
+ ]},
+{sym:'♒',name:'Aquarius · Kumbha',h:'कुंभ',el:'air',ruler:'Saturn · शनि',
+ desc:'The visionary humanitarian. Aquarius ascendants are innovative, eccentric, and deeply concerned with collective welfare and progressive ideals.',
+ dh:'दूरदर्शी मानवतावादी। कुंभ लग्न के जातक नवीन, विलक्षण और सामूहिक कल्याण से गहराई से जुड़े होते हैं।',
+ houses:[
+  {n:'10th House',e:'Per Maansagri: "Action-oriented person who cheats others. Hypocrite, greedy, untrustworthy, works against people."',h:'मानसागरी: "कर्म प्रधान, दूसरों को ठगने वाला, पाखंड धर्मी, विश्वास रहित।"'}
+ ]},
+{sym:'♓',name:'Pisces · Meena',h:'मीन',el:'water',ruler:'Jupiter · गुरु',
+ desc:'The mystic dreamer. Pisces ascendants are intuitive, compassionate, and spiritually inclined. They dissolve boundaries and connect to the universal consciousness.',
+ dh:'रहस्यमय स्वप्नदर्शी। मीन लग्न के जातक सहज ज्ञानी, करुणामय और आध्यात्मिक रूप से झुके होते हैं।',
+ houses:[
+  {n:'10th House',e:'Per Maansagri: "Performs dharmic deeds taught by religious elders. Famous, patient, devoted to worshipping brahmins."',h:'मानसागरी: "कुल में धार्मिक गुरुजनों के उपदिष्ट कर्म, कीर्ति युक्त, ब्राह्मण आराधना में तत्पर।"'}
+ ]}
+];
+
+function renderRashi(filter){
+    const f=filter==='all'?RASHIS:RASHIS.filter(r=>r.el===filter);
+    document.getElementById('rashiGrid').innerHTML=f.map(r=>`
+    <div class="rashi-card">
+        <div class="rashi-icon">${r.sym}</div>
+        <div class="rashi-name">${r.name}</div>
+        <div class="rashi-name-hi">${r.h}</div>
+        <div class="rashi-meta">
+            <span class="rashi-tag">${r.el==='fire'?'🔥':r.el==='earth'?'🌍':r.el==='air'?'💨':'💧'} ${r.el}</span>
+            <span class="rashi-tag">Ruler: ${r.ruler}</span>
+        </div>
+        <div class="rashi-body">${r.desc}</div>
+        <div class="rashi-body-hi">${r.dh}</div>
+        <div class="rashi-houses">
+            ${r.houses.map(h=>`
+            <div class="rashi-house">
+                <div class="rashi-house-num">${h.n}</div>
+                <div class="rashi-house-desc">${h.e}</div>
+                <div class="rashi-house-hi">${h.h}</div>
+            </div>`).join('')}
+        </div>
+    </div>`).join('');
+}
+function rashiFilter(f,el){document.querySelectorAll('#rashiTabs .tab').forEach(b=>b.classList.remove('on'));el.classList.add('on');renderRashi(f);}
+renderRashi('all');
+
+// ============================================================
+// BIRTH MONTH (MASA) DATA — From Maansagri Paddhati OCR
+// ============================================================
+const MASAS=[
+{m:'Chaitra · चैत्र',mo:'Mar-Apr',
+ e:'Born in Chaitra: Handsome, worthy, treasure of good qualities, profit-earning, beautiful-eyed, and reassured by friends.',
+ h:'चैत्र मास में जन्मा: दर्शनीय, अर्हकारी, शुभ गुणों का स्थान, लाभ वाला, सुन्दर नेत्र वाला।'},
+{m:'Vaishakha · वैशाख',mo:'Apr-May',
+ e:'Born in Vaishakha: Enjoyer of pleasures, wealthy, cheerful-minded, wrathful, large-eyed, very handsome, and beloved of women.',
+ h:'वैशाख: भोगी, धनवान्, प्रसन्न चित्त, क्रोध युक्त, विशाल नेत्र, स्वरूपवान्, स्त्रियों का प्रिय।'},
+{m:'Jyeshtha · ज्येष्ठ',mo:'May-Jun',
+ e:'Born in Jyeshtha: Lives in foreign lands, generous-minded, wealthy, long-lived, very intelligent, and a shrewd moneylender.',
+ h:'ज्येष्ठ: परदेश रहने वाला, उदार चित्त, धन सम्पन्न, बडी आयु, बड़ा बुद्धिमान, साहूकार।'},
+{m:'Ashadha · आषाढ़',mo:'Jun-Jul',
+ e:'Born in Ashadha: Blessed with sons and grandsons, dharmic, afflicted by loss of wealth, handsome complexion, moderate happiness.',
+ h:'आषाढ़: पुत्र-पौत्र युक्त, धर्मात्मा, धन नाश से पीडित, सुन्दर वर्ण, थोडा सुख।'},
+{m:'Shravana · श्रावण',mo:'Jul-Aug',
+ e:'Born in Shravana: Equal-minded in joy-sorrow and gain-loss, stout body, handsome form.',
+ h:'श्रावण: सुख-दुःख, हानि-लाभ में समचित्त, मोटी देह, सुन्दर स्वरूप।'},
+{m:'Bhadrapada · भाद्रपद',mo:'Aug-Sep',
+ e:'Born in Bhadrapada: Always cheerful-minded, blessed with sons, happy. Firm resolve, good character.',
+ h:'भाद्रपद: नित्य प्रसन्न मन, पुत्र युक्त, सुखी। दृढ़ संकल्प, सुशील।'},
+{m:'Ashvina · आश्विन',mo:'Sep-Oct',
+ e:'Born in Ashvina: Skilled in arts, respected by community, charitable nature, enjoys festivities.',
+ h:'आश्विन: कलाओं में कुशल, समाज में सम्मानित, दानशील स्वभाव, उत्सव प्रेमी।'},
+{m:'Kartika · कार्तिक',mo:'Oct-Nov',
+ e:'Born in Kartika: Devoted to Lord Vishnu, performs sacred rituals, charitable, gains through pilgrimage.',
+ h:'कार्तिक: भगवान विष्णु भक्त, पवित्र अनुष्ठान करने वाला, दानी, तीर्थ से लाभ।'},
+{m:'Margashirsha · मार्गशीर्ष',mo:'Nov-Dec',
+ e:'Born in Margashirsha: Learned, fond of music, truthful speech, respected by kings and scholars.',
+ h:'मार्गशीर्ष: विद्वान, संगीत प्रेमी, सत्य वचन, राजाओं और विद्वानों द्वारा सम्मानित।'},
+{m:'Pausha · पौष',mo:'Dec-Jan',
+ e:'Born in Pausha: Patient, enduring, accumulates wealth slowly, devoted to ancestors and family traditions.',
+ h:'पौष: धैर्यवान, सहनशील, धीरे-धीरे धन संचय, पूर्वजों और पारिवारिक परंपराओं के प्रति समर्पित।'},
+{m:'Magha · माघ',mo:'Jan-Feb',
+ e:'Born in Magha: Pious, performs sacred baths, generous to brahmins, devoted to spiritual practices.',
+ h:'माघ: पवित्र, पवित्र स्नान करने वाला, ब्राह्मणों के प्रति उदार, आध्यात्मिक अभ्यास में समर्पित।'},
+{m:'Phalguna · फाल्गुन',mo:'Feb-Mar',
+ e:'Born in Phalguna: Enjoys life, celebrates festivals, generous nature, attractive personality, skilled in arts.',
+ h:'फाल्गुन: जीवन का आनंद लेने वाला, उत्सव मनाने वाला, उदार, आकर्षक, कलाओं में कुशल।'}
+];
+
+document.getElementById('masaGrid').innerHTML=MASAS.map(m=>`
+<div class="card">
+    <div class="card-i">📅</div>
+    <h3 class="card-t">${m.m}</h3>
+    <div class="card-hi">${m.mo}</div>
+    <p class="card-p">${m.e}</p>
+    <p class="card-p-hi">${m.h}</p>
+</div>`).join('');
+
+// ============================================================
+// TITHI DATA — From Maansagri Paddhati OCR
+// ============================================================
+const TITHIS=[
+{sym:'🌑',n:'Nanda Tithi · नन्दा',nh:'नन्दा तिथियाँ (१, ६, ११)',
+ locs:['Pratipada (1st), Shashthi (6th), Ekadashi (11th) · प्रतिपदा, षष्ठी, एकादशी',
+       'Nature: Joy-giving, auspicious beginnings · स्वभाव: आनंद देने वाली, शुभ आरंभ',
+       'Born on Nanda: Wealthy, happy, blessed with good family · नन्दा जन्म: धनवान, सुखी, अच्छे परिवार से आशीर्वादित',
+       'Best for: Starting new ventures, celebrations · सर्वोत्तम: नए उद्यम शुरू करने, समारोह के लिए']},
+{sym:'🌒',n:'Bhadra Tithi · भद्रा',nh:'भद्रा तिथियाँ (२, ७, १२)',
+ locs:['Dwitiya (2nd), Saptami (7th), Dwadashi (12th) · द्वितीया, सप्तमी, द्वादशी',
+       'Nature: Gentle, prosperous, secure · स्वभाव: सौम्य, समृद्ध, सुरक्षित',
+       'Born on Bhadra: Kind-hearted, diplomatic, gains through partnerships · भद्रा जन्म: दयालु, कूटनीतिक',
+       'Best for: Travel, partnerships, gentle beginnings · सर्वोत्तम: यात्रा, साझेदारी, कोमल आरंभ']},
+{sym:'🌓',n:'Jaya Tithi · जया',nh:'जया तिथियाँ (३, ८, १३)',
+ locs:['Tritiya (3rd), Ashtami (8th), Trayodashi (13th) · तृतीया, अष्टमी, त्रयोदशी',
+       'Nature: Victorious, competitive, conquering · स्वभाव: विजयी, प्रतिस्पर्धी, विजितकर्ता',
+       'Born on Jaya: Courageous, achiever, overcomes obstacles · जया जन्म: साहसी, उपलब्धि प्राप्त, बाधाओं पर विजय',
+       'Best for: Competitions, legal matters, battles · सर्वोत्तम: प्रतियोगिता, कानूनी मामले, युद्ध']},
+{sym:'🌔',n:'Rikta Tithi · रिक्ता',nh:'रिक्ता तिथियाँ (४, ९, १४)',
+ locs:['Chaturthi (4th), Navami (9th), Chaturdashi (14th) · चतुर्थी, नवमी, चतुर्दशी',
+       'Nature: Emptying, challenging, transformative · स्वभाव: खالीपन, चुनौतीपूर्ण, परिवर्तनकारी',
+       'Per Maansagri — Chaturdashi: "Wealthy, dharmic, brave warrior, upholds noble words, honored by kings, very famous." · मानसागरी: "धनवान, धर्मी, शूरवीर, संतों के वाक्य का पालक, राजमान्य, बड़ा यशस्वी।"',
+       'Best for: Fasting, penance, tantra, endings · सर्वोत्तम: उपवास, तपस्या, तंत्र, अंत']},
+{sym:'🌕',n:'Purna Tithi · पूर्णा',nh:'पूर्णा तिथियाँ (५, १०, १५)',
+ locs:['Panchami (5th), Dashami (10th), Purnima/Amavasya (15th) · पंचमी, दशमी, पूर्णिमा/अमावस्या',
+       'Nature: Full, complete, abundant · स्वभाव: पूर्ण, सम्पूर्ण, प्रचुर',
+       'Per Maansagri — Purnima: "Very wealthy, intelligent, fond of food, generous, and attached to other women." · मानसागरी: "श्रीमान, बुद्धिमान्, भोजन लालसा, उताही, पर स्त्रियों में आसक्त।"',
+       'Per Maansagri — Amavasya: "Lazy, hostile, angry, very foolish, mighty warrior, and counselor to a foolish king." · मानसागरी: "आलसी, द्वेषी, क्रोधी, अति मूर्ख, पराक्रमी, मूर्ख राजा का मंत्री।"']}
+];
+
+document.getElementById('tithiGrid').innerHTML=TITHIS.map(mk=>`
+<div class="mark">
+<div class="mark-h"><span class="mark-sym">${mk.sym}</span><div><div class="mark-n">${mk.n}</div><div class="mark-nhi">${mk.nh}</div></div></div>
+<div class="mark-body">${mk.locs.map(l=>`<span class="loc">${l}</span>`).join('')}</div>
+</div>`).join('');
 
 // ============================================================
 // STARS

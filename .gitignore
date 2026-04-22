@@ -15,3 +15,15 @@ env/
 # IDEs
 .vscode/
 .idea/
+
+# Large PDF books (too big for GitHub)
+*.pdf
+
+# Knowledge base cache (generated locally)
+book_cache/ocr/
+book_cache/chroma_db/
+book_cache/master_index.json
+
+# Scratch/test files
+scratch/
+test_script.js
