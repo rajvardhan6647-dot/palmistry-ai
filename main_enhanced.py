@@ -120,7 +120,7 @@ async def analyze_palm(req: AnalyzeRequest):
 
         # 2. Call Gemini Vision API
         model = genai.GenerativeModel(
-            model_name="gemini-flash-latest",
+            model_name="gemini-2.5-flash",
             system_instruction=SYSTEM_PROMPT
         )
         
@@ -354,7 +354,7 @@ Output ONLY valid JSON matching the schema exactly."""
 
         # 5. Call Gemini API
         model = genai.GenerativeModel(
-            model_name="gemini-flash-latest",
+            model_name="gemini-2.5-flash",
             system_instruction=HOROSCOPE_SYSTEM_PROMPT
         )
         
